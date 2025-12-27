@@ -1,0 +1,1930 @@
+/* ========================================
+   타로 심리검사 - 메인 스타일시트
+   ======================================== */
+
+:root {
+  --tarot-primary: #8c683b;
+  --tarot-secondary: #402c1a;
+  --tarot-accent: #9C7E54;
+  --tarot-highlight: #bfb79f;
+  --tarot-dark: #402c1a;
+  --tarot-light: #f5f1e8;
+  --tarot-gradient: linear-gradient(135deg, #8c683b 0%, #402c1a 100%);
+  --tarot-gold: linear-gradient(135deg, #9C7E54 0%, #A68A64 50%, #9C7E54 100%);
+  --tarot-card-back: linear-gradient(135deg, #402c1a 0%, #8c683b 100%);
+  --font-family: "Nanum Gothic", "Malgun Gothic", sans-serif;
+  --color-text: #2a1a0f;
+  --cards-bg: #0d0d1a;
+}
+
+/* 카드 선택 페이지 body 배경 */
+.tarot-cards-body {
+  background: radial-gradient(ellipse at center, #1a1a2e 0%, #0d0d1a 100%) !important;
+  background-attachment: fixed !important;
+  min-height: 100vh;
+}
+
+.tarot-cards-body,
+.tarot-cards-body html {
+  min-height: 100%;
+}
+
+/* ========================================
+   타로 히어로 슬라이더
+   ======================================== */
+.tarot-hero {
+  position: relative;
+  width: 100%;
+  height: 70vh;
+  min-height: 500px;
+  max-height: 700px;
+  overflow: hidden;
+}
+
+.tarot-hero-slider {
+  width: 100%;
+  height: 100%;
+}
+
+.tarot-hero__slide {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.tarot-hero__slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.tarot-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(64, 44, 26, 0.3) 0%,
+    rgba(64, 44, 26, 0.5) 50%,
+    rgba(64, 44, 26, 0.7) 100%
+  );
+}
+
+.tarot-hero__content {
+  position: absolute;
+  bottom: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  color: #fff;
+  z-index: 10;
+  width: 90%;
+  max-width: 800px;
+}
+
+.tarot-hero__label {
+  display: inline-block;
+  padding: 0.5rem 1.5rem;
+  background: rgba(156, 126, 84, 0.2);
+  border: 1px solid rgba(156, 126, 84, 0.5);
+  border-radius: 30px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--tarot-accent);
+  margin-bottom: 1.5rem;
+  backdrop-filter: blur(4px);
+}
+
+.tarot-hero__title {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.3;
+  margin-bottom: 1rem;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+}
+
+.tarot-hero__desc {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  font-weight: 400;
+  opacity: 0.9;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* 페이지네이션 스타일 */
+.tarot-hero-pagination {
+  position: absolute;
+  bottom: 30px !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  z-index: 20;
+}
+
+.tarot-hero-pagination .swiper-pagination-bullet {
+  width: 40px;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.3);
+  opacity: 1;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.tarot-hero-pagination .swiper-pagination-bullet-active {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.tarot-hero-pagination .swiper-pagination-bullet .bullet-progress {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, var(--tarot-accent), #A68A64);
+  border-radius: 2px;
+}
+
+.tarot-hero-pagination .swiper-pagination-bullet-active .bullet-progress {
+  animation: progressBar 3s linear forwards;
+}
+
+@keyframes progressBar {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+.tarot-hero-pagination .swiper-pagination-bullet:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* 슬라이드 콘텐츠 애니메이션 */
+.swiper-slide-active .tarot-hero__label {
+  animation: fadeInUp 0.8s ease forwards;
+  animation-delay: 0.2s;
+  opacity: 0;
+}
+
+.swiper-slide-active .tarot-hero__title {
+  animation: fadeInUp 0.8s ease forwards;
+  animation-delay: 0.4s;
+  opacity: 0;
+}
+
+.swiper-slide-active .tarot-hero__desc {
+  animation: fadeInUp 0.8s ease forwards;
+  animation-delay: 0.6s;
+  opacity: 0;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+  .tarot-hero {
+    height: 60vh;
+    min-height: 400px;
+  }
+  
+  .tarot-hero__content {
+    bottom: 20%;
+  }
+  
+  .tarot-hero-pagination .swiper-pagination-bullet {
+    width: 30px;
+  }
+}
+
+/* ========================================
+   파티클 배경
+   ======================================== */
+.particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  animation: float 15s infinite ease-in-out;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(100vh) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+/* ========================================
+   앱 컨테이너
+   ======================================== */
+.tarot-app {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+  background: var(--tarot-light);
+}
+
+/* ========================================
+   헤더
+   ======================================== */
+.tarot-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.tarot-header__back {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+}
+
+.tarot-header__back:hover {
+  color: var(--tarot-accent);
+}
+
+.tarot-header__logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  font-size: 1.125rem;
+}
+
+.tarot-header__icon {
+  color: var(--tarot-accent);
+  font-size: 1.5rem;
+}
+
+/* ========================================
+   메인 콘텐츠
+   ======================================== */
+.tarot-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  max-width: 600px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* ========================================
+   인트로 섹션
+   ======================================== */
+.tarot-intro {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.tarot-intro__stars {
+  font-size: 1.5rem;
+  color: var(--tarot-accent);
+  margin-bottom: 1rem;
+  letter-spacing: 0.5rem;
+  animation: twinkle 2s ease-in-out infinite;
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.tarot-intro__title {
+  font-size: clamp(2rem, 8vw, 3rem);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  background: var(--tarot-gold);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.tarot-intro__subtitle {
+  font-size: 1.25rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 1rem;
+  font-weight: 300;
+}
+
+.tarot-intro__desc {
+  font-size: 0.9375rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.8;
+}
+
+/* ========================================
+   폼 스타일
+   ======================================== */
+.tarot-form {
+  width: 100%;
+  background: linear-gradient(145deg, rgba(64, 44, 26, 0.95), rgba(140, 104, 59, 0.9));
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 32px;
+  padding: 3rem 2.5rem;
+  border: 1px solid rgba(156, 126, 84, 0.3);
+  box-shadow: 
+    0 25px 50px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(156, 126, 84, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+  animation: formAppear 0.8s ease-out;
+}
+
+@keyframes formAppear {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.tarot-form::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(156, 126, 84, 0.1) 0%, transparent 60%);
+  animation: shimmer 8s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes shimmer {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.form-section {
+  margin-bottom: 2.5rem;
+  position: relative;
+  z-index: 1;
+  animation: sectionFadeIn 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+.form-section:nth-child(1) { animation-delay: 0.1s; }
+.form-section:nth-child(2) { animation-delay: 0.2s; }
+.form-section:nth-child(3) { animation-delay: 0.3s; }
+.form-section:nth-child(4) { animation-delay: 0.4s; }
+.form-section:nth-child(5) { animation-delay: 0.5s; }
+
+@keyframes sectionFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.form-section:last-of-type {
+  margin-bottom: 3rem;
+}
+
+.form-label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #fff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.form-label__icon {
+  font-size: 1.5rem;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+  animation: iconFloat 3s ease-in-out infinite;
+}
+
+@keyframes iconFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+.form-label__hint {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--tarot-accent);
+  background: rgba(156, 126, 84, 0.15);
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  border: 1px solid rgba(156, 126, 84, 0.3);
+}
+
+/* 생년월일 */
+.form-birth {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 1rem;
+}
+
+/* 셀렉트 */
+.form-select {
+  appearance: none;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
+  border: 1px solid rgba(156, 126, 84, 0.3);
+  border-radius: 14px;
+  padding: 1rem 1.25rem;
+  font-size: 1rem;
+  color: #fff;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%239C7E54' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.form-select:hover {
+  border-color: var(--tarot-accent);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.form-select:focus {
+  outline: none;
+  border-color: var(--tarot-accent);
+  box-shadow: 
+    0 0 0 3px rgba(156, 126, 84, 0.3),
+    0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.form-select option {
+  background: #402c1a;
+  color: #fff;
+  padding: 0.5rem;
+}
+
+.form-select--full {
+  width: 100%;
+}
+
+/* 라디오 버튼 */
+.form-radio-group {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.form-radio {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  padding: 0.75rem 1.25rem;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.form-radio:hover {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.08));
+  border-color: rgba(156, 126, 84, 0.4);
+  transform: translateY(-2px);
+}
+
+.form-radio input {
+  display: none;
+}
+
+.form-radio__box {
+  width: 22px;
+  height: 22px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.form-radio__box::after {
+  content: '';
+  width: 12px;
+  height: 12px;
+  background: var(--tarot-gold);
+  border-radius: 50%;
+  transform: scale(0);
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.form-radio input:checked + .form-radio__box {
+  border-color: var(--tarot-accent);
+  box-shadow: 0 0 15px rgba(156, 126, 84, 0.4);
+}
+
+.form-radio input:checked + .form-radio__box::after {
+  transform: scale(1);
+}
+
+.form-radio:has(input:checked) {
+  background: linear-gradient(135deg, rgba(156, 126, 84, 0.2), rgba(156, 126, 84, 0.1));
+  border-color: var(--tarot-accent);
+  box-shadow: 0 4px 15px rgba(156, 126, 84, 0.2);
+}
+
+.form-radio__text {
+  font-size: 1rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+/* 체크박스 */
+.form-checkbox-group {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.form-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  padding: 1rem 1.25rem;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  transition: all 0.3s ease;
+}
+
+.form-checkbox:hover {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.06));
+  border-color: rgba(156, 126, 84, 0.4);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.form-checkbox input {
+  display: none;
+}
+
+.form-checkbox__box {
+  width: 24px;
+  height: 24px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.form-checkbox__box::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--tarot-gold);
+  transform: scale(0);
+  border-radius: 6px;
+  transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.form-checkbox__box::after {
+  content: '✓';
+  color: var(--tarot-dark);
+  font-size: 14px;
+  font-weight: 700;
+  opacity: 0;
+  transform: scale(0) rotate(-45deg);
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.form-checkbox input:checked + .form-checkbox__box {
+  border-color: var(--tarot-accent);
+  box-shadow: 0 0 20px rgba(156, 126, 84, 0.4);
+}
+
+.form-checkbox input:checked + .form-checkbox__box::before {
+  transform: scale(1);
+}
+
+.form-checkbox input:checked + .form-checkbox__box::after {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+
+.form-checkbox:has(input:checked) {
+  background: linear-gradient(135deg, rgba(156, 126, 84, 0.2), rgba(156, 126, 84, 0.08));
+  border-color: var(--tarot-accent);
+  box-shadow: 0 4px 20px rgba(156, 126, 84, 0.2);
+}
+
+.form-checkbox__text {
+  font-size: 1rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.form-error {
+  display: none;
+  color: #ff8a8a;
+  font-size: 0.875rem;
+  margin-top: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: rgba(255, 107, 107, 0.1);
+  border: 1px solid rgba(255, 107, 107, 0.3);
+  border-radius: 10px;
+  animation: shake 0.5s ease;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+.form-error.is-visible {
+  display: block;
+}
+
+/* 카드 장수 선택 */
+.form-card-count {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.form-card-option {
+  cursor: pointer;
+}
+
+.form-card-option input {
+  display: none;
+}
+
+.form-card-option__box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.75rem 1rem;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.03));
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.form-card-option__box::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(156, 126, 84, 0.3) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.form-card-option:hover .form-card-option__box {
+  transform: translateY(-5px) scale(1.02);
+  border-color: rgba(156, 126, 84, 0.5);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+.form-card-option:hover .form-card-option__box::before {
+  opacity: 1;
+}
+
+.form-card-option input:checked + .form-card-option__box {
+  background: linear-gradient(145deg, rgba(156, 126, 84, 0.25), rgba(156, 126, 84, 0.1));
+  border-color: var(--tarot-accent);
+  box-shadow: 
+    0 0 30px rgba(156, 126, 84, 0.3),
+    inset 0 0 20px rgba(156, 126, 84, 0.1);
+  transform: translateY(-3px);
+}
+
+.form-card-option input:checked + .form-card-option__box::before {
+  opacity: 1;
+}
+
+.form-card-option__number {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin-bottom: 0.5rem;
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.form-card-option__name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  text-align: center;
+  position: relative;
+  white-space: nowrap;
+  z-index: 1;
+}
+
+/* 제출 버튼 */
+.tarot-submit {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1.5rem 2.5rem;
+  background: linear-gradient(135deg, #7A6243 0%, #9C7E54 30%, #A68A64 50%, #9C7E54 70%, #7A6243 100%);
+  background-size: 200% 200%;
+  border: none;
+  border-radius: 20px;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 
+    0 10px 30px rgba(156, 126, 84, 0.4),
+    inset 0 2px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.1);
+  animation: buttonGlow 3s ease-in-out infinite, gradientShift 4s ease infinite;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+@keyframes buttonGlow {
+  0%, 100% {
+    box-shadow: 
+      0 10px 30px rgba(156, 126, 84, 0.4),
+      inset 0 2px 0 rgba(255, 255, 255, 0.3),
+      inset 0 -2px 0 rgba(0, 0, 0, 0.1);
+  }
+  50% {
+    box-shadow: 
+      0 10px 50px rgba(156, 126, 84, 0.6),
+      0 0 30px rgba(156, 126, 84, 0.3),
+      inset 0 2px 0 rgba(255, 255, 255, 0.4),
+      inset 0 -2px 0 rgba(0, 0, 0, 0.1);
+  }
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.tarot-submit::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+  transition: left 0.6s ease;
+}
+
+.tarot-submit::after {
+  content: '✦';
+  position: absolute;
+  right: 2rem;
+  font-size: 1rem;
+  opacity: 0;
+  transform: translateX(-10px) rotate(-45deg);
+  transition: all 0.4s ease;
+}
+
+.tarot-submit:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 
+    0 20px 50px rgba(156, 126, 84, 0.5),
+    0 0 40px rgba(156, 126, 84, 0.3),
+    inset 0 2px 0 rgba(255, 255, 255, 0.4);
+}
+
+.tarot-submit:hover::before {
+  left: 100%;
+}
+
+.tarot-submit:hover::after {
+  opacity: 1;
+  transform: translateX(0) rotate(0deg);
+}
+
+.tarot-submit:active {
+  transform: translateY(-2px) scale(0.98);
+}
+
+.tarot-submit__text {
+  position: relative;
+  z-index: 1;
+}
+
+.tarot-submit__icon {
+  font-size: 1.5rem;
+  transition: transform 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.tarot-submit:hover .tarot-submit__icon {
+  transform: translateX(5px);
+  animation: arrowBounce 0.6s ease infinite;
+}
+
+@keyframes arrowBounce {
+  0%, 100% { transform: translateX(5px); }
+  50% { transform: translateX(10px); }
+}
+
+/* ========================================
+   푸터
+   ======================================== */
+.tarot-footer {
+  text-align: center;
+  padding: 3rem 2rem;
+  font-size: 0.9rem;
+  color: rgba(64, 44, 26, 0.7);
+  background: rgba(245, 241, 232, 0.95);
+  border-top: 1px solid rgba(64, 44, 26, 0.1);
+  margin-top: 3rem;
+}
+
+.tarot-footer p {
+  margin: 0.5rem 0;
+}
+
+.tarot-footer small {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+/* ========================================
+   카드 선택 페이지
+   ======================================== */
+.cards-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: radial-gradient(ellipse at center, #1a1a2e 0%, #0d0d1a 100%);
+  background-attachment: fixed;
+  padding-top: 0;
+  margin-top: 0;
+  position: relative;
+}
+
+.cards-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1rem 2rem;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.4) 100%);
+  backdrop-filter: blur(15px);
+  position: sticky;
+  top: 70px;
+  z-index: 90;
+  border-bottom: 1px solid rgba(156, 126, 84, 0.15);
+}
+
+.cards-counter {
+  background: linear-gradient(135deg, rgba(156, 126, 84, 0.2) 0%, rgba(156, 126, 84, 0.1) 100%);
+  border: 2px solid var(--tarot-accent);
+  padding: 0.75rem 1.5rem;
+  border-radius: 30px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--tarot-accent);
+  box-shadow: 0 0 20px rgba(156, 126, 84, 0.2), inset 0 0 15px rgba(156, 126, 84, 0.1);
+  animation: counterGlow 2s ease-in-out infinite;
+}
+
+@keyframes counterGlow {
+  0%, 100% { box-shadow: 0 0 20px rgba(156, 126, 84, 0.2), inset 0 0 15px rgba(156, 126, 84, 0.1); }
+  50% { box-shadow: 0 0 30px rgba(156, 126, 84, 0.4), inset 0 0 20px rgba(156, 126, 84, 0.2); }
+}
+
+.shuffle-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.9rem 2rem;
+  background: linear-gradient(135deg, #9C7E54 0%, #7A6243 50%, #9C7E54 100%);
+  background-size: 200% auto;
+  border: none;
+  border-radius: 30px;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(156, 126, 84, 0.4);
+  animation: shuffleBtnShimmer 3s ease-in-out infinite;
+}
+
+@keyframes shuffleBtnShimmer {
+  0% { background-position: 0% center; }
+  50% { background-position: 200% center; }
+  100% { background-position: 0% center; }
+}
+
+.shuffle-btn__icon {
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+}
+
+.shuffle-btn:hover .shuffle-btn__icon {
+  animation: spinIcon 0.6s ease-in-out;
+}
+
+@keyframes spinIcon {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.shuffle-btn:hover {
+  transform: scale(1.08) translateY(-2px);
+  box-shadow: 0 8px 25px rgba(156, 126, 84, 0.5);
+}
+
+/* 안내 메시지 */
+.cards-guide {
+  text-align: center;
+  padding: 2.5rem 2rem;
+  position: relative;
+}
+
+.cards-guide p {
+  display: inline-block;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 700;
+  color: transparent;
+  background: linear-gradient(135deg, #9C7E54 0%, #C4A97D 25%, #9C7E54 50%, #C4A97D 75%, #9C7E54 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  letter-spacing: 0.08em;
+  text-shadow: none;
+  animation: goldShimmer 3s ease-in-out infinite, floatText 4s ease-in-out infinite;
+  position: relative;
+  padding: 1rem 2.5rem;
+}
+
+.cards-guide p::before {
+  content: '✧';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.2rem;
+  color: #9C7E54;
+  animation: starPulse 2s ease-in-out infinite;
+  text-shadow: 0 0 15px rgba(156, 126, 84, 0.8);
+}
+
+.cards-guide p::after {
+  content: '✧';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.2rem;
+  color: #9C7E54;
+  animation: starPulse 2s ease-in-out infinite 1s;
+  text-shadow: 0 0 15px rgba(156, 126, 84, 0.8);
+}
+
+@keyframes goldShimmer {
+  0% { background-position: 0% center; }
+  50% { background-position: 200% center; }
+  100% { background-position: 0% center; }
+}
+
+@keyframes floatText {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes starPulse {
+  0%, 100% { 
+    opacity: 0.6; 
+    transform: translateY(-50%) scale(1);
+  }
+  50% { 
+    opacity: 1; 
+    transform: translateY(-50%) scale(1.3);
+  }
+}
+
+.cards-guide.is-warning p {
+  background: linear-gradient(135deg, #fbbf24 0%, #fef3c7 50%, #fbbf24 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* 카드 컨테이너 */
+.cards-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  padding-bottom: 100px;
+  position: relative;
+  overflow: visible;
+  min-height: calc(100vh - 120px);
+}
+
+.cards-spread {
+  position: relative;
+  width: 100%;
+  height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 80px;
+}
+
+/* 개별 카드 - 데스크톱 기본 (큰 화면) */
+.tarot-card {
+  position: absolute;
+  width: 160px;
+  height: 250px;
+  border-radius: 14px;
+  cursor: pointer;
+  transform-origin: center 600px;
+  transition: all 0.3s ease-out;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.tarot-card__inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tarot-card__face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  backface-visibility: hidden;
+  box-shadow: 
+    0 8px 25px rgba(0, 0, 0, 0.4),
+    0 0 1px rgba(156, 126, 84, 0.5);
+}
+
+.tarot-card__back {
+  background: linear-gradient(145deg, #402c1a 0%, #8c683b 50%, #402c1a 100%);
+  border: 2px solid var(--tarot-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 
+    0 8px 25px rgba(0, 0, 0, 0.4),
+    0 0 1px rgba(156, 126, 84, 0.5),
+    inset 0 0 20px rgba(156, 126, 84, 0.1);
+}
+
+.tarot-card__back::before {
+  content: '✦';
+  font-size: 4rem;
+  color: var(--tarot-accent);
+  opacity: 0.9;
+  text-shadow: 
+    0 0 30px rgba(212, 175, 55, 0.7),
+    0 0 60px rgba(212, 175, 55, 0.4);
+  z-index: 2;
+  animation: starPulse 3s ease-in-out infinite;
+}
+
+@keyframes starPulse {
+  0%, 100% {
+    opacity: 0.9;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+.tarot-card__back::after {
+  content: '';
+  position: absolute;
+  inset: 12px;
+  border: 2px solid rgba(156, 126, 84, 0.5);
+  border-radius: 10px;
+  background: radial-gradient(ellipse at center, rgba(156, 126, 84, 0.15) 0%, transparent 70%);
+}
+
+.tarot-card__front {
+  transform: rotateY(180deg);
+  background: #fff;
+  overflow: hidden;
+  border-radius: 10px;
+  border: 1px solid rgba(156, 126, 84, 0.2);
+}
+
+.tarot-card__front img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 카드 상태 - 데스크톱 */
+.tarot-card:hover:not(.is-selected) {
+  transform: translateY(-120px) scale(1.35);
+  z-index: 100 !important;
+}
+
+.tarot-card:hover:not(.is-selected) .tarot-card__face {
+  box-shadow: 
+    0 0 70px rgba(156, 126, 84, 0.9),
+    0 30px 70px rgba(0, 0, 0, 0.5);
+}
+
+.tarot-card.is-selected {
+  /* z-index는 JavaScript에서 동적으로 설정 (다른 카드들 위에 표시) */
+  /* 각도는 JavaScript에서 유지하고 scale만 추가 */
+  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), z-index 0s;
+}
+
+.tarot-card.is-selected .tarot-card__inner {
+  transform: rotateY(180deg);
+}
+
+.tarot-card.is-selected .tarot-card__face {
+  box-shadow: 
+    0 0 100px rgba(212, 175, 55, 0.9),
+    0 0 60px rgba(156, 126, 84, 0.7),
+    0 0 30px rgba(156, 126, 84, 0.5),
+    0 20px 60px rgba(0, 0, 0, 0.6),
+    inset 0 0 30px rgba(212, 175, 55, 0.2);
+  animation: cardGlow 2s ease-in-out infinite;
+}
+
+@keyframes cardGlow {
+  0%, 100% {
+    box-shadow: 
+      0 0 100px rgba(212, 175, 55, 0.9),
+      0 0 60px rgba(156, 126, 84, 0.7),
+      0 0 30px rgba(156, 126, 84, 0.5),
+      0 20px 60px rgba(0, 0, 0, 0.6),
+      inset 0 0 30px rgba(212, 175, 55, 0.2);
+  }
+  50% {
+    box-shadow: 
+      0 0 120px rgba(212, 175, 55, 1),
+      0 0 80px rgba(156, 126, 84, 0.9),
+      0 0 40px rgba(156, 126, 84, 0.7),
+      0 25px 70px rgba(0, 0, 0, 0.7),
+      inset 0 0 40px rgba(212, 175, 55, 0.3);
+  }
+}
+
+.tarot-card.is-flipping {
+  pointer-events: none;
+}
+
+/* 역방향/정방향 배지 */
+.card-direction-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  background: linear-gradient(135deg, rgba(64, 44, 26, 0.95) 0%, rgba(140, 104, 59, 0.95) 100%);
+  border: 2px solid rgba(212, 175, 55, 0.8);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  box-shadow: 
+    0 4px 15px rgba(0, 0, 0, 0.4),
+    0 0 20px rgba(212, 175, 55, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  z-index: 10;
+  opacity: 0;
+  transform: scale(0.8) translateY(-10px);
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  pointer-events: none;
+}
+
+.card-direction-badge.is-visible {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+.card-direction-badge.is-upright {
+  border-color: rgba(76, 175, 80, 0.9);
+  box-shadow: 
+    0 4px 15px rgba(0, 0, 0, 0.4),
+    0 0 20px rgba(76, 175, 80, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  background: linear-gradient(135deg, rgba(27, 94, 32, 0.95) 0%, rgba(56, 142, 60, 0.95) 100%);
+}
+
+.card-direction-badge.is-reversed {
+  border-color: rgba(244, 67, 54, 0.9);
+  box-shadow: 
+    0 4px 15px rgba(0, 0, 0, 0.4),
+    0 0 20px rgba(244, 67, 54, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  background: linear-gradient(135deg, rgba(183, 28, 28, 0.95) 0%, rgba(198, 40, 40, 0.95) 100%);
+}
+
+.badge-icon {
+  font-size: 1.2rem;
+  font-weight: bold;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  animation: iconPulse 2s ease-in-out infinite;
+}
+
+.badge-text {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  white-space: nowrap;
+}
+
+@keyframes iconPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.9;
+  }
+}
+
+/* 정방향 카드 - 이미지 정상 표시 */
+.tarot-card.is-upright .tarot-card__front img {
+  transform: rotate(0deg);
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 역방향 카드 - 이미지 180도 회전 */
+.tarot-card.is-reversed .tarot-card__front img {
+  transform: rotate(180deg);
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 모바일에서 배지 크기 조정 */
+@media (max-width: 1024px) {
+  .card-direction-badge {
+    top: 8px;
+    right: 8px;
+    padding: 6px 10px;
+    gap: 4px;
+  }
+  
+  .badge-icon {
+    font-size: 1rem;
+    width: 16px;
+    height: 16px;
+  }
+  
+  .badge-text {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .card-direction-badge {
+    top: 4px;
+    right: 4px;
+    padding: 4px 8px;
+    gap: 3px;
+    border-width: 1.5px;
+  }
+  
+  .badge-icon {
+    font-size: 0.9rem;
+    width: 14px;
+    height: 14px;
+  }
+  
+  .badge-text {
+    font-size: 0.7rem;
+  }
+}
+
+/* 결과 보기 버튼 */
+.result-btn-container {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 200;
+}
+
+.result-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 2.5rem;
+  background: var(--tarot-gold);
+  border: none;
+  border-radius: 50px;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--tarot-dark);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.result-btn.is-active {
+  opacity: 1;
+  pointer-events: auto;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(156, 126, 84, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 0 15px rgba(156, 126, 84, 0);
+  }
+}
+
+.result-btn:hover {
+  transform: scale(1.05);
+}
+
+/* ========================================
+   결과 페이지
+   ======================================== */
+.result-page {
+  min-height: 100vh;
+  background: var(--tarot-gradient);
+  padding-top: 80px;
+}
+
+.result-header {
+  text-align: center;
+  padding: 3rem 2rem;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.result-header__title {
+  font-size: 2rem;
+  font-weight: 700;
+  background: var(--tarot-gold);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.5rem;
+}
+
+.result-header__subtitle {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1rem;
+}
+
+/* 선택된 카드들 */
+.result-cards {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  padding: 3rem 2rem;
+  flex-wrap: wrap;
+}
+
+.result-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 1.5rem;
+  text-align: center;
+  max-width: 280px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  animation: fadeInUp 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.result-card:nth-child(1) { animation-delay: 0.1s; }
+.result-card:nth-child(2) { animation-delay: 0.3s; }
+.result-card:nth-child(3) { animation-delay: 0.5s; }
+.result-card:nth-child(4) { animation-delay: 0.7s; }
+.result-card:nth-child(5) { animation-delay: 0.9s; }
+
+.result-card__position {
+  font-size: 0.8125rem;
+  color: var(--tarot-accent);
+  font-weight: 600;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.result-card__image {
+  width: 140px;
+  height: 220px;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 0 auto 1rem;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+}
+
+.result-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.result-card__image.is-reversed img {
+  transform: rotate(180deg);
+}
+
+.result-card__badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.result-card__badge--upright {
+  background: rgba(20, 184, 166, 0.3);
+  color: var(--tarot-highlight);
+}
+
+.result-card__badge--reversed {
+  background: rgba(239, 68, 68, 0.3);
+  color: #f87171;
+}
+
+.result-card__name {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.25rem;
+}
+
+.result-card__name-en {
+  font-size: 0.8125rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 1rem;
+}
+
+.result-card__meaning {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.7;
+  text-align: left;
+}
+
+.result-card__category {
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.85rem;
+}
+
+.result-card__category strong {
+  color: var(--tarot-accent);
+}
+
+/* 종합 해석 */
+.result-interpretation {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+}
+
+.result-interpretation__title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.result-interpretation__content {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.result-interpretation__text {
+  font-size: 1rem;
+  line-height: 1.9;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* 차트 섹션 */
+.result-charts {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+}
+
+.result-chart {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.result-chart__title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+/* 액션 버튼 */
+.result-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: 3rem 2rem;
+  flex-wrap: wrap;
+}
+
+.result-action-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.result-action-btn--primary {
+  background: var(--tarot-gold);
+  border: none;
+  color: var(--tarot-dark);
+}
+
+.result-action-btn--secondary {
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: #fff;
+}
+
+.result-action-btn:hover {
+  transform: translateY(-2px);
+}
+
+.result-action-btn--primary:hover {
+  box-shadow: 0 8px 30px rgba(156, 126, 84, 0.4);
+}
+
+.result-action-btn--secondary:hover {
+  border-color: var(--tarot-accent);
+  color: var(--tarot-accent);
+}
+
+/* ========================================
+   반응형 디자인
+   ======================================== */
+
+/* 태블릿 */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .cards-container {
+    min-height: calc(100vh - 150px);
+    padding-bottom: 120px;
+  }
+  
+  .cards-spread {
+    height: 420px;
+    margin-top: 30px;
+  }
+  
+  .tarot-card {
+    width: 100px;
+    height: 155px;
+    transform-origin: center 420px;
+  }
+  
+  .tarot-card__back::before {
+    font-size: 2.5rem;
+  }
+  
+  .tarot-card:hover {
+    transform: translateY(-70px) scale(1.2);
+  }
+  
+  .tarot-card.is-selected {
+    transform: scale(1.12);
+  }
+}
+
+@media (max-width: 768px) {
+  .tarot-header {
+    padding: 1rem;
+  }
+  
+  .tarot-main {
+    padding: 1.5rem;
+  }
+  
+  .tarot-form {
+    padding: 1.5rem;
+  }
+  
+  .form-birth {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+  
+  .form-checkbox-group {
+    grid-template-columns: 1fr;
+  }
+  
+  .form-card-count {
+    grid-template-columns: 1fr;
+  }
+  
+  /* 카드 페이지 - 모바일 (기존 크기 유지) */
+  .cards-container {
+    min-height: 50vh;
+    padding-bottom: 120px;
+  }
+  
+  .cards-spread {
+    height: 350px;
+  }
+  
+  .tarot-card {
+    width: 55px;
+    height: 85px;
+    border-radius: 6px;
+    transform-origin: center 350px;
+  }
+  
+  .tarot-card__back::before {
+    font-size: 1.5rem;
+  }
+  
+  .tarot-card__back::after {
+    inset: 4px;
+  }
+  
+  .tarot-card:hover {
+    transform: translateY(-35px) scale(1.12);
+  }
+  
+  .tarot-card.is-selected {
+    /* 각도는 JavaScript에서 유지 */
+  }
+  
+  .cards-guide {
+    padding: 1.5rem 1rem;
+  }
+  
+  .cards-guide p {
+    font-size: 1.1rem;
+    padding: 0.8rem 2rem;
+  }
+  
+  .cards-guide p::before,
+  .cards-guide p::after {
+    font-size: 1rem;
+  }
+  
+  .cards-header {
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+  }
+  
+  .cards-counter {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.85rem;
+  }
+  
+  .shuffle-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+  }
+  
+  /* 결과 페이지 */
+  .result-cards {
+    gap: 1.5rem;
+  }
+  
+  .result-card {
+    max-width: 100%;
+    width: 100%;
+  }
+  
+  .result-card__image {
+    width: 120px;
+    height: 190px;
+  }
+  
+  .result-charts {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .tarot-intro__title {
+    font-size: 1.75rem;
+  }
+  
+  .tarot-intro__subtitle {
+    font-size: 1rem;
+  }
+  
+  .form-radio-group {
+    flex-direction: column;
+  }
+  
+  /* 작은 모바일 카드 */
+  .cards-spread {
+    height: 280px;
+  }
+  
+  .tarot-card {
+    width: 45px;
+    height: 70px;
+    border-radius: 5px;
+    transform-origin: center 280px;
+  }
+  
+  .tarot-card:hover {
+    transform: translateY(-25px) scale(1.1);
+  }
+  
+  .tarot-card.is-selected {
+    /* 각도는 JavaScript에서 유지 */
+  }
+  
+  .cards-guide {
+    padding: 1rem 0.5rem;
+  }
+  
+  .cards-guide p {
+    font-size: 0.95rem;
+    padding: 0.6rem 1.5rem;
+    letter-spacing: 0.02em;
+  }
+  
+  .cards-guide p::before,
+  .cards-guide p::after {
+    font-size: 0.8rem;
+  }
+  
+  .result-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .result-action-btn {
+    justify-content: center;
+  }
+}
+
+/* ========================================
+   페이지 전환 애니메이션
+   ======================================== */
+.page-transition {
+  position: fixed;
+  inset: 0;
+  background: var(--tarot-dark);
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+
+.page-transition.is-active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ========================================
+   로딩 스피너
+   ======================================== */
+.loading {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.loading__spinner {
+  width: 60px;
+  height: 60px;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-top-color: var(--tarot-accent);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+

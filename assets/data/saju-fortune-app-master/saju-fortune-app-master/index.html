@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>사주 팔자 보기 - Saju Fortune Telling</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="status-notice">
+                ⚠️ 공공데이터포털 화재로 인해 대체 데이터 소스를 사용하고 있습니다.
+            </div>
+            <h1>사주 팔자 보기</h1>
+            <p>당신의 운명을 알아보세요</p>
+            <p><small>향상된 천문학 계산으로 API 없이도 정확한 사주 분석 제공</small></p>
+        </header>
+
+        <main>
+            <section class="input-section">
+                <h2>생년월일 및 시간 입력</h2>
+                <form id="saju-form">
+                    <div class="form-group">
+                        <label for="birth-year">생년 (Year):</label>
+                        <input type="number" id="birth-year" min="1900" max="2030" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="birth-month">생월 (Month):</label>
+                        <select id="birth-month" required>
+                            <option value="">월 선택</option>
+                            <option value="1">1월</option>
+                            <option value="2">2월</option>
+                            <option value="3">3월</option>
+                            <option value="4">4월</option>
+                            <option value="5">5월</option>
+                            <option value="6">6월</option>
+                            <option value="7">7월</option>
+                            <option value="8">8월</option>
+                            <option value="9">9월</option>
+                            <option value="10">10월</option>
+                            <option value="11">11월</option>
+                            <option value="12">12월</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="birth-day">생일 (Day):</label>
+                        <input type="number" id="birth-day" min="1" max="31" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="birth-hour">생시 (Hour):</label>
+                        <select id="birth-hour" required>
+                            <option value="">시간 선택</option>
+                            <option value="23">자시 (23:00-01:00)</option>
+                            <option value="1">축시 (01:00-03:00)</option>
+                            <option value="3">인시 (03:00-05:00)</option>
+                            <option value="5">묘시 (05:00-07:00)</option>
+                            <option value="7">진시 (07:00-09:00)</option>
+                            <option value="9">사시 (09:00-11:00)</option>
+                            <option value="11">오시 (11:00-13:00)</option>
+                            <option value="13">미시 (13:00-15:00)</option>
+                            <option value="15">신시 (15:00-17:00)</option>
+                            <option value="17">유시 (17:00-19:00)</option>
+                            <option value="19">술시 (19:00-21:00)</option>
+                            <option value="21">해시 (21:00-23:00)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>
+                            <input type="radio" name="gender" value="male" required> 남성
+                        </label>
+                        <label>
+                            <input type="radio" name="gender" value="female" required> 여성
+                        </label>
+                    </div>
+                    
+                    <button type="submit">사주 보기</button>
+                </form>
+            </section>
+
+            <section class="result-section" id="result-section" style="display: none;">
+                <h2>사주 팔자 결과</h2>
+                <div id="saju-result">
+                    <!-- Results will be displayed here -->
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2024 사주 팔자 앱. 참고용으로만 사용하세요.</p>
+        </footer>
+    </div>
+
+    <!-- 대체 데이터 소스 라이브러리 로드 -->
+    <script src="https://cdn.jsdelivr.net/npm/suncalc@1.9.0/suncalc.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
+    <script src="js/timezone-api-client.js"></script>
+    <script src="js/alternative-data-provider.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

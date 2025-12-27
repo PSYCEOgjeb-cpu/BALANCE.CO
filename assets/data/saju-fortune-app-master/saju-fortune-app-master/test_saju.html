@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>사주 계산 테스트</title>
+    <style>
+        body { font-family: 'Malgun Gothic', sans-serif; padding: 20px; }
+        .test-result { margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }
+        .correct { border-color: green; background-color: #f0fff0; }
+        .incorrect { border-color: red; background-color: #fff0f0; }
+    </style>
+</head>
+<body>
+    <h1>사주 계산 정확도 테스트</h1>
+    <div id="test-results"></div>
+
+    <script src="js/app.js"></script>
+    <script>
+        // 알려진 사주 데이터로 테스트
+        const testCases = [
+            {
+                name: "1984년 갑자년 테스트",
+                date: { year: 1984, month: 2, day: 15, hour: 11 },
+                expected: { year: { stem: '갑', branch: '자' } }
+            },
+            {
+                name: "1990년 경오년 테스트", 
+                date: { year: 1990, month: 6, day: 10, hour: 15 },
+                expected: { year: { stem: '경', branch: '오' } }
+            },
+            {
+                name: "2000년 경진년 테스트",
+                date: { year: 2000, month: 3, day: 20, hour: 9 },
+                expected: { year: { stem: '경', branch: '진' } }
+            }
+        ];
+
+        function runTests() {
+            const calculator = new SajuCalculator();
+            const resultsDiv = document.getElementById('test-results');
+
+            testCases.forEach(testCase => {
+                const { year, month, day, hour } = testCase.date;
+                const result = calculator.calculateFourPillars(year, month, day, hour);
+                
+                const isCorrectYear = result.year.stem === testCase.expected.year.stem && 
+                                     result.year.branch === testCase.expected.year.branch;
+                
+                const div = document.createElement('div');
+                div.className = `test-result ${isCorrectYear ? 'correct' : 'incorrect'}`;
+                div.innerHTML = `
+                    <h3>${testCase.name}</h3>
+                    <p><strong>입력:</strong> ${year}년 ${month}월 ${day}일 ${hour}시</p>
+                    <p><strong>계산 결과:</strong> ${result.year.stem}${result.year.branch}년</p>
+                    <p><strong>예상 결과:</strong> ${testCase.expected.year.stem}${testCase.expected.year.branch}년</p>
+                    <p><strong>결과:</strong> ${isCorrectYear ? '✅ 정확' : '❌ 부정확'}</p>
+                    <div style="margin-top: 10px;">
+                        <strong>전체 사주:</strong><br>
+                        년주: ${result.year.stem}${result.year.branch} (${result.year.animal})<br>
+                        월주: ${result.month.stem}${result.month.branch} (${result.month.animal})<br>
+                        일주: ${result.day.stem}${result.day.branch} (${result.day.animal})<br>
+                        시주: ${result.hour.stem}${result.hour.branch} (${result.hour.animal})
+                    </div>
+                `;
+                resultsDiv.appendChild(div);
+            });
+        }
+
+        // DOM이 로드된 후 테스트 실행
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', runTests);
+        } else {
+            runTests();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="십신학습">
+    <meta name="application-name" content="명리학 핵심 해석">
+    <meta name="theme-color" content="#7c3aed">
+    
+    <title>명리학 핵심 해석 - 십신과 상호작용</title>
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="icons/icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32x32.png">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="level2-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="level2-script.js" as="script">
+</head>
+<body>
+    <!-- 학습 진도 헤더 -->
+    <header class="learning-header">
+        <div class="progress-container">
+            <h1>🎯 2단계: 핵심 해석 도구</h1>
+            <div class="progress-bar">
+                <div class="progress-fill" id="overallProgress"></div>
+            </div>
+            <span class="progress-text" id="progressText">0% 완료</span>
+        </div>
+        <nav class="lesson-nav">
+            <button class="nav-btn active" data-section="ten-gods">십신</button>
+            <button class="nav-btn" data-section="interactions">합충형파해</button>
+            <button class="nav-btn" data-section="practice">실습</button>
+            <button class="nav-btn" data-section="quiz">퀴즈</button>
+        </nav>
+    </header>
+
+    <main class="learning-content">
+        <!-- 십신(十神) 섹션 -->
+        <section id="ten-gods" class="lesson-section active">
+            <div class="lesson-container">
+                <h2>십신(十神) - 인간관계와 심리의 지형도</h2>
+                <p class="section-intro">
+                    일간을 중심으로 다른 글자들과의 오행 관계를 통해 성격과 인간관계를 파악하는 핵심 도구입니다.
+                </p>
+
+                <!-- 십신 도출 원리 -->
+                <div class="interactive-card">
+                    <h3>🧮 십신 도출 원리</h3>
+                    <div class="derivation-explanation">
+                        <div class="formula-box">
+                            <h4>공식: 오행관계 + 음양관계 = 십신</h4>
+                            <div class="formula-visual">
+                                <div class="step">
+                                    <span class="step-num">1</span>
+                                    <div class="step-content">
+                                        <h5>일간 확인</h5>
+                                        <p>자신의 핵심 성격</p>
+                                        <div class="example">예: 甲木 일간</div>
+                                    </div>
+                                </div>
+                                <div class="arrow">→</div>
+                                <div class="step">
+                                    <span class="step-num">2</span>
+                                    <div class="step-content">
+                                        <h5>오행관계 파악</h5>
+                                        <p>상생/상극/동류</p>
+                                        <div class="example">甲木 vs 丙火 = 木生火</div>
+                                    </div>
+                                </div>
+                                <div class="arrow">→</div>
+                                <div class="step">
+                                    <span class="step-num">3</span>
+                                    <div class="step-content">
+                                        <h5>음양관계 확인</h5>
+                                        <p>같음/다름</p>
+                                        <div class="example">甲(양) vs 丙(양) = 같음</div>
+                                    </div>
+                                </div>
+                                <div class="arrow">→</div>
+                                <div class="step">
+                                    <span class="step-num">4</span>
+                                    <div class="step-content">
+                                        <h5>십신 결정</h5>
+                                        <p>최종 십신</p>
+                                        <div class="example result">식신(食神)</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 십신 인터랙티브 원형 -->
+                <div class="interactive-card">
+                    <h3>🎭 십신의 세계</h3>
+                    <div class="ten-gods-wheel" id="tenGodsWheel">
+                        <div class="center-self" id="centerSelf">
+                            <div class="self-stem">甲</div>
+                            <div class="self-label">일간</div>
+                        </div>
+                        
+                        <!-- 십신 카드들 -->
+                        <div class="god-card self-group" data-god="bijeon" style="--angle: 0deg">
+                            <div class="god-symbol">比</div>
+                            <div class="god-name">비견</div>
+                            <div class="god-meaning">자아·형제</div>
+                        </div>
+                        
+                        <div class="god-card self-group" data-god="geopjae" style="--angle: 36deg">
+                            <div class="god-symbol">劫</div>
+                            <div class="god-name">겁재</div>
+                            <div class="god-meaning">경쟁·변화</div>
+                        </div>
+                        
+                        <div class="god-card expression-group" data-god="siksin" style="--angle: 72deg">
+                            <div class="god-symbol">食</div>
+                            <div class="god-name">식신</div>
+                            <div class="god-meaning">창의·자녀</div>
+                        </div>
+                        
+                        <div class="god-card expression-group" data-god="sanggwan" style="--angle: 108deg">
+                            <div class="god-symbol">傷</div>
+                            <div class="god-name">상관</div>
+                            <div class="god-meaning">재능·반항</div>
+                        </div>
+                        
+                        <div class="god-card wealth-group" data-god="jeongjae" style="--angle: 144deg">
+                            <div class="god-symbol">財</div>
+                            <div class="god-name">정재</div>
+                            <div class="god-meaning">안정재물·아내</div>
+                        </div>
+                        
+                        <div class="god-card wealth-group" data-god="pyeonjae" style="--angle: 180deg">
+                            <div class="god-symbol">才</div>
+                            <div class="god-name">편재</div>
+                            <div class="god-meaning">유동재물·사교성</div>
+                        </div>
+                        
+                        <div class="god-card authority-group" data-god="jeonggwan" style="--angle: 216deg">
+                            <div class="god-symbol">官</div>
+                            <div class="god-name">정관</div>
+                            <div class="god-meaning">품위·명예·남편</div>
+                        </div>
+                        
+                        <div class="god-card authority-group" data-god="pyeongwan" style="--angle: 252deg">
+                            <div class="god-symbol">殺</div>
+                            <div class="god-name">편관(칠살)</div>
+                            <div class="god-meaning">권위·도전·압력</div>
+                        </div>
+                        
+                        <div class="god-card support-group" data-god="jeongin" style="--angle: 288deg">
+                            <div class="god-symbol">印</div>
+                            <div class="god-name">정인</div>
+                            <div class="god-meaning">학문·어머니·보호</div>
+                        </div>
+                        
+                        <div class="god-card support-group" data-god="pyeongin" style="--angle: 324deg">
+                            <div class="god-symbol">梟</div>
+                            <div class="god-name">편인</div>
+                            <div class="god-meaning">직관·신비·특수학문</div>
+                        </div>
+                    </div>
+                    
+                    <div class="wheel-controls">
+                        <button class="stem-btn active" data-stem="갑">甲</button>
+                        <button class="stem-btn" data-stem="을">乙</button>
+                        <button class="stem-btn" data-stem="병">丙</button>
+                        <button class="stem-btn" data-stem="정">丁</button>
+                        <button class="stem-btn" data-stem="무">戊</button>
+                        <button class="stem-btn" data-stem="기">己</button>
+                        <button class="stem-btn" data-stem="경">庚</button>
+                        <button class="stem-btn" data-stem="신">辛</button>
+                        <button class="stem-btn" data-stem="임">壬</button>
+                        <button class="stem-btn" data-stem="계">癸</button>
+                    </div>
+                </div>
+
+                <!-- 십신 상세 설명 -->
+                <div class="god-details" id="godDetails">
+                    <h3 id="selectedGodTitle">십신을 선택해주세요</h3>
+                    <div class="details-content" id="detailsContent">
+                        <p>십신 카드를 클릭하면 상세 설명을 볼 수 있습니다.</p>
+                    </div>
+                </div>
+
+                <div class="lesson-complete">
+                    <button class="complete-btn" id="tenGodsComplete">십신 학습 완료 ✅</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 합충형파해 섹션 -->
+        <section id="interactions" class="lesson-section">
+            <div class="lesson-container">
+                <h2>합충형파해(合沖刑破害) - 역동적 상호작용</h2>
+                <p class="section-intro">
+                    사주 내 글자들이 만나 일으키는 화학반응으로, 인생의 변화와 기회를 예측하는 중요한 도구입니다.
+                </p>
+
+                <!-- 합(合) 학습 -->
+                <div class="interactive-card">
+                    <h3>🤝 합(合) - 끌림과 결합</h3>
+                    <div class="interaction-tabs">
+                        <button class="tab-btn active" data-tab="cheongan">천간합</button>
+                        <button class="tab-btn" data-tab="jiji">지지합</button>
+                    </div>
+                    
+                    <div class="tab-content active" id="cheongan">
+                        <h4>천간 5합</h4>
+                        <div class="combination-grid">
+                            <div class="combination-card" data-combination="갑기">
+                                <div class="stems">
+                                    <span class="stem yang wood">甲</span>
+                                    <span class="plus">+</span>
+                                    <span class="stem yin earth">己</span>
+                                </div>
+                                <div class="arrow">→</div>
+                                <div class="result earth">土</div>
+                                <div class="meaning">갑기합토 - 중정한 결합</div>
+                            </div>
+                            
+                            <div class="combination-card" data-combination="을경">
+                                <div class="stems">
+                                    <span class="stem yin wood">乙</span>
+                                    <span class="plus">+</span>
+                                    <span class="stem yang metal">庚</span>
+                                </div>
+                                <div class="arrow">→</div>
+                                <div class="result metal">金</div>
+                                <div class="meaning">을경합금 - 의로운 결합</div>
+                            </div>
+                            
+                            <div class="combination-card" data-combination="병신">
+                                <div class="stems">
+                                    <span class="stem yang fire">丙</span>
+                                    <span class="plus">+</span>
+                                    <span class="stem yin metal">辛</span>
+                                </div>
+                                <div class="arrow">→</div>
+                                <div class="result water">水</div>
+                                <div class="meaning">병신합수 - 위엄있는 결합</div>
+                            </div>
+                            
+                            <div class="combination-card" data-combination="정임">
+                                <div class="stems">
+                                    <span class="stem yin fire">丁</span>
+                                    <span class="plus">+</span>
+                                    <span class="stem yang water">壬</span>
+                                </div>
+                                <div class="arrow">→</div>
+                                <div class="result wood">木</div>
+                                <div class="meaning">정임합목 - 음란한 결합</div>
+                            </div>
+                            
+                            <div class="combination-card" data-combination="무계">
+                                <div class="stems">
+                                    <span class="stem yang earth">戊</span>
+                                    <span class="plus">+</span>
+                                    <span class="stem yin water">癸</span>
+                                </div>
+                                <div class="arrow">→</div>
+                                <div class="result fire">火</div>
+                                <div class="meaning">무계합화 - 무정한 결합</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="jiji">
+                        <h4>지지합 - 삼합과 육합</h4>
+                        <div class="jiji-combinations">
+                            <div class="samhap-section">
+                                <h5>🔺 삼합</h5>
+                                <div class="samhap-grid">
+                                    <div class="samhap-card water">
+                                        <div class="branches">申子辰</div>
+                                        <div class="result">水局</div>
+                                        <div class="meaning">지혜와 유연함</div>
+                                    </div>
+                                    <div class="samhap-card metal">
+                                        <div class="branches">巳酉丑</div>
+                                        <div class="result">金局</div>
+                                        <div class="meaning">정확함과 결단</div>
+                                    </div>
+                                    <div class="samhap-card fire">
+                                        <div class="branches">寅午戌</div>
+                                        <div class="result">火局</div>
+                                        <div class="meaning">열정과 활동</div>
+                                    </div>
+                                    <div class="samhap-card wood">
+                                        <div class="branches">亥卯未</div>
+                                        <div class="result">木局</div>
+                                        <div class="meaning">성장과 발전</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="yukhap-section">
+                                <h5>🤝 육합</h5>
+                                <div class="yukhap-grid">
+                                    <div class="yukhap-pair">子丑</div>
+                                    <div class="yukhap-pair">寅亥</div>
+                                    <div class="yukhap-pair">卯戌</div>
+                                    <div class="yukhap-pair">辰酉</div>
+                                    <div class="yukhap-pair">巳申</div>
+                                    <div class="yukhap-pair">午未</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 충(沖) 학습 -->
+                <div class="interactive-card">
+                    <h3>⚡ 충(沖) - 갈등과 변화</h3>
+                    <div class="conflict-visualization">
+                        <div class="conflict-pairs">
+                            <div class="conflict-pair" data-pair="자오">
+                                <span class="branch water">子</span>
+                                <div class="conflict-symbol">⚡</div>
+                                <span class="branch fire">午</span>
+                                <div class="meaning">물과 불의 대립</div>
+                            </div>
+                            <div class="conflict-pair" data-pair="축미">
+                                <span class="branch earth">丑</span>
+                                <div class="conflict-symbol">⚡</div>
+                                <span class="branch earth">未</span>
+                                <div class="meaning">습토와 조토의 충돌</div>
+                            </div>
+                            <div class="conflict-pair" data-pair="인신">
+                                <span class="branch wood">寅</span>
+                                <div class="conflict-symbol">⚡</div>
+                                <span class="branch metal">申</span>
+                                <div class="meaning">나무와 금속의 대결</div>
+                            </div>
+                            <div class="conflict-pair" data-pair="묘유">
+                                <span class="branch wood">卯</span>
+                                <div class="conflict-symbol">⚡</div>
+                                <span class="branch metal">酉</span>
+                                <div class="meaning">동서 방향의 충돌</div>
+                            </div>
+                            <div class="conflict-pair" data-pair="진술">
+                                <span class="branch earth">辰</span>
+                                <div class="conflict-symbol">⚡</div>
+                                <span class="branch earth">戌</span>
+                                <div class="meaning">저장고의 개방</div>
+                            </div>
+                            <div class="conflict-pair" data-pair="사해">
+                                <span class="branch fire">巳</span>
+                                <div class="conflict-symbol">⚡</div>
+                                <span class="branch water">亥</span>
+                                <div class="meaning">화수 미제</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="conflict-effects">
+                        <h4>충의 현실적 의미</h4>
+                        <div class="effect-grid">
+                            <div class="effect-card positive">
+                                <h5>✨ 긍정적 작용</h5>
+                                <ul>
+                                    <li>새로운 시작의 계기</li>
+                                    <li>변화와 발전의 동력</li>
+                                    <li>정체 상황의 돌파</li>
+                                </ul>
+                            </div>
+                            <div class="effect-card challenging">
+                                <h5>⚠️ 주의할 점</h5>
+                                <ul>
+                                    <li>급작스러운 변화</li>
+                                    <li>이별이나 분리</li>
+                                    <li>건강상의 주의</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lesson-complete">
+                    <button class="complete-btn" id="interactionsComplete">합충형파해 학습 완료 ✅</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 실습 섹션 -->
+        <section id="practice" class="lesson-section">
+            <div class="lesson-container">
+                <h2>🎯 실습 - 직접 해보기</h2>
+                <p class="section-intro">
+                    배운 내용을 바탕으로 실제 사주에서 십신과 합충을 찾아보는 연습을 해보세요.
+                </p>
+
+                <!-- 십신 찾기 실습 -->
+                <div class="practice-card">
+                    <h3>🧮 십신 찾기 실습</h3>
+                    <div class="practice-saju" id="practiceSaju">
+                        <div class="saju-display">
+                            <div class="pillar year">
+                                <div class="stem" id="yearStem">甲</div>
+                                <div class="branch" id="yearBranch">子</div>
+                                <div class="pillar-label">년주</div>
+                            </div>
+                            <div class="pillar month">
+                                <div class="stem" id="monthStem">丙</div>
+                                <div class="branch" id="monthBranch">寅</div>
+                                <div class="pillar-label">월주</div>
+                            </div>
+                            <div class="pillar day main">
+                                <div class="stem" id="dayStem">戊</div>
+                                <div class="branch" id="dayBranch">午</div>
+                                <div class="pillar-label">일주 (일간)</div>
+                            </div>
+                            <div class="pillar hour">
+                                <div class="stem" id="hourStem">癸</div>
+                                <div class="branch" id="hourBranch">亥</div>
+                                <div class="pillar-label">시주</div>
+                            </div>
+                        </div>
+                        
+                        <div class="practice-questions">
+                            <div class="question-card">
+                                <h4>월간 丙화는 일간 戊토에 대해 무엇인가요?</h4>
+                                <div class="options">
+                                    <button class="option-btn" data-answer="편인">편인</button>
+                                    <button class="option-btn" data-answer="정인" data-correct="true">정인</button>
+                                    <button class="option-btn" data-answer="식신">식신</button>
+                                    <button class="option-btn" data-answer="상관">상관</button>
+                                </div>
+                                <div class="explanation hidden" id="explanation1">
+                                    <p>✅ 정답: <strong>정인</strong></p>
+                                    <p>丙화(양) → 戊토(양): 화생토 + 다른 음양 = 정인</p>
+                                    <p>정인은 학문, 보호, 어머니를 상징합니다.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="practice-controls">
+                            <button class="practice-btn" id="newPractice">새로운 사주 생성</button>
+                            <button class="practice-btn" id="showAnswers">정답 보기</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 합충 찾기 실습 -->
+                <div class="practice-card">
+                    <h3>🤝⚡ 합충 찾기 실습</h3>
+                    <div class="interaction-finder">
+                        <div class="finder-saju">
+                            <div class="stems-row">
+                                <span class="stem-char">甲</span>
+                                <span class="stem-char">己</span>
+                                <span class="stem-char">丙</span>
+                                <span class="stem-char">庚</span>
+                            </div>
+                            <div class="branches-row">
+                                <span class="branch-char">子</span>
+                                <span class="branch-char">午</span>
+                                <span class="branch-char">申</span>
+                                <span class="branch-char">子</span>
+                            </div>
+                        </div>
+                        
+                        <div class="finder-results">
+                            <h4>발견된 상호작용</h4>
+                            <div class="found-interactions" id="foundInteractions">
+                                <div class="interaction-result">
+                                    <span class="interaction-type hap">합</span>
+                                    <span class="interaction-detail">甲己 → 갑기합토</span>
+                                </div>
+                                <div class="interaction-result">
+                                    <span class="interaction-type chung">충</span>
+                                    <span class="interaction-detail">子午 → 자오충</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lesson-complete">
+                    <button class="complete-btn" id="practiceComplete">실습 완료 ✅</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 퀴즈 섹션 -->
+        <section id="quiz" class="lesson-section">
+            <div class="lesson-container">
+                <h2>🧠 종합 퀴즈</h2>
+                <div class="quiz-container" id="level2Quiz">
+                    <!-- 퀴즈 내용은 JavaScript로 동적 생성 -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 학습 노트 -->
+    <div class="learning-notes" id="learningNotes">
+        <div class="notes-header">
+            <h3>📝 학습 노트</h3>
+            <button class="close-notes" id="closeNotes">×</button>
+        </div>
+        <textarea id="notesText" placeholder="중요한 내용을 기록해보세요..."></textarea>
+        <button class="save-notes" id="saveNotes">저장</button>
+    </div>
+
+    <!-- 노트 토글 버튼 -->
+    <button class="notes-toggle" id="notesToggle">📝</button>
+
+    <!-- Scripts -->
+    <script src="level2-script.js"></script>
+    <script>
+        // Service Worker 등록
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('service-worker.js')
+                .then(reg => console.log('SW registered', reg))
+                .catch(err => console.log('SW registration failed', err));
+        }
+    </script>
+</body>
+</html>

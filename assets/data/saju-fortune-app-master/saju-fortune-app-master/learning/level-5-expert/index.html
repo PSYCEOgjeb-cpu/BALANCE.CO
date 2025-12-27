@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#7c2d12">
+    <title>명리학 전문가 과정 - 종합 상담 기법</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Noto Sans KR', sans-serif; 
+            background: linear-gradient(135deg, #7c2d12 0%, #431407 100%); 
+            min-height: 100vh; color: #1a202c; 
+        }
+        .learning-header { 
+            background: rgba(255, 255, 255, 0.95); 
+            padding: 1rem; 
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); 
+        }
+        .progress-container { text-align: center; margin-bottom: 1rem; }
+        .progress-container h1 { color: #7c2d12; margin-bottom: 0.5rem; }
+        .lesson-nav { display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; }
+        .nav-btn { 
+            padding: 0.5rem 1rem; border: none; border-radius: 20px; 
+            background: #f1f5f9; color: #64748b; cursor: pointer; transition: all 0.3s ease; 
+        }
+        .nav-btn.active { background: #7c2d12; color: white; }
+        .learning-content { max-width: 1200px; margin: 2rem auto; padding: 0 1rem; }
+        .lesson-section { display: none; }
+        .lesson-section.active { display: block; animation: fadeIn 0.5s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .lesson-container { 
+            background: rgba(255, 255, 255, 0.95); 
+            border-radius: 16px; padding: 2rem; 
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1); 
+        }
+        .lesson-container h2 { color: #7c2d12; margin-bottom: 1rem; }
+        .interactive-card { 
+            background: linear-gradient(145deg, #f8fafc, #e2e8f0); 
+            border-radius: 12px; padding: 1.5rem; margin-bottom: 2rem; 
+        }
+        .expert-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
+            gap: 1rem; 
+        }
+        .expert-card { 
+            background: white; border-radius: 8px; padding: 2rem; 
+            border: 2px solid #e2e8f0; transition: all 0.3s ease; 
+        }
+        .expert-card:hover { border-color: #7c2d12; transform: translateY(-2px); }
+        .expert-card.master { border-color: #d97706; background: linear-gradient(145deg, #fef3c7, #fed7aa); }
+        .expert-card.wisdom { border-color: #6366f1; background: linear-gradient(145deg, #e0e7ff, #c7d2fe); }
+        .complete-btn { 
+            padding: 1rem 2rem; border: none; border-radius: 8px; 
+            background: linear-gradient(135deg, #7c2d12, #431407); 
+            color: white; font-weight: 600; cursor: pointer; 
+            transition: all 0.3s ease; 
+        }
+        .complete-btn:hover { transform: translateY(-2px); }
+        .lesson-complete { text-align: center; margin-top: 2rem; }
+        .consultation-demo { 
+            background: #fffbeb; border: 2px solid #d97706; 
+            border-radius: 12px; padding: 2rem; margin: 1rem 0; 
+        }
+        .case-study { 
+            background: #f0f9ff; border: 2px solid #0ea5e9; 
+            border-radius: 12px; padding: 2rem; margin: 1rem 0; 
+        }
+    </style>
+</head>
+<body>
+    <header class="learning-header">
+        <div class="progress-container">
+            <h1>🎓 5단계: 전문가 과정</h1>
+            <p>종합 상담 기법과 실무 응용</p>
+        </div>
+        <nav class="lesson-nav">
+            <button class="nav-btn active" data-section="consultation">상담 기법</button>
+            <button class="nav-btn" data-section="cases">실무 사례</button>
+            <button class="nav-btn" data-section="ethics">윤리와 책임</button>
+            <button class="nav-btn" data-section="final">최종 평가</button>
+        </nav>
+    </header>
+
+    <main class="learning-content">
+        <!-- 상담 기법 섹션 -->
+        <section id="consultation" class="lesson-section active">
+            <div class="lesson-container">
+                <h2>종합 상담 기법 - 조언자의 자세</h2>
+                <p>사주 지식을 바탕으로 실제 상담에서 도움이 되는 조언을 제공하는 방법을 학습합니다.</p>
+
+                <div class="interactive-card">
+                    <h3>🎯 상담의 핵심 원칙</h3>
+                    <div class="expert-grid">
+                        <div class="expert-card master">
+                            <h4>1. 균형잡힌 관점</h4>
+                            <ul>
+                                <li>운명론이 아닌 가능성 제시</li>
+                                <li>장점과 주의점 균형있게 전달</li>
+                                <li>절대적 판단 대신 상대적 해석</li>
+                                <li>개인의 노력과 선택 강조</li>
+                            </ul>
+                        </div>
+                        <div class="expert-card master">
+                            <h4>2. 건설적 조언</h4>
+                            <ul>
+                                <li>문제 지적보다 해결책 제시</li>
+                                <li>구체적이고 실용적인 조언</li>
+                                <li>단계별 개선 방안 안내</li>
+                                <li>희망과 용기를 주는 메시지</li>
+                            </ul>
+                        </div>
+                        <div class="expert-card master">
+                            <h4>3. 공감과 경청</h4>
+                            <ul>
+                                <li>상담자의 입장 이해하기</li>
+                                <li>판단보다는 수용하는 자세</li>
+                                <li>질문을 통한 깊은 소통</li>
+                                <li>감정적 지지와 격려</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="consultation-demo">
+                    <h3>💬 상담 시연 예시</h3>
+                    <div class="consultation-script">
+                        <p><strong>상담자:</strong> "제가 사업을 해도 될지 궁금합니다."</p>
+                        <p><strong>전문가:</strong> "사주를 보니 편재와 식신이 잘 배치되어 있어서 사업에 대한 감각과 창의적 아이디어가 있으시네요. 다만 현재 대운에서는 신중한 접근이 필요할 것 같습니다. 작은 규모부터 시작해서 경험을 쌓아가시는 것을 권합니다."</p>
+                        <p><strong>특징:</strong> ✅ 긍정적 요소 먼저 언급 ✅ 구체적 조언 제시 ✅ 단계적 접근 권유</p>
+                    </div>
+                </div>
+
+                <div class="lesson-complete">
+                    <button class="complete-btn" onclick="completeSection('consultation')">상담 기법 완료 ✅</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 실무 사례 섹션 -->
+        <section id="cases" class="lesson-section">
+            <div class="lesson-container">
+                <h2>실무 응용 사례 - 다양한 상황별 접근</h2>
+                <p>실제 상담에서 자주 접하는 질문들과 적절한 답변 방법을 학습합니다.</p>
+
+                <div class="interactive-card">
+                    <h3>📋 주요 상담 분야</h3>
+                    <div class="expert-grid">
+                        <div class="expert-card wisdom">
+                            <h4>직업과 진로</h4>
+                            <ul>
+                                <li>적성에 맞는 직업 분야 안내</li>
+                                <li>창업 시기와 업종 조언</li>
+                                <li>승진과 이직 타이밍</li>
+                                <li>부업과 투자 가능성</li>
+                            </ul>
+                        </div>
+                        <div class="expert-card wisdom">
+                            <h4>결혼과 인간관계</h4>
+                            <ul>
+                                <li>배우자와의 궁합</li>
+                                <li>결혼 적령기 판단</li>
+                                <li>가족관계 개선 방법</li>
+                                <li>대인관계 패턴 분석</li>
+                            </ul>
+                        </div>
+                        <div class="expert-card wisdom">
+                            <h4>건강과 생활</h4>
+                            <ul>
+                                <li>체질에 맞는 생활 습관</li>
+                                <li>주의할 건강 부위</li>
+                                <li>스트레스 관리 방법</li>
+                                <li>거주지와 방향 선택</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="case-study">
+                    <h3>📚 실제 상담 사례</h3>
+                    <div class="case-example">
+                        <p><strong>사례:</strong> 30대 여성, 육아와 일의 양립에 대한 고민</p>
+                        <p><strong>사주 분석:</strong> 정인과 식신이 강한 구조, 가정과 자녀에 대한 애정이 깊음</p>
+                        <p><strong>조언 방향:</strong></p>
+                        <ul>
+                            <li>현재는 육아에 집중하되, 3년 후 대운 변화 시 단계적 사회 복귀</li>
+                            <li>재택근무나 시간제 일자리부터 시작</li>
+                            <li>자녀 교육 관련 분야에서 전문성 발휘 가능</li>
+                            <li>가족의 지지를 얻는 것이 중요</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="lesson-complete">
+                    <button class="complete-btn" onclick="completeSection('cases')">실무 사례 완료 ✅</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 윤리와 책임 섹션 -->
+        <section id="ethics" class="lesson-section">
+            <div class="lesson-container">
+                <h2>명리학자의 윤리와 책임</h2>
+                <p>전문가로서 지켜야 할 윤리적 기준과 사회적 책임에 대해 학습합니다.</p>
+
+                <div class="interactive-card">
+                    <h3>⚖️ 윤리적 원칙</h3>
+                    <div class="expert-grid">
+                        <div class="expert-card">
+                            <h4>정직과 겸손</h4>
+                            <ul>
+                                <li>자신의 한계를 인정하기</li>
+                                <li>확신할 수 없는 부분은 솔직히 표현</li>
+                                <li>과장되거나 단정적 표현 피하기</li>
+                                <li>지속적인 학습과 성장</li>
+                            </ul>
+                        </div>
+                        <div class="expert-card">
+                            <h4>도움과 치유</h4>
+                            <ul>
+                                <li>상담자의 최선의 이익 우선</li>
+                                <li>부정적 암시나 공포감 조성 금지</li>
+                                <li>희망적이고 건설적인 메시지</li>
+                                <li>전문적 상담이 필요한 경우 연계</li>
+                            </ul>
+                        </div>
+                        <div class="expert-card">
+                            <h4>비밀 보호</h4>
+                            <ul>
+                                <li>상담 내용의 절대 기밀 유지</li>
+                                <li>개인정보 보호 철저</li>
+                                <li>사례 소개 시 익명성 보장</li>
+                                <li>신뢰 관계의 중요성</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lesson-complete">
+                    <button class="complete-btn" onclick="completeSection('ethics')">윤리와 책임 완료 ✅</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 최종 평가 섹션 -->
+        <section id="final" class="lesson-section">
+            <div class="lesson-container">
+                <h2>🏆 최종 평가 - 전문가 인증</h2>
+                <p>5단계 전 과정을 완료하신 것을 축하합니다!</p>
+
+                <div class="interactive-card">
+                    <h3>🎓 학습 완료 인증</h3>
+                    <div class="completion-summary">
+                        <div class="achievement-badge">
+                            <div style="font-size: 4rem; text-align: center; margin: 2rem 0;">🏅</div>
+                            <h2 style="text-align: center; color: #7c2d12;">명리학 전문가 과정 수료</h2>
+                            <p style="text-align: center; margin: 1rem 0;">
+                                체계적인 5단계 학습을 통해<br>
+                                전통 명리학의 깊이 있는 이해와<br>
+                                현대적 상담 기법을 모두 습득하셨습니다.
+                            </p>
+                        </div>
+                        
+                        <div class="learning-path-summary">
+                            <h4>📚 완료한 학습 과정</h4>
+                            <ul style="list-style: none; padding: 0;">
+                                <li>✅ 1단계: 우주의 근본 언어 (음양오행, 천간지지)</li>
+                                <li>✅ 2단계: 핵심 해석 도구 (십신, 합충형파해)</li>
+                                <li>✅ 3단계: 실전 적용 (사주 구성, 격국론)</li>
+                                <li>✅ 4단계: 고급 분석 (신살, 운세 분석)</li>
+                                <li>✅ 5단계: 전문가 과정 (상담 기법, 윤리)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="interactive-card">
+                    <h3>🌟 앞으로의 길</h3>
+                    <p>진정한 명리학 전문가가 되기 위한 지속적인 발전 방향:</p>
+                    <div class="expert-grid">
+                        <div class="expert-card">
+                            <h4>실무 경험 쌓기</h4>
+                            <ul>
+                                <li>다양한 사례 경험하기</li>
+                                <li>상담 기술 연마</li>
+                                <li>피드백 수렴과 개선</li>
+                            </ul>
+                        </div>
+                        <div class="expert-card">
+                            <h4>지속적 학습</h4>
+                            <ul>
+                                <li>고전 명리서 연구</li>
+                                <li>현대적 해석 방법 탐구</li>
+                                <li>동료들과의 교류</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lesson-complete">
+                    <button class="complete-btn" onclick="completeCourse()">🎉 전체 과정 완료</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        let currentSection = 'consultation';
+        let completedSections = new Set();
+
+        // 네비게이션
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const sectionId = e.target.dataset.section;
+                switchSection(sectionId);
+            });
+        });
+
+        function switchSection(sectionId) {
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.section === sectionId) {
+                    btn.classList.add('active');
+                }
+            });
+
+            document.querySelectorAll('.lesson-section').forEach(section => {
+                section.classList.remove('active');
+                if (section.id === sectionId) {
+                    section.classList.add('active');
+                }
+            });
+
+            currentSection = sectionId;
+        }
+
+        function completeSection(sectionName) {
+            completedSections.add(sectionName);
+            alert(`🎉 ${sectionName} 학습을 완료했습니다!`);
+        }
+
+        function completeCourse() {
+            alert(`🏆 축하합니다! 
+            
+명리학 전문가 과정을 모두 완료하셨습니다!
+
+이제 여러분은:
+• 음양오행의 원리를 이해하고
+• 십신과 합충을 분석할 수 있으며  
+• 격국과 신살을 판단할 수 있고
+• 전문적인 상담을 제공할 수 있습니다
+
+앞으로도 지속적인 학습과 실천을 통해
+더욱 훌륭한 명리학자가 되시기 바랍니다!`);
+        }
+
+        // CSS 추가
+        const style = document.createElement('style');
+        style.textContent = `
+            .achievement-badge { 
+                background: linear-gradient(145deg, #fef3c7, #fed7aa); 
+                border-radius: 16px; padding: 2rem; margin-bottom: 2rem; 
+                text-align: center; border: 3px solid #d97706; 
+            }
+            .learning-path-summary { 
+                background: white; border-radius: 12px; padding: 2rem; 
+                border: 2px solid #e2e8f0; 
+            }
+            .learning-path-summary li { 
+                padding: 0.5rem 0; font-size: 1.1rem; 
+                color: #374151; 
+            }
+            .expert-card ul { padding-left: 1rem; }
+            .expert-card li { margin-bottom: 0.5rem; color: #6b7280; }
+            .consultation-script p { margin-bottom: 1rem; line-height: 1.6; }
+            .case-example ul { margin-top: 1rem; padding-left: 2rem; }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

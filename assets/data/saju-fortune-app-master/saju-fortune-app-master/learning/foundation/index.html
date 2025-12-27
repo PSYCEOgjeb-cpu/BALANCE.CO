@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="사주학습">
+    <meta name="application-name" content="사주명리 학습">
+    <meta name="theme-color" content="#1e40af">
+    <meta name="msapplication-TileColor" content="#1e40af">
+    <meta name="msapplication-navbutton-color" content="#1e40af">
+    
+    <title>명리학 기초 - 음양오행의 세계</title>
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- iOS Icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="icons/icon-180x180.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="icons/icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="icons/icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="icons/icon-120x120.png">
+    
+    <!-- Standard Icons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="icons/icon-16x16.png">
+    
+    <!-- Splash Screens -->
+    <link rel="apple-touch-startup-image" href="splash/splash-2048x2732.png" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="splash/splash-1668x2388.png" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="splash/splash-1536x2048.png" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="splash/splash-1125x2436.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="splash/splash-1242x2208.png" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="splash/splash-750x1334.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="foundation-styles-mobile.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="foundation-script.js" as="script">
+</head>
+<body>
+    <!-- 학습 진도 헤더 -->
+    <header class="learning-header">
+        <div class="progress-container">
+            <h1>🎯 1단계: 우주의 근본 언어</h1>
+            <div class="progress-bar">
+                <div class="progress-fill" id="overallProgress"></div>
+            </div>
+            <span class="progress-text" id="progressText">0% 완료</span>
+        </div>
+        <nav class="lesson-nav">
+            <button class="nav-btn active" data-section="yinyang">음양</button>
+            <button class="nav-btn" data-section="wuxing">오행</button>
+            <button class="nav-btn" data-section="stems-branches">천간지지</button>
+            <button class="nav-btn" data-section="quiz">퀴즈</button>
+        </nav>
+    </header>
+
+    <main class="learning-content">
+        <!-- 음양(陰陽) 섹션 -->
+        <section id="yinyang" class="lesson-section active">
+            <div class="lesson-container">
+                <h2>음양(陰陽) - 태초의 이원성</h2>
+                <p class="section-intro">
+                    음양은 우주 만물을 생성하고 변화시키는 근원적 원리로, 서로 대립하면서도 상호 보완하는 두 기운입니다.
+                </p>
+
+                <!-- 태극 인터랙티브 -->
+                <div class="interactive-card">
+                    <h3>🌀 태극의 역동적 순환</h3>
+                    <div class="taiji-container">
+                        <div class="taiji-symbol" id="taijiSymbol">
+                            <div class="yin-part">
+                                <div class="yang-dot"></div>
+                                <span class="element-label">음(陰)</span>
+                            </div>
+                            <div class="yang-part">
+                                <div class="yin-dot"></div>
+                                <span class="element-label">양(陽)</span>
+                            </div>
+                        </div>
+                        <div class="taiji-controls">
+                            <button class="control-btn" id="rotateBtn">🔄 순환 보기</button>
+                            <button class="control-btn" id="seasonBtn">🌸 계절 변화</button>
+                        </div>
+                    </div>
+                    
+                    <div class="explanation-panel" id="yinyangExplanation">
+                        <h4>핵심 원리</h4>
+                        <div class="principle-cards">
+                            <div class="principle-card">
+                                <h5>🔗 상호 의존</h5>
+                                <p>음과 양은 새끼줄처럼 꼬여 하나를 이룹니다</p>
+                            </div>
+                            <div class="principle-card">
+                                <h5>🔄 역동적 변환</h5>
+                                <p>음이 차면 양이 태동하고, 양이 차면 음이 태동합니다</p>
+                            </div>
+                            <div class="principle-card">
+                                <h5>⚖️ 균형과 조화</h5>
+                                <p>어느 한쪽이 우월한 것이 아닌 완전한 조화입니다</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 음양 실생활 적용 -->
+                <div class="application-section">
+                    <h3>📱 일상 속 음양 원리</h3>
+                    <div class="application-grid">
+                        <div class="app-card" data-concept="seasons">
+                            <div class="app-icon">🌸</div>
+                            <h4>계절의 순환</h4>
+                            <p>동지(음 극점) → 양기 태동<br>하지(양 극점) → 음기 시작</p>
+                        </div>
+                        <div class="app-card" data-concept="lifecycle">
+                            <div class="app-icon">🌱</div>
+                            <h4>생명의 리듬</h4>
+                            <p>탄생 → 성장 → 쇠퇴 → 소멸<br>끝없는 생명의 순환</p>
+                        </div>
+                        <div class="app-card" data-concept="breath">
+                            <div class="app-icon">🫁</div>
+                            <h4>호흡의 리듬</h4>
+                            <p>들숨(양) ↔ 날숨(음)<br>생명을 유지하는 기본 리듬</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lesson-complete">
+                    <button class="complete-btn" id="yinyangComplete">음양 학습 완료 ✅</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 오행(五行) 섹션 -->
+        <section id="wuxing" class="lesson-section">
+            <div class="lesson-container">
+                <h2>오행(五行) - 변화의 순환</h2>
+                <p class="section-intro">
+                    목화토금수 다섯 기운의 순환으로 우주 만물의 변화를 설명하는 체계입니다.
+                </p>
+
+                <!-- 오행 상생상극 인터랙티브 -->
+                <div class="interactive-card">
+                    <h3>🔄 오행의 상생상극</h3>
+                    <div class="wuxing-container">
+                        <div class="wuxing-circle" id="wuxingCircle">
+                            <div class="element wood" data-element="wood">
+                                <div class="element-symbol">木</div>
+                                <div class="element-name">목(木)</div>
+                                <div class="element-season">봄</div>
+                            </div>
+                            <div class="element fire" data-element="fire">
+                                <div class="element-symbol">火</div>
+                                <div class="element-name">화(火)</div>
+                                <div class="element-season">여름</div>
+                            </div>
+                            <div class="element earth" data-element="earth">
+                                <div class="element-symbol">土</div>
+                                <div class="element-name">토(土)</div>
+                                <div class="element-season">환절기</div>
+                            </div>
+                            <div class="element metal" data-element="metal">
+                                <div class="element-symbol">金</div>
+                                <div class="element-name">금(金)</div>
+                                <div class="element-season">가을</div>
+                            </div>
+                            <div class="element water" data-element="water">
+                                <div class="element-symbol">水</div>
+                                <div class="element-name">수(水)</div>
+                                <div class="element-season">겨울</div>
+                            </div>
+                        </div>
+                        
+                        <div class="wuxing-controls">
+                            <button class="cycle-btn active" id="generationCycle">상생 순환</button>
+                            <button class="cycle-btn" id="controlCycle">상극 순환</button>
+                            <button class="cycle-btn" id="seasonFlow">계절 흐름</button>
+                        </div>
+                    </div>
+
+                    <div class="cycle-explanation" id="cycleExplanation">
+                        <div class="cycle-info generation active">
+                            <h4>🌱 상생(相生) - 온실 같은 성장</h4>
+                            <p>목생화 → 화생토 → 토생금 → 금생수 → 수생목</p>
+                            <div class="flow-description">
+                                나무가 불을 피우고, 불이 재(토)를 만들고, 
+                                토에서 금속이 나오고, 금속이 이슬(수)를 맺고, 
+                                물이 나무를 키웁니다.
+                            </div>
+                        </div>
+                        <div class="cycle-info control">
+                            <h4>⚔️ 상극(相克) - 거친 들판의 시련</h4>
+                            <p>목극토 → 토극수 → 수극화 → 화극금 → 금극목</p>
+                            <div class="flow-description">
+                                나무가 토양을 말리고, 흙이 물을 막고, 
+                                물이 불을 끄고, 불이 금속을 녹이고, 
+                                금속이 나무를 자릅니다.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 오행별 특성 카드 -->
+                <div class="elements-detail">
+                    <h3>🎨 오행별 특성 탐구</h3>
+                    <div class="element-cards">
+                        <div class="detail-card wood" data-element="wood">
+                            <div class="card-header">
+                                <span class="element-symbol">木</span>
+                                <h4>목(木) - 생장발전</h4>
+                            </div>
+                            <div class="card-content">
+                                <div class="trait-row">
+                                    <span class="trait-label">계절</span>
+                                    <span class="trait-value">봄</span>
+                                </div>
+                                <div class="trait-row">
+                                    <span class="trait-label">덕목</span>
+                                    <span class="trait-value">인(仁) - 어짊</span>
+                                </div>
+                                <div class="trait-row">
+                                    <span class="trait-label">감정</span>
+                                    <span class="trait-value">노(怒) - 분노</span>
+                                </div>
+                                <div class="trait-row">
+                                    <span class="trait-label">방향</span>
+                                    <span class="trait-value">동쪽</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="detail-card fire" data-element="fire">
+                            <div class="card-header">
+                                <span class="element-symbol">火</span>
+                                <h4>화(火) - 번영완성</h4>
+                            </div>
+                            <div class="card-content">
+                                <div class="trait-row">
+                                    <span class="trait-label">계절</span>
+                                    <span class="trait-value">여름</span>
+                                </div>
+                                <div class="trait-row">
+                                    <span class="trait-label">덕목</span>
+                                    <span class="trait-value">예(禮) - 예의</span>
+                                </div>
+                                <div class="trait-row">
+                                    <span class="trait-label">감정</span>
+                                    <span class="trait-value">희(喜) - 기쁨</span>
+                                </div>
+                                <div class="trait-row">
+                                    <span class="trait-label">방향</span>
+                                    <span class="trait-value">남쪽</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="detail-card earth" data-element="earth">
+                            <div class="card-header">
+                                <span class="element-symbol">土</span>
+                                <h4>토(土) - 포용저장</h4>
+                            </div>
+                            <div class="card-content">
+                                <div class="trait-row">
+                                    <span class="trait-label">계절</span>
+                                    <span class="trait-value">환절기</span>
+                                </div>
+                                <div class="trait-row">
+                                    <span class="trait-label">덕목</span>
+                                    <span class="trait-value">신(信) - 믿음</span>
+                                </div>
+                                <div class="trait-row">
+                                    <span class="trait-label">감정</span>
+                                    <span class="trait-value">사(思) - 생각</span>
+                                </div>
+                                <div class="trait-row">
+                                    <span class="trait-label">방향</span>
+                                    <span class="trait-value">중앙</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="detail-card metal" data-element="metal">
+                            <div class="card-header">
+                                <span class="element-symbol">金</span>
+                                <h4>금(金) - 수렴정리</h4>
+                            </div>
+                            <div class="card-content">
+                                <div class="trait-row">
+                                    <span class="trait-label">계절</span>
+                                    <span class="trait-value">가을</span>
+                                </div>
+                                <div class="trait-row">
+                                    <span class="trait-label">덕목</span>
+                                    <span class="trait-value">의(義) - 의로움</span>
+                                </div>
+                                <div class="trait-row">
+                                    <span class="trait-label">감정</span>
+                                    <span class="trait-value">우(憂) - 근심</span>
+                                </div>
+                                <div class="trait-row">
+                                    <span class="trait-label">방향</span>
+                                    <span class="trait-value">서쪽</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="detail-card water" data-element="water">
+                            <div class="card-header">
+                                <span class="element-symbol">水</span>
+                                <h4>수(水) - 휴식반성</h4>
+                            </div>
+                            <div class="card-content">
+                                <div class="trait-row">
+                                    <span class="trait-label">계절</span>
+                                    <span class="trait-value">겨울</span>
+                                </div>
+                                <div class="trait-row">
+                                    <span class="trait-label">덕목</span>
+                                    <span class="trait-value">지(智) - 지혜</span>
+                                </div>
+                                <div class="trait-row">
+                                    <span class="trait-label">감정</span>
+                                    <span class="trait-value">공(恐) - 두려움</span>
+                                </div>
+                                <div class="trait-row">
+                                    <span class="trait-label">방향</span>
+                                    <span class="trait-value">북쪽</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lesson-complete">
+                    <button class="complete-btn" id="wuxingComplete">오행 학습 완료 ✅</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 천간지지 섹션 -->
+        <section id="stems-branches" class="lesson-section">
+            <div class="lesson-container">
+                <h2>천간지지(天干地支) - 천체와 대지의 부호</h2>
+                <p class="section-intro">
+                    10개의 천간과 12개의 지지는 명리학의 기본 문자로, 음양오행의 기운을 구체화합니다.
+                </p>
+
+                <!-- 천간 학습 -->
+                <div class="interactive-card">
+                    <h3>☰ 천간(天干) - 하늘의 기운</h3>
+                    <p class="concept-desc">정신적·이상적 세계, 드러나는 생각과 의도를 상징</p>
+                    
+                    <div class="stems-container">
+                        <div class="stems-grid" id="heavenlyStems">
+                            <div class="stem-card yang wood" data-stem="갑">
+                                <div class="stem-character">甲</div>
+                                <div class="stem-name">갑(甲)</div>
+                                <div class="stem-nature">양목 - 큰나무</div>
+                                <div class="stem-traits">정직, 원칙적</div>
+                            </div>
+                            <div class="stem-card yin wood" data-stem="을">
+                                <div class="stem-character">乙</div>
+                                <div class="stem-name">을(乙)</div>
+                                <div class="stem-nature">음목 - 작은나무</div>
+                                <div class="stem-traits">유연, 적응적</div>
+                            </div>
+                            <div class="stem-card yang fire" data-stem="병">
+                                <div class="stem-character">丙</div>
+                                <div class="stem-name">병(丙)</div>
+                                <div class="stem-nature">양화 - 태양</div>
+                                <div class="stem-traits">적극적, 열정적</div>
+                            </div>
+                            <div class="stem-card yin fire" data-stem="정">
+                                <div class="stem-character">丁</div>
+                                <div class="stem-name">정(丁)</div>
+                                <div class="stem-nature">음화 - 촛불</div>
+                                <div class="stem-traits">세밀, 정교</div>
+                            </div>
+                            <div class="stem-card yang earth" data-stem="무">
+                                <div class="stem-character">戊</div>
+                                <div class="stem-name">무(戊)</div>
+                                <div class="stem-nature">양토 - 산</div>
+                                <div class="stem-traits">안정적, 포용력</div>
+                            </div>
+                            <div class="stem-card yin earth" data-stem="기">
+                                <div class="stem-character">己</div>
+                                <div class="stem-name">기(己)</div>
+                                <div class="stem-nature">음토 - 밭</div>
+                                <div class="stem-traits">실용적, 협조적</div>
+                            </div>
+                            <div class="stem-card yang metal" data-stem="경">
+                                <div class="stem-character">庚</div>
+                                <div class="stem-name">경(庚)</div>
+                                <div class="stem-nature">양금 - 쇠</div>
+                                <div class="stem-traits">강직, 결단력</div>
+                            </div>
+                            <div class="stem-card yin metal" data-stem="신">
+                                <div class="stem-character">辛</div>
+                                <div class="stem-name">신(辛)</div>
+                                <div class="stem-nature">음금 - 보석</div>
+                                <div class="stem-traits">세련, 예리</div>
+                            </div>
+                            <div class="stem-card yang water" data-stem="임">
+                                <div class="stem-character">壬</div>
+                                <div class="stem-name">임(壬)</div>
+                                <div class="stem-nature">양수 - 바다</div>
+                                <div class="stem-traits">포용적, 지혜</div>
+                            </div>
+                            <div class="stem-card yin water" data-stem="계">
+                                <div class="stem-character">癸</div>
+                                <div class="stem-name">계(癸)</div>
+                                <div class="stem-nature">음수 - 이슬</div>
+                                <div class="stem-traits">섬세, 직관적</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 지지 학습 -->
+                <div class="interactive-card">
+                    <h3>☷ 지지(地支) - 땅의 기운</h3>
+                    <p class="concept-desc">현실적·구체적 세계, 실제로 나타나는 작용과 결과</p>
+                    
+                    <div class="branches-container">
+                        <div class="branches-circle" id="earthlyBranches">
+                            <div class="branch-card" data-branch="자" style="--angle: 0deg">
+                                <div class="branch-character">子</div>
+                                <div class="branch-info">
+                                    <div class="branch-name">자(子)</div>
+                                    <div class="branch-time">23-01시</div>
+                                    <div class="branch-season">겨울</div>
+                                    <div class="branch-animal">쥐</div>
+                                </div>
+                            </div>
+                            <div class="branch-card" data-branch="축" style="--angle: 30deg">
+                                <div class="branch-character">丑</div>
+                                <div class="branch-info">
+                                    <div class="branch-name">축(丑)</div>
+                                    <div class="branch-time">01-03시</div>
+                                    <div class="branch-season">겨울말</div>
+                                    <div class="branch-animal">소</div>
+                                </div>
+                            </div>
+                            <!-- 나머지 지지들... -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lesson-complete">
+                    <button class="complete-btn" id="stemsComplete">천간지지 학습 완료 ✅</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 퀴즈 섹션 -->
+        <section id="quiz" class="lesson-section">
+            <div class="lesson-container">
+                <h2>🧠 기초 이해도 확인 퀴즈</h2>
+                <div class="quiz-container" id="quizContainer">
+                    <!-- 퀴즈 내용이 JavaScript로 동적 생성됩니다 -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 학습 노트 사이드바 -->
+    <aside class="learning-notes">
+        <button class="notes-toggle" id="notesToggle">📝</button>
+        <div class="notes-content">
+            <h3>학습 노트</h3>
+            <textarea id="learningNotes" placeholder="여기에 학습 내용을 기록하세요..."></textarea>
+            <button class="save-notes-btn" id="saveNotes">저장</button>
+        </div>
+    </aside>
+
+    <script src="foundation-script.js"></script>
+    
+    <!-- PWA 초기화 스크립트 -->
+    <script>
+        // 서비스 워커 등록
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', async () => {
+                try {
+                    const registration = await navigator.serviceWorker.register('service-worker.js');
+                    console.log('✅ 서비스 워커 등록 성공:', registration.scope);
+                    
+                    // 업데이트 확인
+                    registration.addEventListener('updatefound', () => {
+                        const newWorker = registration.installing;
+                        newWorker.addEventListener('statechange', () => {
+                            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                // 새 버전 알림
+                                showUpdateNotification();
+                            }
+                        });
+                    });
+                } catch (error) {
+                    console.error('❌ 서비스 워커 등록 실패:', error);
+                }
+            });
+        }
+        
+        // PWA 설치 프롬프트
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            showInstallBanner();
+        });
+        
+        // 설치 배너 표시
+        function showInstallBanner() {
+            const banner = document.createElement('div');
+            banner.className = 'install-banner';
+            banner.innerHTML = `
+                <div class="install-content">
+                    <div class="install-icon">📱</div>
+                    <div class="install-text">
+                        <h4>앱으로 설치하기</h4>
+                        <p>홈화면에 추가하여 더 빠르게 학습하세요</p>
+                    </div>
+                    <div class="install-actions">
+                        <button class="install-btn" onclick="installApp()">설치</button>
+                        <button class="dismiss-btn" onclick="dismissInstall()">나중에</button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(banner);
+            
+            // 애니메이션
+            setTimeout(() => banner.classList.add('show'), 100);
+        }
+        
+        // 앱 설치
+        async function installApp() {
+            if (!deferredPrompt) return;
+            
+            const result = await deferredPrompt.prompt();
+            console.log('설치 결과:', result.outcome);
+            
+            deferredPrompt = null;
+            dismissInstall();
+        }
+        
+        // 설치 배너 닫기
+        function dismissInstall() {
+            const banner = document.querySelector('.install-banner');
+            if (banner) {
+                banner.classList.remove('show');
+                setTimeout(() => banner.remove(), 300);
+            }
+        }
+        
+        // 업데이트 알림
+        function showUpdateNotification() {
+            const notification = document.createElement('div');
+            notification.className = 'update-notification';
+            notification.innerHTML = `
+                <div class="update-content">
+                    <span>🔄 새로운 버전이 사용 가능합니다</span>
+                    <button onclick="updateApp()">업데이트</button>
+                </div>
+            `;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => notification.classList.add('show'), 100);
+        }
+        
+        // 앱 업데이트
+        function updateApp() {
+            window.location.reload();
+        }
+        
+        // 온라인/오프라인 상태 관리
+        window.addEventListener('online', () => {
+            showToast('🌐 온라인 상태로 복구되었습니다', 'success');
+        });
+        
+        window.addEventListener('offline', () => {
+            showToast('📱 오프라인 모드로 전환되었습니다', 'info');
+        });
+        
+        // 토스트 메시지
+        function showToast(message, type = 'info') {
+            const toast = document.createElement('div');
+            toast.className = `toast toast-${type}`;
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            
+            setTimeout(() => toast.classList.add('show'), 100);
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+    </script>
+    
+    <!-- PWA 스타일 -->
+    <style>
+        .install-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, #1e40af, #3b82f6);
+            color: white;
+            padding: 16px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .install-banner.show {
+            transform: translateY(0);
+        }
+        
+        .install-content {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .install-icon {
+            font-size: 2rem;
+        }
+        
+        .install-text {
+            flex: 1;
+        }
+        
+        .install-text h4 {
+            margin: 0;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        
+        .install-text p {
+            margin: 4px 0 0 0;
+            font-size: 0.875rem;
+            opacity: 0.9;
+        }
+        
+        .install-actions {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .install-btn, .dismiss-btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 20px;
+            font-weight: 500;
+            cursor: pointer;
+            font-size: 0.875rem;
+            transition: all 0.2s ease;
+        }
+        
+        .install-btn {
+            background: white;
+            color: #1e40af;
+        }
+        
+        .install-btn:hover {
+            background: #f1f5f9;
+        }
+        
+        .dismiss-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+        
+        .dismiss-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .update-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #059669;
+            color: white;
+            padding: 12px 16px;
+            border-radius: 12px;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .update-notification.show {
+            transform: translateX(0);
+        }
+        
+        .update-content {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.875rem;
+        }
+        
+        .update-content button {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            padding: 4px 12px;
+            border-radius: 16px;
+            cursor: pointer;
+            font-size: 0.75rem;
+        }
+        
+        .toast {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #1f2937;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 24px;
+            font-size: 0.875rem;
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+        }
+        
+        .toast.toast-success {
+            background: #059669;
+        }
+        
+        .toast.toast-info {
+            background: #1e40af;
+        }
+        
+        @media (max-width: 480px) {
+            .install-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 16px;
+            }
+            
+            .install-actions {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .install-btn, .dismiss-btn {
+                flex: 1;
+            }
+        }
+    </style>
+</body>
+</html>

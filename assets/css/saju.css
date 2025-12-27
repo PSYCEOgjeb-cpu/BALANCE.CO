@@ -1,0 +1,786 @@
+/* ========================================
+   사주 심리검사 스타일
+   ======================================== */
+
+:root {
+  --saju-primary: #1a1a2e;
+  --saju-secondary: #16213e;
+  --saju-accent: #e94560;
+  --saju-gold: #D4AF37;
+  --saju-wood: #22c55e;
+  --saju-fire: #ef4444;
+  --saju-earth: #eab308;
+  --saju-metal: #64748b;
+  --saju-water: #3b82f6;
+  --saju-gradient: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+}
+
+/* Body 스타일 */
+.saju-body {
+  background: var(--saju-gradient) !important;
+  background-attachment: fixed !important;
+  min-height: 100vh;
+}
+
+/* 메인 컨테이너 */
+.saju-main {
+  padding-top: 0;
+}
+
+/* ========================================
+   히어로 슬라이더
+   ======================================== */
+.saju-hero-slider {
+  width: 100%;
+  height: 60vh;
+  min-height: 500px;
+  position: relative;
+}
+
+.saju-hero-slide {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.saju-hero-slide__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 1;
+}
+
+.saju-hero-slide__content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 800px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.saju-hero-slide__stars {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  letter-spacing: 1rem;
+  color: var(--saju-gold);
+  animation: starsFloat 3s ease-in-out infinite;
+}
+
+@keyframes starsFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.saju-hero-slide__title {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 1.5rem;
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+  line-height: 1.3;
+}
+
+.saju-hero-slide__subtitle {
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-shadow: 0 2px 15px rgba(0, 0, 0, 0.4);
+}
+
+/* 페이지네이션 */
+.saju-hero-pagination {
+  position: absolute;
+  bottom: 2rem !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center;
+  gap: 0.75rem;
+  z-index: 10;
+}
+
+.saju-hero-pagination .swiper-pagination-bullet {
+  width: 50px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+  opacity: 1;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.saju-hero-pagination .swiper-pagination-bullet:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.saju-hero-pagination .swiper-pagination-bullet-active {
+  background: rgba(212, 175, 55, 0.4);
+}
+
+.saju-hero-pagination .swiper-pagination-bullet-active .saju-pagination-progress {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background: linear-gradient(90deg, #D4AF37, #F4D03F);
+  border-radius: 2px;
+  animation: progressBar 3s linear forwards;
+}
+
+@keyframes progressBar {
+  from { width: 0%; }
+  to { width: 100%; }
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+  .saju-hero-slider {
+    height: 50vh;
+    min-height: 400px;
+  }
+  
+  .saju-hero-slide__stars {
+    font-size: 1.5rem;
+    letter-spacing: 0.5rem;
+  }
+  
+  .saju-hero-pagination .swiper-pagination-bullet {
+    width: 35px;
+    height: 3px;
+  }
+}
+
+/* ========================================
+   기존 히어로 섹션 (백업)
+   ======================================== */
+.saju-hero {
+  position: relative;
+  min-height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 4rem 2rem;
+  overflow: hidden;
+}
+
+.saju-hero__bg {
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(233, 69, 96, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(212, 175, 55, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(15, 52, 96, 0.3) 0%, transparent 70%);
+  animation: bgPulse 10s ease-in-out infinite;
+}
+
+@keyframes bgPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.saju-hero__content {
+  position: relative;
+  z-index: 1;
+  max-width: 700px;
+}
+
+.saju-hero__stars {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  letter-spacing: 1rem;
+}
+
+.saju-hero__title {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 1rem;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(135deg, #fff 0%, var(--saju-gold) 50%, #fff 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: titleShimmer 4s ease-in-out infinite;
+}
+
+@keyframes titleShimmer {
+  0% { background-position: 0% center; }
+  50% { background-position: 200% center; }
+  100% { background-position: 0% center; }
+}
+
+.saju-hero__subtitle {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: var(--saju-gold);
+  margin-bottom: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.saju-hero__description {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.8;
+}
+
+/* ========================================
+   폼 섹션 - 베이지/갈색 테마
+   ======================================== */
+.saju-form-section {
+  padding: 3rem 2rem 5rem;
+  background: linear-gradient(180deg, rgba(245, 241, 232, 0.3) 0%, rgba(245, 241, 232, 0.8) 100%);
+}
+
+.saju-form-container {
+  max-width: 650px;
+  margin: 0 auto;
+  background: linear-gradient(135deg, #4a3728 0%, #3d2e22 50%, #4a3728 100%);
+  border-radius: 20px;
+  padding: 2.5rem;
+  box-shadow: 
+    0 20px 40px rgba(45, 30, 20, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  animation: formFadeIn 0.8s ease-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.saju-form-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #8c683b, #a67c52, #8c683b);
+}
+
+@keyframes formFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.saju-form-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.saju-form-icon {
+  font-size: 2.5rem;
+  display: block;
+  margin-bottom: 0.75rem;
+  animation: iconFloat 3s ease-in-out infinite;
+}
+
+@keyframes iconFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.saju-form-header h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.saju-form-header p {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+}
+
+/* 폼 그룹 */
+.saju-form__group {
+  margin-bottom: 1.75rem;
+}
+
+.saju-form__label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 0.75rem;
+  font-size: 0.95rem;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.saju-form__label-icon {
+  font-size: 1.1rem;
+}
+
+/* 날짜 입력 */
+.saju-form__date-inputs {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.saju-form__input-wrapper {
+  position: relative;
+}
+
+.saju-form__input-wrapper input,
+.saju-form__input-wrapper select {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.95);
+  color: #402c1a;
+}
+
+.saju-form__input-wrapper input:focus,
+.saju-form__input-wrapper select:focus {
+  outline: none;
+  border-color: #8c683b;
+  box-shadow: 0 0 0 3px rgba(140, 104, 59, 0.3);
+}
+
+.saju-form__input-wrapper input::placeholder {
+  color: #a09080;
+}
+
+.saju-form__input-suffix {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #8c683b;
+  font-size: 0.85rem;
+  pointer-events: none;
+}
+
+/* 셀렉트 */
+.saju-form__select {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.95);
+  color: #402c1a;
+  cursor: pointer;
+}
+
+.saju-form__select:focus {
+  outline: none;
+  border-color: #8c683b;
+  box-shadow: 0 0 0 3px rgba(140, 104, 59, 0.3);
+}
+
+/* 라디오 버튼 */
+.saju-form__radio-group {
+  display: flex;
+  gap: 1rem;
+}
+
+.saju-form__radio {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  cursor: pointer;
+  padding: 0.9rem 1.25rem;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  flex: 1;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.saju-form__radio:hover {
+  border-color: #8c683b;
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0 4px 12px rgba(140, 104, 59, 0.2);
+}
+
+.saju-form__radio input {
+  display: none;
+}
+
+.saju-form__radio-custom {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #8c683b;
+  border-radius: 50%;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.saju-form__radio input:checked + .saju-form__radio-custom {
+  border-color: #8c683b;
+  background: #8c683b;
+}
+
+.saju-form__radio input:checked + .saju-form__radio-custom::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 6px;
+  height: 6px;
+  background: #fff;
+  border-radius: 50%;
+}
+
+.saju-form__radio input:checked ~ .saju-form__radio-text {
+  color: #402c1a;
+  font-weight: 700;
+}
+
+.saju-form__radio-text {
+  font-size: 0.95rem;
+  color: #6b5230;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+/* 제출 버튼 */
+.saju-form__submit {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1.1rem 2rem;
+  background: linear-gradient(135deg, #a67c52 0%, #c9a66b 50%, #a67c52 100%);
+  background-size: 200% auto;
+  border: none;
+  border-radius: 12px;
+  color: #2d1e14;
+  font-size: 1.1rem;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  margin-top: 1.5rem;
+  box-shadow: 0 6px 20px rgba(140, 104, 59, 0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+.saju-form__submit::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transition: left 0.5s ease;
+}
+
+.saju-form__submit:hover::before {
+  left: 100%;
+}
+
+.saju-form__submit:hover {
+  background-position: right center;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(140, 104, 59, 0.5);
+}
+
+.saju-form__submit-icon {
+  font-size: 1.3rem;
+  animation: yinyang 4s linear infinite;
+}
+
+@keyframes yinyang {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.saju-form__submit-arrow {
+  transition: transform 0.3s ease;
+}
+
+.saju-form__submit:hover .saju-form__submit-arrow {
+  transform: translateX(5px);
+}
+
+/* ========================================
+   결과 섹션 - 베이지/갈색 테마
+   ======================================== */
+.saju-result-section {
+  padding: 3rem 2rem 5rem;
+  background: linear-gradient(180deg, rgba(245, 241, 232, 0.5) 0%, rgba(245, 241, 232, 0.9) 100%);
+}
+
+.saju-result-container {
+  max-width: 900px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 20px;
+  padding: 2.5rem;
+  box-shadow: 
+    0 15px 40px rgba(64, 44, 26, 0.15),
+    0 0 0 1px rgba(140, 104, 59, 0.1);
+  animation: resultFadeIn 0.8s ease-out;
+}
+
+@keyframes resultFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.saju-result-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.saju-result-stars {
+  font-size: 1.25rem;
+  letter-spacing: 0.5rem;
+  margin-bottom: 0.75rem;
+  color: #8c683b;
+}
+
+.saju-result-header h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #402c1a;
+}
+
+/* 사주 팔자 4주 카드 */
+.saju-pillars {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.pillar {
+  background: linear-gradient(135deg, #f8f6f1 0%, #f5f1e8 100%);
+  padding: 1.25rem 1rem;
+  border-radius: 14px;
+  text-align: center;
+  border: 1px solid rgba(140, 104, 59, 0.15);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.pillar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #8c683b, #D4AF37, #8c683b);
+}
+
+.pillar:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(64, 44, 26, 0.12);
+  border-color: #8c683b;
+}
+
+.pillar-title {
+  font-weight: 700;
+  color: #6b5230;
+  margin-bottom: 0.75rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.03em;
+}
+
+.pillar-content {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  color: #402c1a;
+}
+
+.pillar-content small {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 500;
+  margin-top: 0.5rem;
+  color: #8c683b;
+}
+
+/* 해석 영역 */
+.interpretation {
+  background: linear-gradient(135deg, #f8f6f1 0%, #f5f1e8 100%);
+  padding: 1.75rem;
+  border-radius: 14px;
+  margin-top: 2rem;
+  border-left: 4px solid #8c683b;
+}
+
+.interpretation h3 {
+  color: #402c1a;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+}
+
+.interpretation p {
+  color: #6b5230;
+  margin-bottom: 0.9rem;
+  line-height: 1.75;
+  font-size: 0.95rem;
+}
+
+.interpretation p:last-child {
+  margin-bottom: 0;
+}
+
+.interpretation em {
+  display: block;
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(140, 104, 59, 0.15);
+  font-size: 0.85rem;
+  color: #8c683b;
+}
+
+/* ========================================
+   푸터
+   ======================================== */
+.saju-footer {
+  text-align: center;
+  padding: 3rem 2rem;
+  font-size: 0.9rem;
+  color: rgba(64, 44, 26, 0.7);
+  background: rgba(245, 241, 232, 0.95);
+  border-top: 1px solid rgba(64, 44, 26, 0.1);
+  margin-top: 0;
+}
+
+.saju-footer p {
+  margin: 0.5rem 0;
+}
+
+.saju-footer small {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+/* ========================================
+   반응형
+   ======================================== */
+@media (max-width: 768px) {
+  .saju-form-container {
+    padding: 2rem 1.5rem;
+    margin: 0 1rem;
+  }
+  
+  .saju-form__date-inputs {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+  
+  .saju-form__radio-group {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .saju-pillars {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+  
+  .saju-result-container {
+    padding: 2rem 1.5rem;
+    margin: 0 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .saju-hero {
+    padding: 3rem 1.5rem;
+    min-height: 40vh;
+  }
+  
+  .saju-hero__stars {
+    font-size: 1.5rem;
+    letter-spacing: 0.5rem;
+  }
+  
+  .saju-pillars {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .pillar {
+    padding: 1rem 0.75rem;
+  }
+  
+  .pillar-content {
+    font-size: 1.5rem;
+  }
+  
+  .interpretation {
+    padding: 1.5rem;
+  }
+}
+
+/* ========================================
+   메뉴 버튼 스타일
+   ======================================== */
+.main-nav__saju {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  color: #fff !important;
+  padding: 0.6rem 1.2rem;
+  border-radius: 999px;
+  box-shadow: 0 4px 15px rgba(26, 26, 46, 0.3), inset 0 2px 0 rgba(255, 255, 255, 0.1);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+.main-nav__saju:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(26, 26, 46, 0.5), inset 0 2px 0 rgba(255, 255, 255, 0.15);
+  background: linear-gradient(135deg, #232342 0%, #1e2a4a 50%, #143a70 100%);
+  border-color: var(--saju-gold);
+}
+
+.main-nav__saju.is-active {
+  background: linear-gradient(135deg, #0f3460 0%, #16213e 50%, #1a1a2e 100%);
+  border-color: var(--saju-gold);
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+}
+

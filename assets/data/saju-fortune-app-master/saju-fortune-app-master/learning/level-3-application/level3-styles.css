@@ -1,0 +1,624 @@
+/* 3단계 실전 적용 모듈 CSS - 간소화 버전 */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: linear-gradient(135deg, #059669 0%, #047857 100%);
+    min-height: 100vh;
+    color: #1a202c;
+}
+
+/* 학습 헤더 */
+.learning-header {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 1rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.progress-container {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.progress-container h1 {
+    color: #059669;
+    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: #e2e8f0;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #059669, #10b981);
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+.progress-text {
+    color: #64748b;
+    font-size: 0.875rem;
+}
+
+/* 네비게이션 */
+.lesson-nav {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.nav-btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 20px;
+    background: #f1f5f9;
+    color: #64748b;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.875rem;
+}
+
+.nav-btn:hover {
+    background: #e2e8f0;
+    transform: translateY(-2px);
+}
+
+.nav-btn.active {
+    background: #059669;
+    color: white;
+    box-shadow: 0 4px 14px 0 rgba(5, 150, 105, 0.39);
+}
+
+/* 메인 콘텐츠 */
+.learning-content {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.lesson-section {
+    display: none;
+}
+
+.lesson-section.active {
+    display: block;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.lesson-container {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.lesson-container h2 {
+    color: #059669;
+    margin-bottom: 1rem;
+    font-size: 1.75rem;
+}
+
+.section-intro {
+    color: #64748b;
+    margin-bottom: 2rem;
+    font-size: 1.125rem;
+    line-height: 1.6;
+}
+
+/* 인터랙티브 카드 */
+.interactive-card {
+    background: linear-gradient(145deg, #f8fafc, #e2e8f0);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.interactive-card h3 {
+    color: #374151;
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+}
+
+/* 사주 입력 섹션 */
+.saju-input-section {
+    background: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+}
+
+.birth-input h4 {
+    color: #374151;
+    margin-bottom: 1rem;
+}
+
+.input-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #374151;
+}
+
+.input-group input,
+.input-group select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.input-group input:focus,
+.input-group select:focus {
+    outline: none;
+    border-color: #059669;
+}
+
+.analyze-btn {
+    width: 100%;
+    padding: 1rem;
+    background: #059669;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.125rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.analyze-btn:hover {
+    background: #047857;
+    transform: translateY(-2px);
+}
+
+/* 사주 디스플레이 */
+.saju-display {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 8px;
+    border: 2px solid #10b981;
+}
+
+.pillars-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.pillar {
+    background: linear-gradient(145deg, #f8fafc, #e2e8f0);
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+    border: 2px solid #e2e8f0;
+    transition: all 0.3s ease;
+}
+
+.pillar.main-pillar {
+    border-color: #059669;
+    box-shadow: 0 4px 14px 0 rgba(5, 150, 105, 0.25);
+}
+
+.pillar-label {
+    font-size: 0.875rem;
+    color: #6b7280;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.pillar .stem,
+.pillar .branch {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0.25rem 0;
+    color: #374151;
+}
+
+.pillar-info {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.element-tag,
+.animal-tag {
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.element-tag {
+    background: #dcfce7;
+    color: #16a34a;
+}
+
+.animal-tag {
+    background: #fef3c7;
+    color: #d97706;
+}
+
+/* 원리 설명 */
+.principles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+.principle-card {
+    background: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    border: 2px solid #e2e8f0;
+    transition: all 0.3s ease;
+}
+
+.principle-card:hover {
+    border-color: #059669;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px 0 rgba(5, 150, 105, 0.25);
+}
+
+.principle-card.main-card {
+    border-color: #059669;
+    background: linear-gradient(145deg, #f0fdf4, #dcfce7);
+}
+
+.principle-icon {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.principle-card h4 {
+    color: #374151;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.principle-card p {
+    text-align: center;
+    color: #059669;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.principle-card ul {
+    list-style: none;
+    padding: 0;
+}
+
+.principle-card li {
+    padding: 0.25rem 0;
+    color: #6b7280;
+    font-size: 0.875rem;
+}
+
+.principle-card li::before {
+    content: "• ";
+    color: #059669;
+    margin-right: 0.5rem;
+}
+
+/* 해석 단계 */
+.interpretation-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+}
+
+.step-card {
+    background: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    border: 2px solid #e2e8f0;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.step-card:hover {
+    border-color: #059669;
+    transform: translateY(-2px);
+}
+
+.step-number {
+    position: absolute;
+    top: -15px;
+    left: 20px;
+    background: #059669;
+    color: white;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+}
+
+.step-card h4 {
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    color: #374151;
+}
+
+.step-details {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e2e8f0;
+}
+
+.step-details strong {
+    color: #059669;
+}
+
+.step-details ul {
+    margin-top: 0.5rem;
+    padding-left: 1rem;
+}
+
+.step-details li {
+    color: #6b7280;
+    margin-bottom: 0.25rem;
+}
+
+/* 격국 관련 스타일 */
+.formation-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.formation-tab {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 6px;
+    background: #f1f5f9;
+    color: #64748b;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.formation-tab.active {
+    background: #059669;
+    color: white;
+}
+
+.formation-content {
+    display: none;
+}
+
+.formation-content.active {
+    display: block;
+}
+
+.formations-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.formation-card {
+    background: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    border: 2px solid #e2e8f0;
+    transition: all 0.3s ease;
+}
+
+.formation-card:hover {
+    border-color: #059669;
+    transform: translateY(-2px);
+}
+
+.formation-card.special {
+    border-color: #f59e0b;
+    background: linear-gradient(145deg, #fffbeb, #fef3c7);
+}
+
+.formation-card.rare {
+    border-color: #8b5cf6;
+    background: linear-gradient(145deg, #faf5ff, #f3e8ff);
+}
+
+.formation-card h5 {
+    color: #374151;
+    margin-bottom: 1rem;
+}
+
+.formation-condition {
+    background: #f8fafc;
+    padding: 0.75rem;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    font-size: 0.875rem;
+}
+
+.formation-traits ul {
+    list-style: none;
+    padding: 0;
+}
+
+.formation-traits li {
+    padding: 0.25rem 0;
+    color: #6b7280;
+}
+
+.formation-traits li::before {
+    content: "• ";
+    color: #059669;
+    margin-right: 0.5rem;
+}
+
+/* 완료 버튼 */
+.lesson-complete {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.complete-btn {
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+    font-size: 1.125rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 14px 0 rgba(16, 185, 129, 0.39);
+}
+
+.complete-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px 0 rgba(16, 185, 129, 0.49);
+}
+
+/* 학습 노트 */
+.learning-notes {
+    position: fixed;
+    right: -350px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 320px;
+    background: white;
+    border-radius: 12px 0 0 12px;
+    box-shadow: -4px 0 15px rgba(0, 0, 0, 0.1);
+    transition: right 0.3s ease;
+    z-index: 200;
+}
+
+.learning-notes.open {
+    right: 0;
+}
+
+.notes-header {
+    background: #059669;
+    color: white;
+    padding: 1rem;
+    border-radius: 12px 0 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.close-notes {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.notes-toggle {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: none;
+    background: #059669;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 4px 14px 0 rgba(5, 150, 105, 0.39);
+    transition: all 0.3s ease;
+    z-index: 150;
+}
+
+.notes-toggle:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px 0 rgba(5, 150, 105, 0.49);
+}
+
+#notesText {
+    width: 100%;
+    height: 200px;
+    border: none;
+    padding: 1rem;
+    resize: none;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.save-notes {
+    width: 100%;
+    padding: 0.75rem;
+    border: none;
+    background: #10b981;
+    color: white;
+    cursor: pointer;
+    border-radius: 0 0 12px 12px;
+    transition: background 0.3s ease;
+}
+
+.save-notes:hover {
+    background: #059669;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .learning-content {
+        padding: 0 0.5rem;
+    }
+    
+    .lesson-container {
+        padding: 1rem;
+    }
+    
+    .input-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .pillars-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .principles-grid,
+    .interpretation-steps,
+    .formations-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .learning-notes {
+        width: 280px;
+        right: -280px;
+    }
+}

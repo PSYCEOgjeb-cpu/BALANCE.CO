@@ -1,0 +1,974 @@
+/* 2단계 핵심 해석 도구 모듈 CSS */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    color: #1a202c;
+}
+
+/* 학습 헤더 */
+.learning-header {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 1rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.progress-container {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.progress-container h1 {
+    color: #7c3aed;
+    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: #e2e8f0;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #7c3aed, #a855f7);
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+.progress-text {
+    color: #64748b;
+    font-size: 0.875rem;
+}
+
+/* 네비게이션 */
+.lesson-nav {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.nav-btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 20px;
+    background: #f1f5f9;
+    color: #64748b;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.nav-btn:hover {
+    background: #e2e8f0;
+    transform: translateY(-2px);
+}
+
+.nav-btn.active {
+    background: #7c3aed;
+    color: white;
+    box-shadow: 0 4px 14px 0 rgba(124, 58, 237, 0.39);
+}
+
+/* 메인 콘텐츠 */
+.learning-content {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.lesson-section {
+    display: none;
+}
+
+.lesson-section.active {
+    display: block;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.lesson-container {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.lesson-container h2 {
+    color: #7c3aed;
+    margin-bottom: 1rem;
+    font-size: 1.75rem;
+}
+
+.section-intro {
+    color: #64748b;
+    margin-bottom: 2rem;
+    font-size: 1.125rem;
+    line-height: 1.6;
+}
+
+/* 인터랙티브 카드 */
+.interactive-card {
+    background: linear-gradient(145deg, #f8fafc, #e2e8f0);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.interactive-card h3 {
+    color: #374151;
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+}
+
+/* 십신 도출 원리 */
+.formula-box {
+    background: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+}
+
+.formula-box h4 {
+    text-align: center;
+    color: #7c3aed;
+    margin-bottom: 1rem;
+    font-size: 1.125rem;
+}
+
+.formula-visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.step {
+    background: #f1f5f9;
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+    min-width: 120px;
+    position: relative;
+}
+
+.step-num {
+    background: #7c3aed;
+    color: white;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.875rem;
+    font-weight: 600;
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.step-content h5 {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    color: #374151;
+}
+
+.step-content p {
+    color: #6b7280;
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+}
+
+.example {
+    background: #ddd6fe;
+    border-radius: 4px;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    color: #6d28d9;
+    font-weight: 500;
+}
+
+.example.result {
+    background: #10b981;
+    color: white;
+    font-weight: 600;
+}
+
+.arrow {
+    font-size: 1.5rem;
+    color: #7c3aed;
+    font-weight: bold;
+}
+
+/* 십신 원형 */
+.ten-gods-wheel {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    margin: 2rem auto;
+    background: radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(124,58,237,0.1) 100%);
+    border-radius: 50%;
+    border: 3px solid #7c3aed;
+}
+
+.center-self {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80px;
+    height: 80px;
+    background: #7c3aed;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+    box-shadow: 0 4px 14px 0 rgba(124, 58, 237, 0.39);
+}
+
+.self-stem {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.self-label {
+    font-size: 0.75rem;
+}
+
+.god-card {
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    background: white;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transform-origin: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(var(--angle)) translateY(-150px) rotate(calc(-1 * var(--angle)));
+}
+
+.god-card:hover {
+    transform: translate(-50%, -50%) rotate(var(--angle)) translateY(-150px) rotate(calc(-1 * var(--angle))) scale(1.1);
+    box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.25);
+}
+
+.god-symbol {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.god-name {
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.god-meaning {
+    font-size: 0.625rem;
+    color: #6b7280;
+    text-align: center;
+    line-height: 1.2;
+}
+
+/* 십신 그룹 색상 */
+.self-group { background: linear-gradient(145deg, #fef3c7, #f59e0b); }
+.expression-group { background: linear-gradient(145deg, #dcfce7, #22c55e); }
+.wealth-group { background: linear-gradient(145deg, #fce7f3, #ec4899); }
+.authority-group { background: linear-gradient(145deg, #dbeafe, #3b82f6); }
+.support-group { background: linear-gradient(145deg, #f3e8ff, #8b5cf6); }
+
+/* 천간 컨트롤 */
+.wheel-controls {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+.stem-btn {
+    width: 40px;
+    height: 40px;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    background: white;
+    color: #374151;
+    font-size: 1.125rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.stem-btn:hover {
+    border-color: #7c3aed;
+    transform: scale(1.05);
+}
+
+.stem-btn.active {
+    background: #7c3aed;
+    border-color: #7c3aed;
+    color: white;
+}
+
+/* 십신 상세 설명 */
+.god-details {
+    background: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-top: 1rem;
+    border: 2px solid #e2e8f0;
+}
+
+.god-details h3 {
+    color: #7c3aed;
+    margin-bottom: 1rem;
+}
+
+/* 합충형파해 스타일 */
+.interaction-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.tab-btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 6px;
+    background: #f1f5f9;
+    color: #64748b;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.tab-btn.active {
+    background: #7c3aed;
+    color: white;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.combination-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.combination-card {
+    background: white;
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid #e2e8f0;
+}
+
+.combination-card:hover {
+    border-color: #7c3aed;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px 0 rgba(124, 58, 237, 0.25);
+}
+
+.stems {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.stem {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+}
+
+.plus {
+    font-size: 1.25rem;
+    color: #6b7280;
+    font-weight: 600;
+}
+
+.result {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+    margin: 0.5rem auto;
+}
+
+.meaning {
+    color: #374151;
+    font-weight: 500;
+    font-size: 0.875rem;
+}
+
+/* 오행 색상 */
+.wood { background: #22c55e; }
+.fire { background: #ef4444; }
+.earth { background: #eab308; }
+.metal { background: #64748b; }
+.water { background: #3b82f6; }
+
+/* 음양 스타일 */
+.yang { border: 3px solid #fbbf24; }
+.yin { border: 3px solid #94a3b8; }
+
+/* 지지합 스타일 */
+.jiji-combinations {
+    margin-top: 1rem;
+}
+
+.samhap-section, .yukhap-section {
+    margin-bottom: 2rem;
+}
+
+.samhap-section h5, .yukhap-section h5 {
+    color: #374151;
+    margin-bottom: 1rem;
+}
+
+.samhap-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.samhap-card {
+    background: white;
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+    border: 2px solid;
+}
+
+.samhap-card.water { border-color: #3b82f6; }
+.samhap-card.metal { border-color: #64748b; }
+.samhap-card.fire { border-color: #ef4444; }
+.samhap-card.wood { border-color: #22c55e; }
+
+.branches {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.yukhap-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    gap: 0.5rem;
+}
+
+.yukhap-pair {
+    background: white;
+    border: 2px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 0.5rem;
+    text-align: center;
+    font-weight: 600;
+}
+
+/* 충 스타일 */
+.conflict-visualization {
+    margin-top: 1rem;
+}
+
+.conflict-pairs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.conflict-pair {
+    background: white;
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid #e2e8f0;
+}
+
+.conflict-pair:hover {
+    border-color: #ef4444;
+    transform: scale(1.02);
+}
+
+.branch {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+}
+
+.conflict-symbol {
+    font-size: 1.5rem;
+    color: #ef4444;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.conflict-effects {
+    margin-top: 2rem;
+}
+
+.effect-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.effect-card {
+    background: white;
+    border-radius: 8px;
+    padding: 1rem;
+    border-left: 4px solid;
+}
+
+.effect-card.positive {
+    border-left-color: #22c55e;
+}
+
+.effect-card.challenging {
+    border-left-color: #f59e0b;
+}
+
+.effect-card h5 {
+    margin-bottom: 0.5rem;
+    color: #374151;
+}
+
+.effect-card ul {
+    list-style: none;
+}
+
+.effect-card li {
+    padding: 0.25rem 0;
+    color: #6b7280;
+}
+
+.effect-card li::before {
+    content: "• ";
+    color: #9ca3af;
+    margin-right: 0.5rem;
+}
+
+/* 실습 스타일 */
+.practice-card {
+    background: linear-gradient(145deg, #f8fafc, #e2e8f0);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.practice-card h3 {
+    color: #374151;
+    margin-bottom: 1rem;
+}
+
+.saju-display {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.pillar {
+    background: white;
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+    min-width: 80px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.pillar.main {
+    border: 3px solid #7c3aed;
+    box-shadow: 0 4px 14px 0 rgba(124, 58, 237, 0.39);
+}
+
+.pillar .stem, .pillar .branch {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.pillar-label {
+    font-size: 0.875rem;
+    color: #6b7280;
+    font-weight: 500;
+}
+
+.practice-questions {
+    margin-bottom: 2rem;
+}
+
+.question-card {
+    background: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.question-card h4 {
+    color: #374151;
+    margin-bottom: 1rem;
+}
+
+.options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.option-btn {
+    padding: 0.75rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 6px;
+    background: white;
+    color: #374151;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.option-btn:hover {
+    border-color: #7c3aed;
+    background: #f3e8ff;
+}
+
+.option-btn.correct {
+    border-color: #22c55e;
+    background: #dcfce7;
+    color: #16a34a;
+}
+
+.option-btn.incorrect {
+    border-color: #ef4444;
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+.explanation {
+    background: #f0f9ff;
+    border: 1px solid #0ea5e9;
+    border-radius: 6px;
+    padding: 1rem;
+    margin-top: 1rem;
+}
+
+.explanation.hidden {
+    display: none;
+}
+
+.practice-controls {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.practice-btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    background: #7c3aed;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.practice-btn:hover {
+    background: #6d28d9;
+    transform: translateY(-2px);
+}
+
+/* 상호작용 파인더 */
+.interaction-finder {
+    background: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+}
+
+.finder-saju {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.stems-row, .branches-row {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.stem-char, .branch-char {
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    background: #f1f5f9;
+    border: 2px solid #e2e8f0;
+}
+
+.found-interactions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.interaction-result {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.5rem;
+    background: #f8fafc;
+    border-radius: 6px;
+}
+
+.interaction-type {
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: white;
+}
+
+.interaction-type.hap {
+    background: #22c55e;
+}
+
+.interaction-type.chung {
+    background: #ef4444;
+}
+
+/* 완료 버튼 */
+.lesson-complete {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.complete-btn {
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    color: white;
+    font-size: 1.125rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 14px 0 rgba(34, 197, 94, 0.39);
+}
+
+.complete-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px 0 rgba(34, 197, 94, 0.49);
+}
+
+/* 학습 노트 */
+.learning-notes {
+    position: fixed;
+    right: -350px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 320px;
+    background: white;
+    border-radius: 12px 0 0 12px;
+    box-shadow: -4px 0 15px rgba(0, 0, 0, 0.1);
+    transition: right 0.3s ease;
+    z-index: 200;
+}
+
+.learning-notes.open {
+    right: 0;
+}
+
+.notes-header {
+    background: #7c3aed;
+    color: white;
+    padding: 1rem;
+    border-radius: 12px 0 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.close-notes {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.notes-toggle {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: none;
+    background: #7c3aed;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 4px 14px 0 rgba(124, 58, 237, 0.39);
+    transition: all 0.3s ease;
+    z-index: 150;
+}
+
+.notes-toggle:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px 0 rgba(124, 58, 237, 0.49);
+}
+
+#notesText {
+    width: 100%;
+    height: 200px;
+    border: none;
+    padding: 1rem;
+    resize: none;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.save-notes {
+    width: 100%;
+    padding: 0.75rem;
+    border: none;
+    background: #22c55e;
+    color: white;
+    cursor: pointer;
+    border-radius: 0 0 12px 12px;
+    transition: background 0.3s ease;
+}
+
+.save-notes:hover {
+    background: #16a34a;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .learning-content {
+        padding: 0 0.5rem;
+    }
+    
+    .lesson-container {
+        padding: 1rem;
+    }
+    
+    .ten-gods-wheel {
+        width: 300px;
+        height: 300px;
+    }
+    
+    .god-card {
+        width: 50px;
+        height: 50px;
+        transform: translate(-50%, -50%) rotate(var(--angle)) translateY(-110px) rotate(calc(-1 * var(--angle)));
+    }
+    
+    .god-card:hover {
+        transform: translate(-50%, -50%) rotate(var(--angle)) translateY(-110px) rotate(calc(-1 * var(--angle))) scale(1.1);
+    }
+    
+    .god-symbol {
+        font-size: 1rem;
+    }
+    
+    .god-name {
+        font-size: 0.625rem;
+    }
+    
+    .god-meaning {
+        font-size: 0.5rem;
+    }
+    
+    .formula-visual {
+        flex-direction: column;
+    }
+    
+    .arrow {
+        transform: rotate(90deg);
+    }
+    
+    .learning-notes {
+        width: 280px;
+        right: -280px;
+    }
+}

@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="실전사주">
+    <meta name="application-name" content="명리학 실전 적용">
+    <meta name="theme-color" content="#059669">
+    
+    <title>명리학 실전 적용 - 사주 해석과 격국</title>
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="icons/icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32x32.png">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="level3-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="level3-script.js" as="script">
+</head>
+<body>
+    <!-- 학습 진도 헤더 -->
+    <header class="learning-header">
+        <div class="progress-container">
+            <h1>🎯 3단계: 실전 적용</h1>
+            <div class="progress-bar">
+                <div class="progress-fill" id="overallProgress"></div>
+            </div>
+            <span class="progress-text" id="progressText">0% 완료</span>
+        </div>
+        <nav class="lesson-nav">
+            <button class="nav-btn active" data-section="saju-structure">사주 구성</button>
+            <button class="nav-btn" data-section="interpretation">해석 방법</button>
+            <button class="nav-btn" data-section="formations">격국</button>
+            <button class="nav-btn" data-section="case-study">사례 연구</button>
+            <button class="nav-btn" data-section="quiz">종합 퀴즈</button>
+        </nav>
+    </header>
+
+    <main class="learning-content">
+        <!-- 사주 구성 섹션 -->
+        <section id="saju-structure" class="lesson-section active">
+            <div class="lesson-container">
+                <h2>사주팔자의 구성 - 네 기둥의 체계</h2>
+                <p class="section-intro">
+                    사주팔자는 출생 연월일시를 천간지지로 표현한 8글자로, 개인의 운명과 성격을 파악하는 기본 틀입니다.
+                </p>
+
+                <!-- 사주 입력 및 분석기 -->
+                <div class="interactive-card">
+                    <h3>🏗️ 사주 구성 분석기</h3>
+                    <div class="saju-input-section">
+                        <div class="birth-input">
+                            <h4>출생 정보 입력</h4>
+                            <div class="input-grid">
+                                <div class="input-group">
+                                    <label>생년</label>
+                                    <input type="number" id="birthYear" min="1900" max="2030" placeholder="1990">
+                                </div>
+                                <div class="input-group">
+                                    <label>생월</label>
+                                    <select id="birthMonth">
+                                        <option value="">월 선택</option>
+                                        <option value="1">1월</option>
+                                        <option value="2">2월</option>
+                                        <option value="3">3월</option>
+                                        <option value="4">4월</option>
+                                        <option value="5">5월</option>
+                                        <option value="6">6월</option>
+                                        <option value="7">7월</option>
+                                        <option value="8">8월</option>
+                                        <option value="9">9월</option>
+                                        <option value="10">10월</option>
+                                        <option value="11">11월</option>
+                                        <option value="12">12월</option>
+                                    </select>
+                                </div>
+                                <div class="input-group">
+                                    <label>생일</label>
+                                    <input type="number" id="birthDay" min="1" max="31" placeholder="15">
+                                </div>
+                                <div class="input-group">
+                                    <label>생시</label>
+                                    <select id="birthHour">
+                                        <option value="">시간 선택</option>
+                                        <option value="23">자시 (23:00-01:00)</option>
+                                        <option value="1">축시 (01:00-03:00)</option>
+                                        <option value="3">인시 (03:00-05:00)</option>
+                                        <option value="5">묘시 (05:00-07:00)</option>
+                                        <option value="7">진시 (07:00-09:00)</option>
+                                        <option value="9">사시 (09:00-11:00)</option>
+                                        <option value="11">오시 (11:00-13:00)</option>
+                                        <option value="13">미시 (13:00-15:00)</option>
+                                        <option value="15">신시 (15:00-17:00)</option>
+                                        <option value="17">유시 (17:00-19:00)</option>
+                                        <option value="19">술시 (19:00-21:00)</option>
+                                        <option value="21">해시 (21:00-23:00)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button class="analyze-btn" id="analyzeSaju">사주 분석하기</button>
+                        </div>
+
+                        <!-- 사주 디스플레이 -->
+                        <div class="saju-display" id="sajuDisplay" style="display: none;">
+                            <h4>📊 사주팔자</h4>
+                            <div class="pillars-container">
+                                <div class="pillar year-pillar">
+                                    <div class="pillar-label">년주 (年柱)</div>
+                                    <div class="stem" id="yearStem">-</div>
+                                    <div class="branch" id="yearBranch">-</div>
+                                    <div class="pillar-info">
+                                        <span class="element-tag" id="yearElement">-</span>
+                                        <span class="animal-tag" id="yearAnimal">-</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="pillar month-pillar">
+                                    <div class="pillar-label">월주 (月柱)</div>
+                                    <div class="stem" id="monthStem">-</div>
+                                    <div class="branch" id="monthBranch">-</div>
+                                    <div class="pillar-info">
+                                        <span class="element-tag" id="monthElement">-</span>
+                                        <span class="animal-tag" id="monthAnimal">-</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="pillar day-pillar main-pillar">
+                                    <div class="pillar-label">일주 (日柱) ⭐</div>
+                                    <div class="stem" id="dayStem">-</div>
+                                    <div class="branch" id="dayBranch">-</div>
+                                    <div class="pillar-info">
+                                        <span class="element-tag" id="dayElement">-</span>
+                                        <span class="animal-tag" id="dayAnimal">-</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="pillar hour-pillar">
+                                    <div class="pillar-label">시주 (時柱)</div>
+                                    <div class="stem" id="hourStem">-</div>
+                                    <div class="branch" id="hourBranch">-</div>
+                                    <div class="pillar-info">
+                                        <span class="element-tag" id="hourElement">-</span>
+                                        <span class="animal-tag" id="hourAnimal">-</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- 오행 분석 -->
+                            <div class="element-analysis" id="elementAnalysis">
+                                <h5>🌊 오행 분포</h5>
+                                <div class="element-chart">
+                                    <div class="element-bar wood" data-element="목">
+                                        <span class="element-name">목</span>
+                                        <div class="bar-fill" style="width: 0%"></div>
+                                        <span class="element-count">0</span>
+                                    </div>
+                                    <div class="element-bar fire" data-element="화">
+                                        <span class="element-name">화</span>
+                                        <div class="bar-fill" style="width: 0%"></div>
+                                        <span class="element-count">0</span>
+                                    </div>
+                                    <div class="element-bar earth" data-element="토">
+                                        <span class="element-name">토</span>
+                                        <div class="bar-fill" style="width: 0%"></div>
+                                        <span class="element-count">0</span>
+                                    </div>
+                                    <div class="element-bar metal" data-element="금">
+                                        <span class="element-name">금</span>
+                                        <div class="bar-fill" style="width: 0%"></div>
+                                        <span class="element-count">0</span>
+                                    </div>
+                                    <div class="element-bar water" data-element="수">
+                                        <span class="element-name">수</span>
+                                        <div class="bar-fill" style="width: 0%"></div>
+                                        <span class="element-count">0</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 사주 구성 원리 학습 -->
+                <div class="interactive-card">
+                    <h3>📚 사주 구성 원리</h3>
+                    <div class="principles-grid">
+                        <div class="principle-card">
+                            <div class="principle-icon">🗓️</div>
+                            <h4>년주 (年柱)</h4>
+                            <p><strong>조상·부모·어린 시절</strong></p>
+                            <ul>
+                                <li>가문의 배경과 유전적 특성</li>
+                                <li>어린 시절의 환경</li>
+                                <li>타고난 기질과 성향</li>
+                                <li>사회적 배경</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="principle-card">
+                            <div class="principle-icon">🌱</div>
+                            <h4>월주 (月柱)</h4>
+                            <p><strong>청년기·사회 활동</strong></p>
+                            <ul>
+                                <li>사회 진출 시기의 운세</li>
+                                <li>형제자매와의 관계</li>
+                                <li>직업과 사업 운세</li>
+                                <li>사회적 성취</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="principle-card main-card">
+                            <div class="principle-icon">⭐</div>
+                            <h4>일주 (日柱) - 중심</h4>
+                            <p><strong>본인·배우자·장년기</strong></p>
+                            <ul>
+                                <li>개인의 핵심 성격</li>
+                                <li>배우자와의 관계</li>
+                                <li>인생의 주요 방향성</li>
+                                <li>장년기 운세의 기준점</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="principle-card">
+                            <div class="principle-icon">🌙</div>
+                            <h4>시주 (時柱)</h4>
+                            <p><strong>자녀·노년기·미래</strong></p>
+                            <ul>
+                                <li>자녀와의 인연</li>
+                                <li>노년기의 안정</li>
+                                <li>말년의 결실</li>
+                                <li>후대에 남길 유산</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lesson-complete">
+                    <button class="complete-btn" id="sajuStructureComplete">사주 구성 학습 완료 ✅</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 해석 방법 섹션 -->
+        <section id="interpretation" class="lesson-section">
+            <div class="lesson-container">
+                <h2>사주 해석의 방법론 - 체계적 접근법</h2>
+                <p class="section-intro">
+                    사주를 정확히 해석하기 위한 단계별 방법론과 핵심 포인트를 학습합니다.
+                </p>
+
+                <!-- 해석 단계 -->
+                <div class="interactive-card">
+                    <h3>🎯 해석의 5단계</h3>
+                    <div class="interpretation-steps">
+                        <div class="step-card" data-step="1">
+                            <div class="step-number">1</div>
+                            <h4>일간 파악</h4>
+                            <p>자신의 핵심 성격을 나타내는 일간(日干)을 찾고 그 특성을 파악합니다.</p>
+                            <div class="step-details">
+                                <strong>중요 포인트:</strong>
+                                <ul>
+                                    <li>일간의 오행 속성</li>
+                                    <li>음양 구분</li>
+                                    <li>기본 성격 특성</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="step-card" data-step="2">
+                            <div class="step-number">2</div>
+                            <h4>월령 보기</h4>
+                            <p>태어난 계절(월령)에서 일간의 강약을 판단합니다.</p>
+                            <div class="step-details">
+                                <strong>중요 포인트:</strong>
+                                <ul>
+                                    <li>계절별 오행의 성쇠</li>
+                                    <li>일간의 득령/실령</li>
+                                    <li>전체적인 기운의 흐름</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="step-card" data-step="3">
+                            <div class="step-number">3</div>
+                            <h4>용신 찾기</h4>
+                            <p>사주의 균형을 맞춰주는 핵심 오행인 용신을 찾습니다.</p>
+                            <div class="step-details">
+                                <strong>중요 포인트:</strong>
+                                <ul>
+                                    <li>강한 일간 → 설기, 누기</li>
+                                    <li>약한 일간 → 부조, 생조</li>
+                                    <li>계절과 환경 고려</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="step-card" data-step="4">
+                            <div class="step-number">4</div>
+                            <h4>십신 분석</h4>
+                            <p>일간을 중심으로 다른 글자들과의 관계를 십신으로 분석합니다.</p>
+                            <div class="step-details">
+                                <strong>중요 포인트:</strong>
+                                <ul>
+                                    <li>각 십신의 배치</li>
+                                    <li>십신 간의 상호작용</li>
+                                    <li>인생 각 분야별 해석</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="step-card" data-step="5">
+                            <div class="step-number">5</div>
+                            <h4>종합 해석</h4>
+                            <p>모든 요소를 종합하여 전체적인 인생 패턴을 해석합니다.</p>
+                            <div class="step-details">
+                                <strong>중요 포인트:</strong>
+                                <ul>
+                                    <li>성격과 재능</li>
+                                    <li>직업과 진로</li>
+                                    <li>인간관계와 결혼</li>
+                                    <li>건강과 주의사항</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 실제 해석 실습 -->
+                <div class="interactive-card">
+                    <h3>🔍 해석 실습</h3>
+                    <div class="practice-interpretation" id="practiceInterpretation">
+                        <div class="sample-saju">
+                            <h4>예시 사주: 갑목 일간</h4>
+                            <div class="saju-example">
+                                <div class="pillar-example">
+                                    <span class="stem">戊</span>
+                                    <span class="branch">子</span>
+                                    <small>년주</small>
+                                </div>
+                                <div class="pillar-example">
+                                    <span class="stem">甲</span>
+                                    <span class="branch">寅</span>
+                                    <small>월주</small>
+                                </div>
+                                <div class="pillar-example main">
+                                    <span class="stem">甲</span>
+                                    <span class="branch">午</span>
+                                    <small>일주</small>
+                                </div>
+                                <div class="pillar-example">
+                                    <span class="stem">丙</span>
+                                    <span class="branch">寅</span>
+                                    <small>시주</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="interpretation-analysis">
+                            <div class="analysis-section">
+                                <h5>1단계: 일간 분석</h5>
+                                <div class="analysis-content">
+                                    <p><strong>甲木 일간</strong> - 큰 나무의 성질</p>
+                                    <ul>
+                                        <li>정직하고 원칙적인 성격</li>
+                                        <li>성장 지향적이고 발전을 추구</li>
+                                        <li>리더십이 있고 책임감이 강함</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="analysis-section">
+                                <h5>2단계: 월령 분석</h5>
+                                <div class="analysis-content">
+                                    <p><strong>寅월생 (봄철)</strong> - 갑목이 득령</p>
+                                    <ul>
+                                        <li>계절의 도움을 받는 강한 일간</li>
+                                        <li>성장력과 활동력이 왕성</li>
+                                        <li>적극적이고 진취적인 기운</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="analysis-section">
+                                <h5>3단계: 용신 판단</h5>
+                                <div class="analysis-content">
+                                    <p><strong>강한 갑목 → 설기 필요</strong></p>
+                                    <ul>
+                                        <li>丙火(식신) - 재능 발산</li>
+                                        <li>己土(정재) - 실속 추구</li>
+                                        <li>庚金(편관) - 절제와 통제</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="interpretation-controls">
+                            <button class="practice-btn" id="nextExample">다른 예시 보기</button>
+                            <button class="practice-btn" id="selfPractice">내 사주 해석하기</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lesson-complete">
+                    <button class="complete-btn" id="interpretationComplete">해석 방법 학습 완료 ✅</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 격국 섹션 -->
+        <section id="formations" class="lesson-section">
+            <div class="lesson-container">
+                <h2>격국론(格局論) - 사주의 패턴 분류</h2>
+                <p class="section-intro">
+                    사주의 전체적인 구조와 패턴을 분류하여 운명의 큰 틀을 파악하는 고급 이론입니다.
+                </p>
+
+                <!-- 격국 분류 -->
+                <div class="interactive-card">
+                    <h3>🏛️ 주요 격국 분류</h3>
+                    <div class="formation-tabs">
+                        <button class="formation-tab active" data-formation="정격">정격</button>
+                        <button class="formation-tab" data-formation="외격">외격</button>
+                        <button class="formation-tab" data-formation="특수격">특수격</button>
+                    </div>
+
+                    <!-- 정격 -->
+                    <div class="formation-content active" id="정격">
+                        <h4>정격 (正格) - 일반적인 구조</h4>
+                        <div class="formations-grid">
+                            <div class="formation-card">
+                                <h5>정관격 (正官格)</h5>
+                                <div class="formation-condition">
+                                    <strong>성립 조건:</strong> 월령에 정관이 있고 투간된 경우
+                                </div>
+                                <div class="formation-traits">
+                                    <strong>특성:</strong>
+                                    <ul>
+                                        <li>품위 있고 책임감이 강함</li>
+                                        <li>공직이나 관리직에 적합</li>
+                                        <li>안정적인 삶을 추구</li>
+                                        <li>사회적 인정을 받음</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="formation-card">
+                                <h5>정재격 (正財格)</h5>
+                                <div class="formation-condition">
+                                    <strong>성립 조건:</strong> 월령에 정재가 있고 투간된 경우
+                                </div>
+                                <div class="formation-traits">
+                                    <strong>특성:</strong>
+                                    <ul>
+                                        <li>신중하고 계획적</li>
+                                        <li>안정적인 재물 관리</li>
+                                        <li>가정적이고 현실적</li>
+                                        <li>꾸준한 축적을 선호</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="formation-card">
+                                <h5>식신격 (食神格)</h5>
+                                <div class="formation-condition">
+                                    <strong>성립 조건:</strong> 월령에 식신이 있고 투간된 경우
+                                </div>
+                                <div class="formation-traits">
+                                    <strong>특성:</strong>
+                                    <ul>
+                                        <li>창의적이고 예술적</li>
+                                        <li>평화롭고 여유로움</li>
+                                        <li>자녀와 인연이 깊음</li>
+                                        <li>안정적인 생활 추구</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="formation-card">
+                                <h5>정인격 (正印格)</h5>
+                                <div class="formation-condition">
+                                    <strong>성립 조건:</strong> 월령에 정인이 있고 투간된 경우
+                                </div>
+                                <div class="formation-traits">
+                                    <strong>특성:</strong>
+                                    <ul>
+                                        <li>학문을 좋아함</li>
+                                        <li>명예와 지위 추구</li>
+                                        <li>도덕적이고 윤리적</li>
+                                        <li>보호받는 환경</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 외격 -->
+                    <div class="formation-content" id="외격">
+                        <h4>외격 (外格) - 특별한 구조</h4>
+                        <div class="formations-grid">
+                            <div class="formation-card special">
+                                <h5>편관격 (偏官格)</h5>
+                                <div class="formation-condition">
+                                    <strong>성립 조건:</strong> 월령에 편관(칠살)이 있고 제어되는 경우
+                                </div>
+                                <div class="formation-traits">
+                                    <strong>특성:</strong>
+                                    <ul>
+                                        <li>강한 권위 의식</li>
+                                        <li>도전적이고 적극적</li>
+                                        <li>무술이나 군직 적합</li>
+                                        <li>극과 극의 변화</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="formation-card special">
+                                <h5>편재격 (偏財格)</h5>
+                                <div class="formation-condition">
+                                    <strong>성립 조건:</strong> 월령에 편재가 있고 투간된 경우
+                                </div>
+                                <div class="formation-traits">
+                                    <strong>특성:</strong>
+                                    <ul>
+                                        <li>사교적이고 활동적</li>
+                                        <li>사업 수완이 뛰어남</li>
+                                        <li>유동적인 재물 운용</li>
+                                        <li>인맥이 넓음</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="formation-card special">
+                                <h5>상관격 (傷官格)</h5>
+                                <div class="formation-condition">
+                                    <strong>성립 조건:</strong> 월령에 상관이 있고 투간된 경우
+                                </div>
+                                <div class="formation-traits">
+                                    <strong>특성:</strong>
+                                    <ul>
+                                        <li>재능이 뛰어남</li>
+                                        <li>반항적이고 개성적</li>
+                                        <li>예술이나 창작 분야</li>
+                                        <li>변화를 추구함</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 특수격 -->
+                    <div class="formation-content" id="특수격">
+                        <h4>특수격 (特殊格) - 극단적인 구조</h4>
+                        <div class="formations-grid">
+                            <div class="formation-card rare">
+                                <h5>종강격 (從强格)</h5>
+                                <div class="formation-condition">
+                                    <strong>성립 조건:</strong> 일간이 극도로 강하여 다른 오행을 따르게 하는 격
+                                </div>
+                                <div class="formation-traits">
+                                    <strong>특성:</strong>
+                                    <ul>
+                                        <li>강한 개성과 자아</li>
+                                        <li>독립적이고 주도적</li>
+                                        <li>극단적 성공 가능</li>
+                                        <li>조심스러운 운세 관리</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="formation-card rare">
+                                <h5>종약격 (從弱格)</h5>
+                                <div class="formation-condition">
+                                    <strong>성립 조건:</strong> 일간이 극도로 약하여 다른 오행을 따라가는 격
+                                </div>
+                                <div class="formation-traits">
+                                    <strong>특성:</strong>
+                                    <ul>
+                                        <li>유연하고 적응력 강함</li>
+                                        <li>협력을 통한 성공</li>
+                                        <li>환경에 따른 변화</li>
+                                        <li>특별한 재능 발휘</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="formation-card rare">
+                                <h5>화기격 (化氣格)</h5>
+                                <div class="formation-condition">
+                                    <strong>성립 조건:</strong> 일간과 다른 글자가 합하여 새로운 오행으로 변화
+                                </div>
+                                <div class="formation-traits">
+                                    <strong>특성:</strong>
+                                    <ul>
+                                        <li>특별한 인연과 만남</li>
+                                        <li>변화를 통한 발전</li>
+                                        <li>독특한 인생 패턴</li>
+                                        <li>귀격의 가능성</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 격국 판단 실습 -->
+                <div class="interactive-card">
+                    <h3>🎯 격국 판단 실습</h3>
+                    <div class="formation-practice">
+                        <div class="practice-saju-display">
+                            <h4>사주 예시</h4>
+                            <div class="practice-pillars" id="practicePillars">
+                                <div class="pillar">
+                                    <div class="stem">甲</div>
+                                    <div class="branch">寅</div>
+                                </div>
+                                <div class="pillar">
+                                    <div class="stem">丁</div>
+                                    <div class="branch">卯</div>
+                                </div>
+                                <div class="pillar main">
+                                    <div class="stem">己</div>
+                                    <div class="branch">巳</div>
+                                </div>
+                                <div class="pillar">
+                                    <div class="stem">壬</div>
+                                    <div class="branch">申</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="formation-question">
+                            <h4>이 사주의 격국은 무엇일까요?</h4>
+                            <div class="formation-options">
+                                <button class="formation-option" data-answer="정관격">정관격</button>
+                                <button class="formation-option" data-answer="정재격" data-correct="true">정재격</button>
+                                <button class="formation-option" data-answer="식신격">식신격</button>
+                                <button class="formation-option" data-answer="정인격">정인격</button>
+                            </div>
+                            <div class="formation-explanation hidden" id="formationExplanation">
+                                <p><strong>정답: 정재격</strong></p>
+                                <p>己土 일간이 卯월(봄)에 태어나 월령에서 甲木 정재를 받고, 년간에도 甲木이 투간되어 정재격이 성립됩니다.</p>
+                            </div>
+                        </div>
+
+                        <button class="practice-btn" id="newFormationExample">새로운 예시</button>
+                    </div>
+                </div>
+
+                <div class="lesson-complete">
+                    <button class="complete-btn" id="formationsComplete">격국 학습 완료 ✅</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 사례 연구 섹션 -->
+        <section id="case-study" class="lesson-section">
+            <div class="lesson-container">
+                <h2>실제 사례 연구 - 종합 분석</h2>
+                <p class="section-intro">
+                    실제 인물의 사주를 분석하면서 이론을 실무에 적용하는 방법을 학습합니다.
+                </p>
+
+                <!-- 사례 연구 -->
+                <div class="interactive-card">
+                    <h3>📋 사례 분석</h3>
+                    <div class="case-study-container">
+                        <div class="case-tabs">
+                            <button class="case-tab active" data-case="case1">사례 1: 성공한 사업가</button>
+                            <button class="case-tab" data-case="case2">사례 2: 유명한 예술가</button>
+                            <button class="case-tab" data-case="case3">사례 3: 학자형 인물</button>
+                        </div>
+
+                        <!-- 사례 1 -->
+                        <div class="case-content active" id="case1">
+                            <div class="case-header">
+                                <h4>사례 1: 성공한 사업가 A씨</h4>
+                                <p class="case-info">생년월일: 1965년 3월 15일 오시(11:00~13:00)</p>
+                            </div>
+
+                            <div class="case-saju">
+                                <div class="pillar">
+                                    <span class="stem">乙</span>
+                                    <span class="branch">巳</span>
+                                    <small>년주</small>
+                                </div>
+                                <div class="pillar">
+                                    <span class="stem">己</span>
+                                    <span class="branch">卯</span>
+                                    <small>월주</small>
+                                </div>
+                                <div class="pillar main">
+                                    <span class="stem">戊</span>
+                                    <span class="branch">戌</span>
+                                    <small>일주</small>
+                                </div>
+                                <div class="pillar">
+                                    <span class="stem">戊</span>
+                                    <span class="branch">午</span>
+                                    <small>시주</small>
+                                </div>
+                            </div>
+
+                            <div class="case-analysis">
+                                <div class="analysis-step">
+                                    <h5>1. 기본 분석</h5>
+                                    <ul>
+                                        <li><strong>일간:</strong> 戊土 (산의 토) - 안정적이고 포용력 있음</li>
+                                        <li><strong>월령:</strong> 卯월생 (봄) - 목이 왕성하여 토가 설기당함</li>
+                                        <li><strong>격국:</strong> 정관격 (乙木 정관이 년간에 투간)</li>
+                                    </ul>
+                                </div>
+
+                                <div class="analysis-step">
+                                    <h5>2. 십신 분석</h5>
+                                    <ul>
+                                        <li><strong>乙木(정관):</strong> 품위 있는 리더십</li>
+                                        <li><strong>己土(비견):</strong> 형제나 동업자와의 인연</li>
+                                        <li><strong>戊土(비견):</strong> 강한 자아 의식</li>
+                                    </ul>
+                                </div>
+
+                                <div class="analysis-step">
+                                    <h5>3. 성공 요인</h5>
+                                    <ul>
+                                        <li>정관격으로 사회적 신뢰 확보</li>
+                                        <li>토의 안정감과 포용력</li>
+                                        <li>화토의 조화로 인한 추진력</li>
+                                        <li>목토의 상극으로 인한 자극과 발전</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 사례 2 -->
+                        <div class="case-content" id="case2">
+                            <div class="case-header">
+                                <h4>사례 2: 유명한 예술가 B씨</h4>
+                                <p class="case-info">생년월일: 1978년 7월 22일 미시(13:00~15:00)</p>
+                            </div>
+
+                            <div class="case-saju">
+                                <div class="pillar">
+                                    <span class="stem">戊</span>
+                                    <span class="branch">午</span>
+                                    <small>년주</small>
+                                </div>
+                                <div class="pillar">
+                                    <span class="stem">己</span>
+                                    <span class="branch">未</span>
+                                    <small>월주</small>
+                                </div>
+                                <div class="pillar main">
+                                    <span class="stem">丁</span>
+                                    <span class="branch">亥</span>
+                                    <small>일주</small>
+                                </div>
+                                <div class="pillar">
+                                    <span class="stem">丁</span>
+                                    <span class="branch">未</span>
+                                    <small>시주</small>
+                                </div>
+                            </div>
+
+                            <div class="case-analysis">
+                                <div class="analysis-step">
+                                    <h5>1. 기본 분석</h5>
+                                    <ul>
+                                        <li><strong>일간:</strong> 丁火 (촛불) - 섬세하고 예술적</li>
+                                        <li><strong>월령:</strong> 未월생 (늦여름) - 화가 쇠하는 시기</li>
+                                        <li><strong>격국:</strong> 상관격 (己土 상관이 월간에 투간)</li>
+                                    </ul>
+                                </div>
+
+                                <div class="analysis-step">
+                                    <h5>2. 예술적 재능</h5>
+                                    <ul>
+                                        <li><strong>상관격:</strong> 뛰어난 표현 능력</li>
+                                        <li><strong>丁火의 섬세함:</strong> 예술적 감각</li>
+                                        <li><strong>화토 조화:</strong> 창작 에너지</li>
+                                        <li><strong>亥수의 지지:</strong> 감성과 영감</li>
+                                    </ul>
+                                </div>
+
+                                <div class="analysis-step">
+                                    <h5>3. 성공 패턴</h5>
+                                    <ul>
+                                        <li>개성적이고 독창적인 작품 세계</li>
+                                        <li>감성적 어필로 대중의 사랑</li>
+                                        <li>지속적인 창작 활동</li>
+                                        <li>예술적 완성도 추구</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 사례 3 -->
+                        <div class="case-content" id="case3">
+                            <div class="case-header">
+                                <h4>사례 3: 학자형 인물 C씨</h4>
+                                <p class="case-info">생년월일: 1955년 11월 8일 진시(07:00~09:00)</p>
+                            </div>
+
+                            <div class="case-saju">
+                                <div class="pillar">
+                                    <span class="stem">乙</span>
+                                    <span class="branch">未</span>
+                                    <small>년주</small>
+                                </div>
+                                <div class="pillar">
+                                    <span class="stem">丁</span>
+                                    <span class="branch">亥</span>
+                                    <small>월주</small>
+                                </div>
+                                <div class="pillar main">
+                                    <span class="stem">壬</span>
+                                    <span class="branch">子</span>
+                                    <small>일주</small>
+                                </div>
+                                <div class="pillar">
+                                    <span class="stem">甲</span>
+                                    <span class="branch">辰</span>
+                                    <small>시주</small>
+                                </div>
+                            </div>
+
+                            <div class="case-analysis">
+                                <div class="analysis-step">
+                                    <h5>1. 기본 분석</h5>
+                                    <ul>
+                                        <li><strong>일간:</strong> 壬水 (바다) - 포용적이고 지혜로움</li>
+                                        <li><strong>월령:</strong> 亥월생 (겨울) - 수가 왕성한 계절</li>
+                                        <li><strong>격국:</strong> 정인격 (甲木 정인이 시간에 투간)</li>
+                                    </ul>
+                                </div>
+
+                                <div class="analysis-step">
+                                    <h5>2. 학문적 성향</h5>
+                                    <ul>
+                                        <li><strong>정인격:</strong> 학문과 연구에 적합</li>
+                                        <li><strong>壬水의 깊이:</strong> 철학적 사고</li>
+                                        <li><strong>수목 상생:</strong> 지속적 학습</li>
+                                        <li><strong>甲木의 정직함:</strong> 학자적 양심</li>
+                                    </ul>
+                                </div>
+
+                                <div class="analysis-step">
+                                    <h5>3. 성취 특징</h5>
+                                    <ul>
+                                        <li>깊이 있는 연구와 저술</li>
+                                        <li>후학 양성에 힘씀</li>
+                                        <li>학문적 권위 인정</li>
+                                        <li>사회적 존경과 명예</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lesson-complete">
+                    <button class="complete-btn" id="caseStudyComplete">사례 연구 완료 ✅</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 종합 퀴즈 섹션 -->
+        <section id="quiz" class="lesson-section">
+            <div class="lesson-container">
+                <h2>🧠 3단계 종합 퀴즈</h2>
+                <div class="quiz-container" id="level3Quiz">
+                    <!-- 퀴즈 내용은 JavaScript로 동적 생성 -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 학습 노트 -->
+    <div class="learning-notes" id="learningNotes">
+        <div class="notes-header">
+            <h3>📝 학습 노트</h3>
+            <button class="close-notes" id="closeNotes">×</button>
+        </div>
+        <textarea id="notesText" placeholder="중요한 해석 포인트를 기록해보세요..."></textarea>
+        <button class="save-notes" id="saveNotes">저장</button>
+    </div>
+
+    <!-- 노트 토글 버튼 -->
+    <button class="notes-toggle" id="notesToggle">📝</button>
+
+    <!-- Scripts -->
+    <script src="level3-script.js"></script>
+    <script>
+        // Service Worker 등록
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('service-worker.js')
+                .then(reg => console.log('SW registered', reg))
+                .catch(err => console.log('SW registration failed', err));
+        }
+    </script>
+</body>
+</html>

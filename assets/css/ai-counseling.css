@@ -1,0 +1,1012 @@
+/* AI Counseling Page Styles */
+
+.page--counseling {
+  background-color: #FDFBF7;
+  color: #3E342F;
+  min-height: 100vh;
+}
+
+/* Hero Section */
+.counseling-hero {
+  padding: 8rem 2rem 3rem;
+  text-align: center;
+  background: linear-gradient(135deg, #FDFBF7 0%, #F7F5F0 100%);
+}
+
+.counseling-hero__content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.counseling-hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: #EAE4D8;
+  border-radius: 2rem;
+  color: #5D5047;
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.counseling-hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #3E342F;
+  margin-bottom: 1.5rem;
+  line-height: 1.3;
+  animation: fadeInUp 0.8s ease-out 0.1s both;
+}
+
+.counseling-hero__highlight {
+  position: relative;
+  display: inline-block;
+}
+
+.counseling-hero__highlight::after {
+  content: '';
+  position: absolute;
+  bottom: 0.25rem;
+  left: 0;
+  width: 100%;
+  height: 0.75rem;
+  background: rgba(220, 206, 184, 0.4);
+  transform: rotate(-1deg);
+  z-index: -1;
+}
+
+.counseling-hero p {
+  color: #8C8075;
+  font-size: 1.125rem;
+  line-height: 1.8;
+  animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+/* Main Content */
+.counseling-main {
+  padding: 2rem 1rem 6rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* Counseling Card */
+.counseling-card {
+  background: white;
+  border-radius: 1.5rem;
+  box-shadow: 0 10px 40px -10px rgba(74, 59, 50, 0.1);
+  border: 1px solid #EAE4D8;
+  overflow: hidden;
+  transition: all 0.5s ease;
+  margin-bottom: 3rem;
+}
+
+.counseling-card:hover {
+  box-shadow: 0 20px 50px -10px rgba(74, 59, 50, 0.15);
+}
+
+.counseling-card__header {
+  background: #4A3B32;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.counseling-card__dots {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.counseling-card__dots span {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: #EAE4D8;
+}
+
+.counseling-card__dots span:nth-child(1) {
+  background: #FF6B6B;
+}
+
+.counseling-card__dots span:nth-child(2) {
+  background: #FFD93D;
+}
+
+.counseling-card__dots span:nth-child(3) {
+  background: #6BCB77;
+}
+
+.counseling-card__label {
+  color: #EAE4D8;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  opacity: 0.8;
+}
+
+.counseling-card__body {
+  padding: 2rem;
+}
+
+/* Message Bubble */
+.counseling-message {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.counseling-message__avatar {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: #EAE4D8;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: #8C6D58;
+}
+
+.counseling-message__content {
+  background: #F7F5F0;
+  border-radius: 1rem;
+  border-top-left-radius: 0;
+  padding: 1.5rem;
+  color: #4A3B32;
+  max-width: 90%;
+  position: relative;
+}
+
+.counseling-message__title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.counseling-message__content p {
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* Form Sections */
+.counseling-form-section {
+  background: #FDFBF7;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  border: 1px solid #EAE4D8;
+  margin-bottom: 2rem;
+}
+
+.counseling-form-section__title {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  color: #4A3B32;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.125rem;
+}
+
+.counseling-form-section__desc {
+  font-size: 0.75rem;
+  color: #8C8075;
+  margin-bottom: 0.75rem;
+  line-height: 1.6;
+}
+
+.counseling-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.counseling-form-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.counseling-form-field label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #8C8075;
+  margin-bottom: 0.25rem;
+}
+
+.counseling-form-field input,
+.counseling-form-field select,
+.counseling-form-field textarea {
+  width: 100%;
+  padding: 0.75rem;
+  background: white;
+  border: 1px solid #EAE4D8;
+  border-radius: 0.75rem;
+  font-size: 1rem;
+  color: #3E342F;
+  font-family: inherit;
+  transition: border-color 0.3s ease;
+}
+
+.counseling-form-field input:focus,
+.counseling-form-field select:focus,
+.counseling-form-field textarea:focus {
+  outline: none;
+  border-color: #8C6D58;
+}
+
+.counseling-form-field textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+/* 성장 과정 및 가족 관계 입력 필드 - 오늘의 고민과 동일한 스타일 */
+.counseling-family-textarea {
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 180px;
+  padding: 1.25rem;
+  background: transparent;
+  border: none;
+  border-radius: 1rem;
+  font-size: 0.95rem;
+  color: #3E342F;
+  font-family: inherit;
+  line-height: 1.8;
+  resize: vertical;
+  position: relative;
+  z-index: 2;
+}
+
+.counseling-family-textarea:focus {
+  outline: none;
+}
+
+@media (min-width: 768px) {
+  .counseling-family-textarea {
+    min-height: 200px;
+  }
+}
+
+/* Textarea Wrapper */
+.counseling-textarea-wrapper {
+  position: relative;
+  background: white;
+  border: 2px solid #EAE4D8;
+  border-radius: 1rem;
+}
+
+.counseling-textarea-placeholder {
+  position: absolute;
+  top: 1.25rem;
+  left: 1.25rem;
+  right: 1.25rem;
+  pointer-events: none;
+  color: #9A948A;
+  line-height: 1.8;
+  white-space: pre-wrap;
+  font-style: italic;
+  font-size: 0.9rem;
+  transition: opacity 0.3s ease;
+  opacity: 1;
+  z-index: 1;
+}
+
+.counseling-textarea-placeholder.hidden {
+  opacity: 0;
+}
+
+#worry-input {
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 280px;
+  padding: 1.25rem;
+  background: transparent;
+  border: none;
+  border-radius: 1rem;
+  font-size: 0.95rem;
+  color: #3E342F;
+  font-family: inherit;
+  resize: vertical;
+  transition: border-color 0.3s ease;
+  position: relative;
+  z-index: 2;
+  line-height: 1.8;
+}
+
+#worry-input:focus {
+  outline: none;
+}
+
+.counseling-textarea-wrapper:focus-within {
+  border-color: #8C6D58;
+}
+
+.counseling-textarea-footer {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  font-size: 0.75rem;
+  color: #A89F91;
+}
+
+/* Slider */
+.counseling-slider-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.counseling-slider__labels {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.counseling-slider__label {
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.875rem;
+}
+
+.counseling-slider__label--empathy {
+  background: #FFFBEB;
+  color: #D97706;
+  border: 1px solid #FDE68A;
+}
+
+.counseling-slider__label--advice {
+  background: #EFF6FF;
+  color: #2563EB;
+  border: 1px solid #BFDBFE;
+}
+
+.counseling-slider__center {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.125rem;
+  color: #8C6D58;
+}
+
+.counseling-slider {
+  width: 100%;
+  height: 0.5rem;
+  background: #EAE4D8;
+  border-radius: 0.5rem;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.counseling-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background: #4A3B32;
+  cursor: pointer;
+  box-shadow: 0 0 0 4px rgba(74, 59, 50, 0.1);
+  transition: all 0.2s ease;
+}
+
+.counseling-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 0 6px rgba(74, 59, 50, 0.15);
+}
+
+.counseling-slider::-moz-range-thumb {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background: #4A3B32;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 0 0 4px rgba(74, 59, 50, 0.1);
+  transition: all 0.2s ease;
+}
+
+.counseling-slider__desc {
+  text-align: center;
+  font-size: 0.875rem;
+  color: #8C8075;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.counseling-slider__hint {
+  text-align: center;
+  font-size: 0.75rem;
+  color: #A89F91;
+  margin-top: 0.5rem;
+}
+
+/* Submit Button */
+.counseling-submit-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
+}
+
+.counseling-submit-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 2rem;
+  border-radius: 0.75rem;
+  font-weight: 700;
+  font-size: 1.125rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  transform: scale(1);
+}
+
+.counseling-submit-btn:not(:disabled) {
+  background: #4A3B32;
+  color: #FDFBF7;
+  box-shadow: 0 4px 12px rgba(74, 59, 50, 0.3);
+}
+
+.counseling-submit-btn:not(:disabled):hover {
+  background: #352922;
+  transform: scale(1.02);
+  box-shadow: 0 6px 16px rgba(74, 59, 50, 0.4);
+}
+
+.counseling-submit-btn:disabled {
+  background: #EAE4D8;
+  color: #A89F91;
+  cursor: not-allowed;
+}
+
+#submit-loader {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Response Section */
+.counseling-response {
+  margin-top: 3rem;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+/* Analysis Card */
+.counseling-analysis-card {
+  background: linear-gradient(135deg, #4A3B32 0%, #352922 100%);
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  color: #FDFBF7;
+  position: relative;
+  overflow: hidden;
+}
+
+.counseling-analysis-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.counseling-analysis-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.counseling-analysis-card__badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  margin-bottom: 0.5rem;
+}
+
+.counseling-analysis-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.counseling-analysis-card__header p {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+.counseling-analysis-card__icon {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 1.25rem;
+}
+
+.counseling-analysis-card__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.counseling-analysis-item {
+  margin-bottom: 1.5rem;
+}
+
+.counseling-analysis-item__label {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+}
+
+.counseling-battery {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.counseling-battery__bar {
+  flex: 1;
+  height: 0.75rem;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.counseling-battery__fill {
+  height: 100%;
+  border-radius: 0.5rem;
+  transition: width 1s ease-out;
+  background: #6BCB77;
+}
+
+.counseling-battery__fill.low {
+  background: #FF6B6B;
+}
+
+.counseling-battery__percent {
+  font-family: monospace;
+  font-weight: 700;
+  font-size: 1rem;
+  min-width: 3rem;
+  text-align: right;
+}
+
+.counseling-keywords {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.counseling-keyword {
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 0.5rem;
+  font-size: 1.125rem;
+  font-weight: 700;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.counseling-color {
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 0.5rem;
+  font-size: 1.125rem;
+  font-weight: 300;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.counseling-analysis-card__right {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.counseling-mission {
+  margin-bottom: 1rem;
+}
+
+.counseling-mission__label {
+  color: #FFD700;
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.counseling-mission__text {
+  font-size: 1.125rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.counseling-quote {
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.counseling-quote p {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+/* Result Card */
+.counseling-result-card {
+  background: #FEFCF9;
+  border-top: 4px solid #8C6D58;
+  border-radius: 1.5rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.counseling-result-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 150px;
+  height: 150px;
+  opacity: 0.05;
+  background: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M14 9V5C14 3.89543 13.1046 3 12 3C10.8954 3 10 3.89543 10 5V9M6 9H18C19.1046 9 20 9.89543 20 11V19C20 20.1046 19.1046 21 18 21H6C4.89543 21 4 20.1046 4 19V11C4 9.89543 4.89543 9 6 9Z' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center;
+  background-size: contain;
+  pointer-events: none;
+}
+
+.counseling-result-card__header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.counseling-result-card__avatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: #4A3B32;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.counseling-result-card__header h3 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: #3E342F;
+  margin: 0;
+}
+
+.counseling-result-card__header p {
+  font-size: 0.875rem;
+  color: #8C6D58;
+  margin: 0;
+}
+
+.counseling-result-card__content {
+  font-size: 1.125rem;
+  line-height: 2;
+  color: #4A3B32;
+  font-family: 'Playfair Display', serif;
+  text-align: justify;
+  white-space: pre-wrap;
+  margin-bottom: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.counseling-result-card__footer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-top: 2rem;
+  border-top: 1px solid #EAE4D8;
+  position: relative;
+  z-index: 1;
+}
+
+@media (min-width: 768px) {
+  .counseling-result-card__footer {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.counseling-result-card__info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: #8C8075;
+}
+
+.counseling-result-card__actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.counseling-action-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: 700;
+  font-size: 0.875rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.counseling-action-btn--secondary {
+  background: #EAE4D8;
+  color: #5D5047;
+}
+
+.counseling-action-btn--secondary:hover {
+  background: #DCCEB8;
+}
+
+.counseling-action-btn--primary {
+  background: #4A3B32;
+  color: #FDFBF7;
+  box-shadow: 0 2px 8px rgba(74, 59, 50, 0.2);
+}
+
+.counseling-action-btn--primary:hover {
+  background: #352922;
+  box-shadow: 0 4px 12px rgba(74, 59, 50, 0.3);
+}
+
+.counseling-result-card__reset {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.counseling-reset-btn {
+  background: none;
+  border: none;
+  color: #8C8075;
+  font-size: 0.875rem;
+  text-decoration: underline;
+  text-underline-offset: 0.25rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.counseling-reset-btn:hover {
+  color: #4A3B32;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .counseling-hero {
+    padding: 6rem 1rem 2rem;
+  }
+
+  .counseling-hero h1 {
+    font-size: 2rem;
+  }
+
+  .counseling-card__body {
+    padding: 1.5rem;
+  }
+
+  .counseling-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .counseling-analysis-card__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .counseling-message__content {
+    max-width: 85%;
+  }
+
+  .counseling-result-card__actions {
+    flex-direction: column;
+  }
+
+  .counseling-action-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .counseling-card,
+  .counseling-submit-container,
+  .counseling-result-card__footer,
+  .counseling-result-card__reset,
+  .site-header,
+  .site-footer,
+  .home-button,
+  .scroll-top {
+    display: none !important;
+  }
+
+  .counseling-result-card {
+    box-shadow: none;
+    border: 1px solid #ccc;
+    border-top: 4px solid #8C6D58;
+    padding: 0;
+    margin: 0;
+  }
+
+  .counseling-result-card__content {
+    font-size: 12pt;
+    line-height: 1.8;
+  }
+}
+
+/* Generated Image Container */
+.counseling-image-container {
+  margin-bottom: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.counseling-image-loading {
+  width: 100%;
+  height: 16rem;
+  background: rgba(234, 228, 216, 0.5);
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  color: #8C6D58;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.counseling-image-loading-icon {
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+.counseling-image-wrapper {
+  position: relative;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.counseling-generated-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.counseling-image-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  text-align: center;
+  color: white;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.25rem;
+  font-weight: bold;
+  line-height: 1.5;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.counseling-save-image-btn {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  background: rgba(255, 255, 255, 0.9);
+  color: #4A3B32;
+  padding: 0.5rem;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  opacity: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.counseling-image-wrapper:hover .counseling-save-image-btn {
+  opacity: 1;
+}
+
+.counseling-save-image-btn:hover {
+  background: white;
+  transform: scale(1.1);
+}
+
+@media (min-width: 768px) {
+  .counseling-image-loading {
+    height: 20rem;
+  }
+  
+  .counseling-image-overlay {
+    font-size: 1.5rem;
+  }
+}
+

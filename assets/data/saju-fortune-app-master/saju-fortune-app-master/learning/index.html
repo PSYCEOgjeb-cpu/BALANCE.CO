@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="명리학습">
+    <meta name="theme-color" content="#3b82f6">
+    
+    <title>명리학 체계적 학습 - 5단계 완전 과정</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh;
+            color: #1a202c;
+        }
+        
+        .header {
+            text-align: center;
+            padding: 2rem 1rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            margin-bottom: 3rem;
+        }
+        
+        .header h1 {
+            color: #3b82f6;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        
+        .header p {
+            color: #64748b;
+            font-size: 1.125rem;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .learning-path {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .progress-overview {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .overall-progress {
+            width: 100%;
+            height: 12px;
+            background: #e2e8f0;
+            border-radius: 6px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+        
+        .overall-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
+            border-radius: 6px;
+            transition: width 0.5s ease;
+            width: 0%;
+        }
+        
+        .progress-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .stat-card {
+            background: linear-gradient(145deg, #f8fafc, #e2e8f0);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #3b82f6;
+            display: block;
+        }
+        
+        .stat-label {
+            color: #64748b;
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+        }
+        
+        .level-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .level-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .level-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.15);
+        }
+        
+        .level-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--accent-color);
+        }
+        
+        .level-card.level-1 { --accent-color: linear-gradient(90deg, #1e40af, #3b82f6); }
+        .level-card.level-2 { --accent-color: linear-gradient(90deg, #7c3aed, #a855f7); }
+        .level-card.level-3 { --accent-color: linear-gradient(90deg, #059669, #10b981); }
+        .level-card.level-4 { --accent-color: linear-gradient(90deg, #dc2626, #ef4444); }
+        .level-card.level-5 { --accent-color: linear-gradient(90deg, #7c2d12, #ea580c); }
+        
+        .level-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .level-icon {
+            font-size: 2.5rem;
+            margin-right: 1rem;
+        }
+        
+        .level-info h3 {
+            color: #374151;
+            font-size: 1.25rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        .level-difficulty {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .difficulty-beginner { background: #dcfce7; color: #16a34a; }
+        .difficulty-intermediate { background: #fef3c7; color: #d97706; }
+        .difficulty-advanced { background: #fee2e2; color: #dc2626; }
+        .difficulty-expert { background: #f3e8ff; color: #7c3aed; }
+        .difficulty-master { background: #fef2f2; color: #991b1b; }
+        
+        .level-description {
+            color: #64748b;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        
+        .level-topics {
+            margin-bottom: 1.5rem;
+        }
+        
+        .level-topics h4 {
+            color: #374151;
+            margin-bottom: 0.75rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .topics-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .topic-tag {
+            background: linear-gradient(145deg, #f1f5f9, #e2e8f0);
+            color: #475569;
+            padding: 0.25rem 0.75rem;
+            border-radius: 16px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        
+        .level-status {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+        
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+        
+        .status-completed {
+            background: #dcfce7;
+            color: #16a34a;
+        }
+        
+        .status-in-progress {
+            background: #fef3c7;
+            color: #d97706;
+        }
+        
+        .status-locked {
+            background: #f1f5f9;
+            color: #64748b;
+        }
+        
+        .level-progress {
+            width: 100%;
+            height: 6px;
+            background: #e2e8f0;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+        
+        .level-progress-fill {
+            height: 100%;
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+        
+        .level-1 .level-progress-fill { background: linear-gradient(90deg, #1e40af, #3b82f6); }
+        .level-2 .level-progress-fill { background: linear-gradient(90deg, #7c3aed, #a855f7); }
+        .level-3 .level-progress-fill { background: linear-gradient(90deg, #059669, #10b981); }
+        .level-4 .level-progress-fill { background: linear-gradient(90deg, #dc2626, #ef4444); }
+        .level-5 .level-progress-fill { background: linear-gradient(90deg, #7c2d12, #ea580c); }
+        
+        .level-actions {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .level-btn {
+            flex: 1;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6, #1e40af);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 14px 0 rgba(59, 130, 246, 0.39);
+        }
+        
+        .btn-secondary {
+            background: #f1f5f9;
+            color: #64748b;
+            border: 2px solid #e2e8f0;
+        }
+        
+        .btn-secondary:hover {
+            background: #e2e8f0;
+            border-color: #cbd5e1;
+        }
+        
+        .btn-disabled {
+            background: #f1f5f9;
+            color: #94a3b8;
+            cursor: not-allowed;
+        }
+        
+        .floating-nav {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 100;
+        }
+        
+        .floating-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            color: white;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 14px 0 rgba(59, 130, 246, 0.39);
+            transition: all 0.3s ease;
+        }
+        
+        .floating-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px 0 rgba(59, 130, 246, 0.49);
+        }
+        
+        .achievements {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .achievements h2 {
+            color: #374151;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        
+        .achievement-card {
+            background: linear-gradient(145deg, #f8fafc, #e2e8f0);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .achievement-card:hover {
+            transform: translateY(-2px);
+        }
+        
+        .achievement-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        
+        .achievement-card h3 {
+            color: #374151;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+        
+        .achievement-card p {
+            color: #64748b;
+            font-size: 0.875rem;
+        }
+        
+        .achievement-card.earned {
+            background: linear-gradient(145deg, #fef3c7, #fed7aa);
+            border: 2px solid #d97706;
+        }
+        
+        /* 반응형 디자인 */
+        @media (max-width: 768px) {
+            .learning-path { padding: 0 1rem; }
+            .level-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 2rem; }
+            .floating-nav { bottom: 1rem; right: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>🎓 명리학 체계적 학습</h1>
+        <p>전통 명리학을 현대적 방법으로 체계적으로 학습하는 5단계 완전 과정</p>
+    </header>
+
+    <main class="learning-path">
+        <!-- 전체 진도 개요 -->
+        <div class="progress-overview">
+            <h2>🎯 전체 학습 진도</h2>
+            <div class="overall-progress">
+                <div class="overall-progress-fill" id="overallProgressFill"></div>
+            </div>
+            <p id="progressText">0개 단계 완료 (0%)</p>
+            
+            <div class="progress-stats">
+                <div class="stat-card">
+                    <span class="stat-number" id="completedLevels">0</span>
+                    <div class="stat-label">완료한 단계</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number" id="totalSections">20</span>
+                    <div class="stat-label">전체 섹션</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number" id="studyTime">0</span>
+                    <div class="stat-label">학습 시간</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number" id="currentLevel">1</span>
+                    <div class="stat-label">현재 레벨</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 학습 단계별 카드 -->
+        <div class="level-grid" id="levelGrid">
+            <!-- 1단계: 기초 -->
+            <div class="level-card level-1" data-level="1">
+                <div class="level-header">
+                    <div class="level-icon">🌱</div>
+                    <div class="level-info">
+                        <h3>1단계: 우주의 근본 언어</h3>
+                        <span class="level-difficulty difficulty-beginner">초급</span>
+                    </div>
+                </div>
+                
+                <p class="level-description">
+                    명리학의 기초가 되는 음양오행과 천간지지 체계를 학습합니다. 
+                    전통 동양철학의 우주관을 현대적 관점에서 이해합니다.
+                </p>
+                
+                <div class="level-topics">
+                    <h4>학습 주제</h4>
+                    <div class="topics-list">
+                        <span class="topic-tag">음양론</span>
+                        <span class="topic-tag">오행론</span>
+                        <span class="topic-tag">천간</span>
+                        <span class="topic-tag">지지</span>
+                        <span class="topic-tag">상생상극</span>
+                        <span class="topic-tag">십이지</span>
+                    </div>
+                </div>
+                
+                <div class="level-status">
+                    <div class="status-badge status-completed" id="status-1">
+                        <span>✅</span> 완료
+                    </div>
+                </div>
+                
+                <div class="level-progress">
+                    <div class="level-progress-fill" style="width: 100%" id="progress-1"></div>
+                </div>
+                
+                <div class="level-actions">
+                    <a href="foundation/" class="level-btn btn-primary">
+                        <span>📚</span> 학습하기
+                    </a>
+                    <button class="level-btn btn-secondary" onclick="showLevelInfo(1)">
+                        <span>ℹ️</span> 상세보기
+                    </button>
+                </div>
+            </div>
+
+            <!-- 2단계: 핵심 해석 -->
+            <div class="level-card level-2" data-level="2">
+                <div class="level-header">
+                    <div class="level-icon">🔍</div>
+                    <div class="level-info">
+                        <h3>2단계: 핵심 해석 도구</h3>
+                        <span class="level-difficulty difficulty-intermediate">중급</span>
+                    </div>
+                </div>
+                
+                <p class="level-description">
+                    십신체계와 합충형파해를 통해 사주의 역학관계를 이해하고, 
+                    인간관계와 성격을 분석하는 방법을 학습합니다.
+                </p>
+                
+                <div class="level-topics">
+                    <h4>학습 주제</h4>
+                    <div class="topics-list">
+                        <span class="topic-tag">십신</span>
+                        <span class="topic-tag">합</span>
+                        <span class="topic-tag">충</span>
+                        <span class="topic-tag">형</span>
+                        <span class="topic-tag">파</span>
+                        <span class="topic-tag">해</span>
+                    </div>
+                </div>
+                
+                <div class="level-status">
+                    <div class="status-badge status-in-progress" id="status-2">
+                        <span>📚</span> 진행중
+                    </div>
+                </div>
+                
+                <div class="level-progress">
+                    <div class="level-progress-fill" style="width: 60%" id="progress-2"></div>
+                </div>
+                
+                <div class="level-actions">
+                    <a href="level-2-core-theory/" class="level-btn btn-primary">
+                        <span>🎯</span> 계속하기
+                    </a>
+                    <button class="level-btn btn-secondary" onclick="showLevelInfo(2)">
+                        <span>ℹ️</span> 상세보기
+                    </button>
+                </div>
+            </div>
+
+            <!-- 3단계: 실전 적용 -->
+            <div class="level-card level-3" data-level="3">
+                <div class="level-header">
+                    <div class="level-icon">⚡</div>
+                    <div class="level-info">
+                        <h3>3단계: 실전 적용</h3>
+                        <span class="level-difficulty difficulty-advanced">고급</span>
+                    </div>
+                </div>
+                
+                <p class="level-description">
+                    사주 구성의 실제와 격국론을 통해 실전 해석 능력을 기릅니다. 
+                    다양한 사례연구를 통해 응용력을 높입니다.
+                </p>
+                
+                <div class="level-topics">
+                    <h4>학습 주제</h4>
+                    <div class="topics-list">
+                        <span class="topic-tag">사주 구성</span>
+                        <span class="topic-tag">해석 방법</span>
+                        <span class="topic-tag">격국론</span>
+                        <span class="topic-tag">사례연구</span>
+                    </div>
+                </div>
+                
+                <div class="level-status">
+                    <div class="status-badge status-locked" id="status-3">
+                        <span>🔒</span> 잠김
+                    </div>
+                </div>
+                
+                <div class="level-progress">
+                    <div class="level-progress-fill" style="width: 0%" id="progress-3"></div>
+                </div>
+                
+                <div class="level-actions">
+                    <a href="level-3-application/" class="level-btn btn-disabled">
+                        <span>📊</span> 시작하기
+                    </a>
+                    <button class="level-btn btn-secondary" onclick="showLevelInfo(3)">
+                        <span>ℹ️</span> 상세보기
+                    </button>
+                </div>
+            </div>
+
+            <!-- 4단계: 고급 분석 -->
+            <div class="level-card level-4" data-level="4">
+                <div class="level-header">
+                    <div class="level-icon">🔮</div>
+                    <div class="level-info">
+                        <h3>4단계: 고급 분석</h3>
+                        <span class="level-difficulty difficulty-expert">전문가</span>
+                    </div>
+                </div>
+                
+                <p class="level-description">
+                    신살론과 운세 분석법을 통해 깊이 있는 해석 능력을 기릅니다. 
+                    시기론까지 포함한 전문적 분석 기법을 학습합니다.
+                </p>
+                
+                <div class="level-topics">
+                    <h4>학습 주제</h4>
+                    <div class="topics-list">
+                        <span class="topic-tag">신살론</span>
+                        <span class="topic-tag">대운</span>
+                        <span class="topic-tag">세운</span>
+                        <span class="topic-tag">시기론</span>
+                    </div>
+                </div>
+                
+                <div class="level-status">
+                    <div class="status-badge status-locked" id="status-4">
+                        <span>🔒</span> 잠김
+                    </div>
+                </div>
+                
+                <div class="level-progress">
+                    <div class="level-progress-fill" style="width: 0%" id="progress-4"></div>
+                </div>
+                
+                <div class="level-actions">
+                    <a href="level-4-advanced/" class="level-btn btn-disabled">
+                        <span>🌟</span> 시작하기
+                    </a>
+                    <button class="level-btn btn-secondary" onclick="showLevelInfo(4)">
+                        <span>ℹ️</span> 상세보기
+                    </button>
+                </div>
+            </div>
+
+            <!-- 5단계: 전문가 과정 -->
+            <div class="level-card level-5" data-level="5">
+                <div class="level-header">
+                    <div class="level-icon">🎓</div>
+                    <div class="level-info">
+                        <h3>5단계: 전문가 과정</h3>
+                        <span class="level-difficulty difficulty-master">마스터</span>
+                    </div>
+                </div>
+                
+                <p class="level-description">
+                    종합 상담 기법과 실무 응용을 학습합니다. 
+                    전문가로서의 윤리와 책임까지 다루는 완성 단계입니다.
+                </p>
+                
+                <div class="level-topics">
+                    <h4>학습 주제</h4>
+                    <div class="topics-list">
+                        <span class="topic-tag">상담 기법</span>
+                        <span class="topic-tag">실무 사례</span>
+                        <span class="topic-tag">윤리</span>
+                        <span class="topic-tag">책임</span>
+                    </div>
+                </div>
+                
+                <div class="level-status">
+                    <div class="status-badge status-locked" id="status-5">
+                        <span>🔒</span> 잠김
+                    </div>
+                </div>
+                
+                <div class="level-progress">
+                    <div class="level-progress-fill" style="width: 0%" id="progress-5"></div>
+                </div>
+                
+                <div class="level-actions">
+                    <a href="level-5-expert/" class="level-btn btn-disabled">
+                        <span>👑</span> 시작하기
+                    </a>
+                    <button class="level-btn btn-secondary" onclick="showLevelInfo(5)">
+                        <span>ℹ️</span> 상세보기
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 성취 시스템 -->
+        <div class="achievements">
+            <h2>🏆 학습 성취</h2>
+            <div class="achievements-grid">
+                <div class="achievement-card earned">
+                    <span class="achievement-icon">🌱</span>
+                    <h3>기초 마스터</h3>
+                    <p>음양오행을 완전히 이해했습니다</p>
+                </div>
+                <div class="achievement-card">
+                    <span class="achievement-icon">🔍</span>
+                    <h3>해석 전문가</h3>
+                    <p>십신 체계를 마스터하세요</p>
+                </div>
+                <div class="achievement-card">
+                    <span class="achievement-icon">⚡</span>
+                    <h3>실전 응용</h3>
+                    <p>격국 판단을 완료하세요</p>
+                </div>
+                <div class="achievement-card">
+                    <span class="achievement-icon">🔮</span>
+                    <h3>고급 분석가</h3>
+                    <p>신살과 운세를 분석하세요</p>
+                </div>
+                <div class="achievement-card">
+                    <span class="achievement-icon">🎓</span>
+                    <h3>명리학 마스터</h3>
+                    <p>전문가 과정을 수료하세요</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 플로팅 네비게이션 -->
+    <div class="floating-nav">
+        <button class="floating-btn" onclick="scrollToTop()" title="맨 위로">
+            ↑
+        </button>
+    </div>
+
+    <script>
+        // 학습 상태 관리
+        let learningProgress = {
+            levels: {
+                1: { completed: true, progress: 100 },
+                2: { completed: false, progress: 60 },
+                3: { completed: false, progress: 0 },
+                4: { completed: false, progress: 0 },
+                5: { completed: false, progress: 0 }
+            }
+        };
+
+        // 페이지 로드 시 초기화
+        document.addEventListener('DOMContentLoaded', function() {
+            loadProgress();
+            updateDisplay();
+        });
+
+        // 진도 로드
+        function loadProgress() {
+            const saved = localStorage.getItem('learning-progress');
+            if (saved) {
+                learningProgress = JSON.parse(saved);
+            }
+        }
+
+        // 진도 저장
+        function saveProgress() {
+            localStorage.setItem('learning-progress', JSON.stringify(learningProgress));
+        }
+
+        // 화면 업데이트
+        function updateDisplay() {
+            updateOverallProgress();
+            updateLevelCards();
+            updateAchievements();
+        }
+
+        // 전체 진도 업데이트
+        function updateOverallProgress() {
+            const totalLevels = 5;
+            const completedLevels = Object.values(learningProgress.levels)
+                .filter(level => level.completed).length;
+            const overallPercentage = (completedLevels / totalLevels) * 100;
+
+            // 전체 진도바
+            document.getElementById('overallProgressFill').style.width = overallPercentage + '%';
+            document.getElementById('progressText').textContent = 
+                `${completedLevels}개 단계 완료 (${Math.round(overallPercentage)}%)`;
+
+            // 통계
+            document.getElementById('completedLevels').textContent = completedLevels;
+            document.getElementById('currentLevel').textContent = 
+                completedLevels < 5 ? completedLevels + 1 : 5;
+        }
+
+        // 레벨 카드 업데이트
+        function updateLevelCards() {
+            Object.keys(learningProgress.levels).forEach(levelNum => {
+                const level = learningProgress.levels[levelNum];
+                const statusElement = document.getElementById(`status-${levelNum}`);
+                const progressElement = document.getElementById(`progress-${levelNum}`);
+                const card = document.querySelector(`[data-level="${levelNum}"]`);
+
+                // 상태 업데이트
+                if (level.completed) {
+                    statusElement.className = 'status-badge status-completed';
+                    statusElement.innerHTML = '<span>✅</span> 완료';
+                } else if (level.progress > 0) {
+                    statusElement.className = 'status-badge status-in-progress';
+                    statusElement.innerHTML = '<span>📚</span> 진행중';
+                } else if (isLevelUnlocked(parseInt(levelNum))) {
+                    statusElement.className = 'status-badge status-locked';
+                    statusElement.innerHTML = '<span>🔓</span> 시작 가능';
+                    card.querySelector('.btn-disabled').classList.remove('btn-disabled');
+                    card.querySelector('.btn-disabled').classList.add('btn-primary');
+                } else {
+                    statusElement.className = 'status-badge status-locked';
+                    statusElement.innerHTML = '<span>🔒</span> 잠김';
+                }
+
+                // 진도바 업데이트
+                progressElement.style.width = level.progress + '%';
+            });
+        }
+
+        // 레벨 잠금 해제 확인
+        function isLevelUnlocked(levelNum) {
+            if (levelNum === 1) return true;
+            return learningProgress.levels[levelNum - 1].completed;
+        }
+
+        // 성취 업데이트
+        function updateAchievements() {
+            const achievements = document.querySelectorAll('.achievement-card');
+            achievements.forEach((card, index) => {
+                const levelNum = index + 1;
+                if (learningProgress.levels[levelNum]?.completed) {
+                    card.classList.add('earned');
+                } else {
+                    card.classList.remove('earned');
+                }
+            });
+        }
+
+        // 레벨 정보 표시
+        function showLevelInfo(levelNum) {
+            const levelTitles = {
+                1: '우주의 근본 언어',
+                2: '핵심 해석 도구',
+                3: '실전 적용',
+                4: '고급 분석',
+                5: '전문가 과정'
+            };
+
+            const levelDescriptions = {
+                1: '음양오행과 천간지지의 기초 이론을 학습합니다.',
+                2: '십신과 합충형파해를 통한 해석 방법을 익힙니다.',
+                3: '실제 사주 구성과 격국 판단을 실습합니다.',
+                4: '신살과 운세 분석의 고급 기법을 다룹니다.',
+                5: '전문적 상담 기법과 윤리를 학습합니다.'
+            };
+
+            alert(`📚 ${levelNum}단계: ${levelTitles[levelNum]}\n\n${levelDescriptions[levelNum]}\n\n진도: ${learningProgress.levels[levelNum].progress}%`);
+        }
+
+        // 맨 위로 스크롤
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // 레벨 완료 처리 (외부에서 호출 가능)
+        function markLevelCompleted(levelNum) {
+            learningProgress.levels[levelNum].completed = true;
+            learningProgress.levels[levelNum].progress = 100;
+            saveProgress();
+            updateDisplay();
+        }
+
+        // 레벨 진도 업데이트 (외부에서 호출 가능)
+        function updateLevelProgress(levelNum, progress) {
+            learningProgress.levels[levelNum].progress = progress;
+            saveProgress();
+            updateDisplay();
+        }
+
+        // 전체 리셋 (개발용)
+        function resetProgress() {
+            if (confirm('모든 학습 진도를 리셋하시겠습니까?')) {
+                localStorage.removeItem('learning-progress');
+                location.reload();
+            }
+        }
+    </script>
+</body>
+</html>

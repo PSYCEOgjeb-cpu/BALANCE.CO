@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#dc2626">
+    <title>명리학 고급 분석 - 신살과 운세</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Noto Sans KR', sans-serif; 
+            background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%); 
+            min-height: 100vh; color: #1a202c; 
+        }
+        .learning-header { 
+            background: rgba(255, 255, 255, 0.95); 
+            padding: 1rem; 
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); 
+        }
+        .progress-container { text-align: center; margin-bottom: 1rem; }
+        .progress-container h1 { color: #dc2626; margin-bottom: 0.5rem; }
+        .lesson-nav { display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; }
+        .nav-btn { 
+            padding: 0.5rem 1rem; border: none; border-radius: 20px; 
+            background: #f1f5f9; color: #64748b; cursor: pointer; transition: all 0.3s ease; 
+        }
+        .nav-btn.active { background: #dc2626; color: white; }
+        .learning-content { max-width: 1200px; margin: 2rem auto; padding: 0 1rem; }
+        .lesson-section { display: none; }
+        .lesson-section.active { display: block; animation: fadeIn 0.5s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .lesson-container { 
+            background: rgba(255, 255, 255, 0.95); 
+            border-radius: 16px; padding: 2rem; 
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1); 
+        }
+        .lesson-container h2 { color: #dc2626; margin-bottom: 1rem; }
+        .interactive-card { 
+            background: linear-gradient(145deg, #f8fafc, #e2e8f0); 
+            border-radius: 12px; padding: 1.5rem; margin-bottom: 2rem; 
+        }
+        .sinsal-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 1rem; 
+        }
+        .sinsal-card { 
+            background: white; border-radius: 8px; padding: 1.5rem; 
+            border: 2px solid #e2e8f0; transition: all 0.3s ease; 
+        }
+        .sinsal-card:hover { border-color: #dc2626; transform: translateY(-2px); }
+        .sinsal-card.lucky { border-color: #22c55e; background: linear-gradient(145deg, #f0fdf4, #dcfce7); }
+        .sinsal-card.challenging { border-color: #f59e0b; background: linear-gradient(145deg, #fffbeb, #fef3c7); }
+        .complete-btn { 
+            padding: 1rem 2rem; border: none; border-radius: 8px; 
+            background: linear-gradient(135deg, #dc2626, #991b1b); 
+            color: white; font-weight: 600; cursor: pointer; 
+            transition: all 0.3s ease; 
+        }
+        .complete-btn:hover { transform: translateY(-2px); }
+        .lesson-complete { text-align: center; margin-top: 2rem; }
+    </style>
+</head>
+<body>
+    <header class="learning-header">
+        <div class="progress-container">
+            <h1>🎯 4단계: 고급 분석</h1>
+            <p>신살 해석과 운세 분석법</p>
+        </div>
+        <nav class="lesson-nav">
+            <button class="nav-btn active" data-section="sinsal">신살</button>
+            <button class="nav-btn" data-section="fortune">운세 분석</button>
+            <button class="nav-btn" data-section="timing">시기론</button>
+            <button class="nav-btn" data-section="quiz">퀴즈</button>
+        </nav>
+    </header>
+
+    <main class="learning-content">
+        <!-- 신살 섹션 -->
+        <section id="sinsal" class="lesson-section active">
+            <div class="lesson-container">
+                <h2>신살론(神殺論) - 특별한 별자리</h2>
+                <p>사주에 숨어있는 특별한 기운들을 찾아내어 해석하는 고급 기법입니다.</p>
+
+                <div class="interactive-card">
+                    <h3>🌟 주요 길신(吉神)</h3>
+                    <div class="sinsal-grid">
+                        <div class="sinsal-card lucky">
+                            <h4>천을귀인(天乙貴人)</h4>
+                            <p><strong>의미:</strong> 귀인의 도움, 위기 탈출</p>
+                            <p><strong>효과:</strong> 어려울 때 도움받는 복, 사회적 인정</p>
+                        </div>
+                        <div class="sinsal-card lucky">
+                            <h4>천덕귀인(天德貴人)</h4>
+                            <p><strong>의미:</strong> 하늘의 덕, 천성적 선량함</p>
+                            <p><strong>효과:</strong> 도덕적 품격, 자연스러운 복</p>
+                        </div>
+                        <div class="sinsal-card lucky">
+                            <h4>월덕귀인(月德貴人)</h4>
+                            <p><strong>의미:</strong> 달의 덕, 인덕과 화합</p>
+                            <p><strong>효과:</strong> 인간관계 좋음, 평화로운 삶</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="interactive-card">
+                    <h3>⚠️ 주의할 흉신(凶神)</h3>
+                    <div class="sinsal-grid">
+                        <div class="sinsal-card challenging">
+                            <h4>공망(空亡)</h4>
+                            <p><strong>의미:</strong> 허무, 변화, 정신적 추구</p>
+                            <p><strong>해석:</strong> 물질보다 정신을 중시, 종교나 철학 관심</p>
+                        </div>
+                        <div class="sinsal-card challenging">
+                            <h4>역마(驛馬)</h4>
+                            <p><strong>의미:</strong> 이동, 변화, 활동성</p>
+                            <p><strong>해석:</strong> 자주 이사하거나 여행, 변화 많은 인생</p>
+                        </div>
+                        <div class="sinsal-card challenging">
+                            <h4>도화(桃花)</h4>
+                            <p><strong>의미:</strong> 이성운, 인기, 예술성</p>
+                            <p><strong>해석:</strong> 이성과 인연 많음, 예술적 재능</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lesson-complete">
+                    <button class="complete-btn" onclick="completeSection('sinsal')">신살 학습 완료 ✅</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 운세 분석 섹션 -->
+        <section id="fortune" class="lesson-section">
+            <div class="lesson-container">
+                <h2>운세 분석법 - 대운과 세운</h2>
+                <p>사주의 기본 틀에 시간의 흐름을 더해 구체적인 운세를 분석합니다.</p>
+
+                <div class="interactive-card">
+                    <h3>📈 대운(大運) - 10년 주기</h3>
+                    <div class="sinsal-grid">
+                        <div class="sinsal-card">
+                            <h4>대운의 원리</h4>
+                            <p>10년마다 바뀌는 큰 운세의 흐름을 파악합니다.</p>
+                            <ul>
+                                <li>남성: 양년생 순행, 음년생 역행</li>
+                                <li>여성: 양년생 역행, 음년생 순행</li>
+                                <li>각 대운별 특징과 주의사항</li>
+                            </ul>
+                        </div>
+                        <div class="sinsal-card">
+                            <h4>대운과 사주의 관계</h4>
+                            <p>대운이 사주에 미치는 영향을 분석합니다.</p>
+                            <ul>
+                                <li>대운과 사주의 합충 관계</li>
+                                <li>용신의 득력/실령</li>
+                                <li>십신 변화의 의미</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="interactive-card">
+                    <h3>📅 세운(歲運) - 1년 주기</h3>
+                    <div class="sinsal-grid">
+                        <div class="sinsal-card">
+                            <h4>세운의 특징</h4>
+                            <p>매년 바뀌는 세세한 운세 변화를 봅니다.</p>
+                            <ul>
+                                <li>세운과 사주의 상호작용</li>
+                                <li>월운, 일운의 세부 분석</li>
+                                <li>특별한 시기의 판단</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lesson-complete">
+                    <button class="complete-btn" onclick="completeSection('fortune')">운세 분석 완료 ✅</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 시기론 섹션 -->
+        <section id="timing" class="lesson-section">
+            <div class="lesson-container">
+                <h2>시기론(時期論) - 때를 아는 지혜</h2>
+                <p>인생의 중요한 일들이 언제 일어날지 예측하는 고급 기법입니다.</p>
+
+                <div class="interactive-card">
+                    <h3>⏰ 시기 판단의 원리</h3>
+                    <div class="sinsal-grid">
+                        <div class="sinsal-card">
+                            <h4>길한 시기</h4>
+                            <ul>
+                                <li>용신이 힘을 얻는 시기</li>
+                                <li>사주와 조화로운 대운/세운</li>
+                                <li>십신이 좋은 작용을 하는 때</li>
+                            </ul>
+                        </div>
+                        <div class="sinsal-card">
+                            <h4>주의할 시기</h4>
+                            <ul>
+                                <li>충(沖)이나 형(刑)이 일어나는 때</li>
+                                <li>용신이 손상받는 시기</li>
+                                <li>과도한 변화가 예상되는 때</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lesson-complete">
+                    <button class="complete-btn" onclick="completeSection('timing')">시기론 완료 ✅</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 퀴즈 섹션 -->
+        <section id="quiz" class="lesson-section">
+            <div class="lesson-container">
+                <h2>🧠 4단계 종합 퀴즈</h2>
+                <div id="quizContainer">
+                    <div class="quiz-question">
+                        <h3>천을귀인의 주요 효과는 무엇인가요?</h3>
+                        <div class="quiz-options">
+                            <button class="quiz-option" onclick="selectAnswer(0)">재물운 상승</button>
+                            <button class="quiz-option" onclick="selectAnswer(1)" data-correct="true">귀인의 도움</button>
+                            <button class="quiz-option" onclick="selectAnswer(2)">건강 증진</button>
+                            <button class="quiz-option" onclick="selectAnswer(3)">학업 성취</button>
+                        </div>
+                        <div id="explanation" class="hidden">
+                            <p>✅ 정답: 귀인의 도움</p>
+                            <p>천을귀인은 어려울 때 도움을 받고, 사회적 인정을 받는 복성입니다.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="lesson-complete">
+                    <button class="complete-btn" onclick="completeSection('quiz')">4단계 완료 ✅</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // 간단한 JavaScript
+        let currentSection = 'sinsal';
+        let completedSections = new Set();
+
+        // 네비게이션
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const sectionId = e.target.dataset.section;
+                switchSection(sectionId);
+            });
+        });
+
+        function switchSection(sectionId) {
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.section === sectionId) {
+                    btn.classList.add('active');
+                }
+            });
+
+            document.querySelectorAll('.lesson-section').forEach(section => {
+                section.classList.remove('active');
+                if (section.id === sectionId) {
+                    section.classList.add('active');
+                }
+            });
+
+            currentSection = sectionId;
+        }
+
+        function selectAnswer(index) {
+            const options = document.querySelectorAll('.quiz-option');
+            options.forEach((option, i) => {
+                option.disabled = true;
+                if (option.dataset.correct) {
+                    option.style.background = '#dcfce7';
+                    option.style.color = '#16a34a';
+                } else if (i === index && !option.dataset.correct) {
+                    option.style.background = '#fee2e2';
+                    option.style.color = '#dc2626';
+                }
+            });
+            document.getElementById('explanation').classList.remove('hidden');
+        }
+
+        function completeSection(sectionName) {
+            completedSections.add(sectionName);
+            alert(`🎉 ${sectionName} 학습을 완료했습니다!`);
+        }
+
+        // CSS 추가
+        const style = document.createElement('style');
+        style.textContent = `
+            .quiz-question { background: white; padding: 2rem; border-radius: 12px; }
+            .quiz-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+            .quiz-option { padding: 1rem; border: 2px solid #e2e8f0; border-radius: 8px; background: white; cursor: pointer; transition: all 0.3s ease; }
+            .quiz-option:hover { border-color: #dc2626; }
+            .hidden { display: none; }
+            #explanation { background: #f0fdf4; border: 1px solid #22c55e; border-radius: 6px; padding: 1rem; margin-top: 1rem; }
+            .sinsal-card ul { padding-left: 1rem; }
+            .sinsal-card li { margin-bottom: 0.5rem; color: #6b7280; }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

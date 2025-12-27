@@ -1,0 +1,868 @@
+/* 명리학 기초 학습 모듈 스타일 */
+:root {
+    /* 학습 색상 팔레트 */
+    --primary-blue: #1e40af;
+    --success-green: #059669;
+    --warning-orange: #d97706;
+    --info-purple: #7c3aed;
+    
+    /* 오행 색상 */
+    --wood-color: #16a34a;
+    --fire-color: #dc2626;
+    --earth-color: #ca8a04;
+    --metal-color: #6b7280;
+    --water-color: #2563eb;
+    
+    /* 음양 색상 */
+    --yin-color: #1f2937;
+    --yang-color: #f9fafb;
+    --yin-accent: #374151;
+    --yang-accent: #e5e7eb;
+    
+    /* 기본 색상 */
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8fafc;
+    --text-primary: #1f2937;
+    --text-secondary: #6b7280;
+    --border-color: #e5e7eb;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    line-height: 1.6;
+}
+
+/* 학습 헤더 */
+.learning-header {
+    background: var(--bg-primary);
+    border-bottom: 2px solid var(--border-color);
+    padding: 1.5rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow);
+}
+
+.progress-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.progress-container h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-blue);
+}
+
+.progress-bar {
+    flex: 1;
+    height: 8px;
+    background: var(--border-color);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--success-green), var(--primary-blue));
+    width: 0%;
+    transition: width 0.3s ease;
+}
+
+.progress-text {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    min-width: 80px;
+}
+
+.lesson-nav {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.nav-btn {
+    padding: 0.5rem 1rem;
+    border: 2px solid var(--border-color);
+    background: var(--bg-primary);
+    color: var(--text-secondary);
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.nav-btn:hover {
+    border-color: var(--primary-blue);
+    color: var(--primary-blue);
+}
+
+.nav-btn.active {
+    background: var(--primary-blue);
+    color: white;
+    border-color: var(--primary-blue);
+}
+
+/* 메인 콘텐츠 */
+.learning-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.lesson-section {
+    display: none;
+}
+
+.lesson-section.active {
+    display: block;
+}
+
+.lesson-container h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-blue);
+    margin-bottom: 0.5rem;
+}
+
+.section-intro {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    line-height: 1.7;
+}
+
+/* 인터랙티브 카드 */
+.interactive-card {
+    background: var(--bg-primary);
+    border-radius: 1rem;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
+}
+
+.interactive-card h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* 태극 인터랙티브 */
+.taiji-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.taiji-symbol {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    border: 3px solid var(--border-color);
+}
+
+.taiji-symbol:hover {
+    transform: scale(1.05);
+}
+
+.taiji-symbol.rotating {
+    animation: rotate 3s linear infinite;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.yin-part, .yang-part {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.yin-part {
+    background: var(--yin-color);
+    left: 0;
+    color: white;
+    border-radius: 100px 0 0 100px;
+}
+
+.yang-part {
+    background: var(--yang-color);
+    right: 0;
+    color: var(--yin-color);
+    border-radius: 0 100px 100px 0;
+}
+
+.yang-dot, .yin-dot {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    position: absolute;
+}
+
+.yang-dot {
+    background: var(--yang-color);
+    top: 30%;
+}
+
+.yin-dot {
+    background: var(--yin-color);
+    bottom: 30%;
+}
+
+.element-label {
+    font-weight: 600;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+}
+
+.taiji-controls {
+    display: flex;
+    gap: 1rem;
+}
+
+.control-btn {
+    padding: 0.75rem 1.5rem;
+    background: var(--primary-blue);
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.control-btn:hover {
+    background: var(--info-purple);
+    transform: translateY(-1px);
+}
+
+/* 설명 패널 */
+.explanation-panel h4 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.principle-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+.principle-card {
+    background: var(--bg-secondary);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    border-left: 4px solid var(--primary-blue);
+}
+
+.principle-card h5 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.principle-card p {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+/* 실생활 적용 섹션 */
+.application-section {
+    margin: 2rem 0;
+}
+
+.application-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.app-card {
+    background: var(--bg-primary);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    text-align: center;
+    border: 1px solid var(--border-color);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.app-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    border-color: var(--primary-blue);
+}
+
+.app-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.app-card h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.app-card p {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+/* 오행 서클 */
+.wuxing-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.wuxing-circle {
+    position: relative;
+    width: 350px;
+    height: 350px;
+    margin: 2rem auto;
+}
+
+.element {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 3px solid transparent;
+    color: white;
+    font-weight: 600;
+}
+
+.element:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.element.wood {
+    background: var(--wood-color);
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.element.fire {
+    background: var(--fire-color);
+    top: 80px;
+    right: 40px;
+}
+
+.element.earth {
+    background: var(--earth-color);
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.element.metal {
+    background: var(--metal-color);
+    top: 80px;
+    left: 40px;
+}
+
+.element.water {
+    background: var(--water-color);
+    bottom: 80px;
+    right: 40px;
+}
+
+.element-symbol {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.element-name {
+    font-size: 0.75rem;
+    margin-top: 0.25rem;
+}
+
+.element-season {
+    font-size: 0.65rem;
+    opacity: 0.8;
+}
+
+/* 오행 컨트롤 */
+.wuxing-controls {
+    display: flex;
+    gap: 1rem;
+}
+
+.cycle-btn {
+    padding: 0.5rem 1rem;
+    border: 2px solid var(--border-color);
+    background: var(--bg-primary);
+    color: var(--text-secondary);
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.cycle-btn:hover, .cycle-btn.active {
+    border-color: var(--primary-blue);
+    background: var(--primary-blue);
+    color: white;
+}
+
+/* 순환 설명 */
+.cycle-explanation {
+    margin-top: 1.5rem;
+}
+
+.cycle-info {
+    display: none;
+    background: var(--bg-secondary);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+}
+
+.cycle-info.active {
+    display: block;
+}
+
+.cycle-info h4 {
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.cycle-info p {
+    font-weight: 600;
+    color: var(--primary-blue);
+    margin-bottom: 0.5rem;
+}
+
+.flow-description {
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* 오행 특성 카드 */
+.elements-detail {
+    margin: 2rem 0;
+}
+
+.element-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.detail-card {
+    background: var(--bg-primary);
+    border-radius: 0.5rem;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: transform 0.2s ease;
+}
+
+.detail-card:hover {
+    transform: translateY(-2px);
+}
+
+.card-header {
+    padding: 1rem;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.detail-card.wood .card-header { background: var(--wood-color); }
+.detail-card.fire .card-header { background: var(--fire-color); }
+.detail-card.earth .card-header { background: var(--earth-color); }
+.detail-card.metal .card-header { background: var(--metal-color); }
+.detail-card.water .card-header { background: var(--water-color); }
+
+.card-header .element-symbol {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.card-header h4 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.card-content {
+    padding: 1rem;
+}
+
+.trait-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.trait-row:last-child {
+    border-bottom: none;
+}
+
+.trait-label {
+    font-weight: 500;
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+}
+
+.trait-value {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 0.875rem;
+}
+
+/* 천간지지 스타일 */
+.concept-desc {
+    color: var(--text-secondary);
+    font-style: italic;
+    margin-bottom: 1.5rem;
+}
+
+.stems-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+}
+
+.stem-card {
+    background: var(--bg-primary);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    text-align: center;
+    border: 2px solid var(--border-color);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.stem-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+}
+
+.stem-card.yang {
+    border-left: 4px solid var(--fire-color);
+}
+
+.stem-card.yin {
+    border-left: 4px solid var(--water-color);
+}
+
+.stem-card.wood { background: linear-gradient(145deg, #f0fdf4, #dcfce7); }
+.stem-card.fire { background: linear-gradient(145deg, #fef2f2, #fee2e2); }
+.stem-card.earth { background: linear-gradient(145deg, #fffbeb, #fef3c7); }
+.stem-card.metal { background: linear-gradient(145deg, #f9fafb, #f3f4f6); }
+.stem-card.water { background: linear-gradient(145deg, #eff6ff, #dbeafe); }
+
+.stem-character {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.stem-name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+}
+
+.stem-nature {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.25rem;
+}
+
+.stem-traits {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+/* 지지 원형 배치 */
+.branches-circle {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    margin: 2rem auto;
+}
+
+.branch-card {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background: var(--bg-primary);
+    border: 2px solid var(--border-color);
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    transform-origin: center;
+}
+
+.branch-card:hover {
+    transform: scale(1.1);
+    box-shadow: var(--shadow);
+    border-color: var(--primary-blue);
+}
+
+.branch-character {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.branch-info {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--text-primary);
+    color: white;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    white-space: nowrap;
+    font-size: 0.75rem;
+    z-index: 10;
+}
+
+.branch-card:hover .branch-info {
+    display: block;
+}
+
+/* 완료 버튼 */
+.lesson-complete {
+    text-align: center;
+    margin-top: 3rem;
+}
+
+.complete-btn {
+    padding: 1rem 2rem;
+    background: var(--success-green);
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.complete-btn:hover {
+    background: var(--primary-blue);
+    transform: translateY(-1px);
+}
+
+.complete-btn:disabled {
+    background: var(--text-secondary);
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* 학습 노트 */
+.learning-notes {
+    position: fixed;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 200;
+}
+
+.notes-toggle {
+    background: var(--primary-blue);
+    color: white;
+    border: none;
+    padding: 1rem;
+    border-radius: 0.5rem 0 0 0.5rem;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: background 0.2s ease;
+}
+
+.notes-toggle:hover {
+    background: var(--info-purple);
+}
+
+.notes-content {
+    position: absolute;
+    right: 100%;
+    top: 0;
+    width: 300px;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem 0 0 0.5rem;
+    padding: 1rem;
+    box-shadow: var(--shadow);
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+}
+
+.learning-notes.open .notes-content {
+    transform: translateX(0);
+}
+
+.notes-content h3 {
+    margin: 0 0 1rem 0;
+    font-size: 1.1rem;
+    color: var(--text-primary);
+}
+
+#learningNotes {
+    width: 100%;
+    height: 200px;
+    border: 1px solid var(--border-color);
+    border-radius: 0.25rem;
+    padding: 0.5rem;
+    font-family: inherit;
+    font-size: 0.875rem;
+    resize: vertical;
+}
+
+.save-notes-btn {
+    margin-top: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: var(--success-green);
+    color: white;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    font-size: 0.875rem;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .learning-header {
+        padding: 1rem;
+    }
+    
+    .progress-container {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.5rem;
+    }
+    
+    .lesson-nav {
+        flex-wrap: wrap;
+    }
+    
+    .learning-content {
+        padding: 1rem;
+    }
+    
+    .taiji-symbol {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .wuxing-circle {
+        width: 250px;
+        height: 250px;
+    }
+    
+    .element {
+        width: 60px;
+        height: 60px;
+        font-size: 0.875rem;
+    }
+    
+    .element-symbol {
+        font-size: 1.2rem;
+    }
+    
+    .branches-circle {
+        width: 280px;
+        height: 280px;
+    }
+    
+    .branch-card {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .learning-notes {
+        position: relative;
+        right: auto;
+        top: auto;
+        transform: none;
+        margin-top: 2rem;
+    }
+    
+    .notes-content {
+        position: relative;
+        right: auto;
+        top: auto;
+        width: 100%;
+        transform: none;
+        margin-top: 1rem;
+        border-radius: 0.5rem;
+    }
+}
+
+/* 애니메이션 효과 */
+.fade-in {
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.slide-up {
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+    from { transform: translateY(10px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}

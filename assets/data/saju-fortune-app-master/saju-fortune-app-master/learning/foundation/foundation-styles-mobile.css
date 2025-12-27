@@ -1,0 +1,1409 @@
+/* 모바일 최적화 명리학 기초 학습 앱 스타일 */
+:root {
+    /* 앱 색상 팔레트 */
+    --primary-blue: #1e40af;
+    --success-green: #059669;
+    --warning-orange: #d97706;
+    --info-purple: #7c3aed;
+    
+    /* 오행 색상 */
+    --wood-color: #16a34a;
+    --fire-color: #dc2626;
+    --earth-color: #ca8a04;
+    --metal-color: #6b7280;
+    --water-color: #2563eb;
+    
+    /* 음양 색상 */
+    --yin-color: #1f2937;
+    --yang-color: #f9fafb;
+    --yin-accent: #374151;
+    --yang-accent: #e5e7eb;
+    
+    /* 앱 UI 색상 */
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8fafc;
+    --bg-card: #ffffff;
+    --text-primary: #1f2937;
+    --text-secondary: #6b7280;
+    --text-muted: #9ca3af;
+    --border-color: #e5e7eb;
+    --border-light: #f3f4f6;
+    
+    /* 그림자 및 효과 */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    
+    /* 반응형 사이즈 */
+    --header-height: 64px;
+    --nav-height: 60px;
+    --bottom-padding: 20px;
+    --container-padding: 16px;
+    
+    /* 터치 타겟 최소 크기 */
+    --touch-target: 44px;
+    
+    /* 애니메이션 */
+    --transition-fast: 0.15s ease;
+    --transition-normal: 0.2s ease;
+    --transition-slow: 0.3s ease;
+}
+
+/* 기본 리셋 및 설정 */
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+    
+    /* iOS Safari 하단 바 처리 */
+    padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* 앱 컨테이너 */
+.app-container {
+    min-height: 100vh;
+    min-height: 100dvh; /* Dynamic viewport height for mobile */
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+/* 학습 헤더 - 앱 스타일 */
+.learning-header {
+    background: var(--bg-primary);
+    border-bottom: 1px solid var(--border-color);
+    padding: 12px var(--container-padding);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow-sm);
+    
+    /* iOS 노치 지원 */
+    padding-top: max(12px, env(safe-area-inset-top));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.progress-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.progress-container h1 {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--primary-blue);
+    flex: 1;
+    min-width: 0;
+}
+
+.progress-bar {
+    flex: 1;
+    height: 6px;
+    background: var(--border-light);
+    border-radius: 8px;
+    overflow: hidden;
+    min-width: 80px;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--success-green), var(--primary-blue));
+    width: 0%;
+    transition: width var(--transition-slow);
+    border-radius: 8px;
+}
+
+.progress-text {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    white-space: nowrap;
+    min-width: 60px;
+}
+
+/* 네비게이션 - 모바일 탭 스타일 */
+.lesson-nav {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding-bottom: 2px;
+}
+
+.lesson-nav::-webkit-scrollbar {
+    display: none;
+}
+
+.nav-btn {
+    padding: 8px 16px;
+    border: 1.5px solid var(--border-color);
+    background: var(--bg-primary);
+    color: var(--text-secondary);
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 0.875rem;
+    transition: all var(--transition-normal);
+    white-space: nowrap;
+    min-height: var(--touch-target);
+    display: flex;
+    align-items: center;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.nav-btn:active {
+    transform: scale(0.98);
+}
+
+.nav-btn:hover {
+    border-color: var(--primary-blue);
+    color: var(--primary-blue);
+}
+
+.nav-btn.active {
+    background: var(--primary-blue);
+    color: white;
+    border-color: var(--primary-blue);
+    box-shadow: var(--shadow-sm);
+}
+
+/* 메인 콘텐츠 */
+.learning-content {
+    flex: 1;
+    padding: 0 var(--container-padding) var(--bottom-padding);
+    max-width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.lesson-section {
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+.lesson-section.active {
+    display: block;
+}
+
+.lesson-container {
+    padding: 20px 0;
+}
+
+.lesson-container h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-blue);
+    margin: 0 0 8px 0;
+    line-height: 1.3;
+}
+
+.section-intro {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin: 0 0 24px 0;
+    line-height: 1.5;
+}
+
+/* 인터랙티브 카드 - 모바일 최적화 */
+.interactive-card {
+    background: var(--bg-card);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-light);
+}
+
+.interactive-card h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 20px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    line-height: 1.3;
+}
+
+/* 태극 인터랙티브 - 터치 최적화 */
+.taiji-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+}
+
+.taiji-symbol {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform var(--transition-normal);
+    border: 2px solid var(--border-color);
+    touch-action: manipulation;
+}
+
+.taiji-symbol:active {
+    transform: scale(0.95);
+}
+
+.taiji-symbol.rotating {
+    animation: rotate 3s linear infinite;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.yin-part, .yang-part {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.yin-part {
+    background: var(--yin-color);
+    left: 0;
+    color: white;
+    border-radius: 80px 0 0 80px;
+}
+
+.yang-part {
+    background: var(--yang-color);
+    right: 0;
+    color: var(--yin-color);
+    border-radius: 0 80px 80px 0;
+}
+
+.yang-dot, .yin-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    position: absolute;
+}
+
+.yang-dot {
+    background: var(--yang-color);
+    top: 30%;
+}
+
+.yin-dot {
+    background: var(--yin-color);
+    bottom: 30%;
+}
+
+.element-label {
+    font-weight: 600;
+    font-size: 0.75rem;
+    margin-top: 8px;
+}
+
+/* 컨트롤 버튼 - 터치 최적화 */
+.taiji-controls {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.control-btn {
+    padding: 12px 20px;
+    background: var(--primary-blue);
+    color: white;
+    border: none;
+    border-radius: 24px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 0.875rem;
+    transition: all var(--transition-normal);
+    min-height: var(--touch-target);
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.control-btn:active {
+    transform: scale(0.95);
+}
+
+.control-btn:hover {
+    background: var(--info-purple);
+}
+
+/* 설명 패널 */
+.explanation-panel h4 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin: 0 0 16px 0;
+    color: var(--text-primary);
+}
+
+.principle-cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+}
+
+.principle-card {
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    padding: 16px;
+    border-left: 4px solid var(--primary-blue);
+}
+
+.principle-card h5 {
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin: 0 0 8px 0;
+    color: var(--text-primary);
+}
+
+.principle-card p {
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.4;
+}
+
+/* 실생활 적용 섹션 */
+.application-section {
+    margin: 24px 0;
+}
+
+.application-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+}
+
+.app-card {
+    background: var(--bg-card);
+    border-radius: 12px;
+    padding: 20px 16px;
+    text-align: center;
+    border: 1px solid var(--border-light);
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    touch-action: manipulation;
+}
+
+.app-card:active {
+    transform: scale(0.98);
+}
+
+.app-card:hover {
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary-blue);
+}
+
+.app-icon {
+    font-size: 2rem;
+    margin-bottom: 12px;
+    line-height: 1;
+}
+
+.app-card h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0 0 8px 0;
+    color: var(--text-primary);
+}
+
+.app-card p {
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.4;
+}
+
+/* 오행 서클 - 모바일 최적화 */
+.wuxing-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.wuxing-circle {
+    position: relative;
+    width: 280px;
+    height: 280px;
+    margin: 0 auto;
+    touch-action: manipulation;
+}
+
+.element {
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    border: 2px solid transparent;
+    color: white;
+    font-weight: 600;
+    touch-action: manipulation;
+}
+
+.element:active {
+    transform: scale(0.9);
+}
+
+.element.wood {
+    background: var(--wood-color);
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.element.fire {
+    background: var(--fire-color);
+    top: 64px;
+    right: 32px;
+}
+
+.element.earth {
+    background: var(--earth-color);
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.element.metal {
+    background: var(--metal-color);
+    top: 64px;
+    left: 32px;
+}
+
+.element.water {
+    background: var(--water-color);
+    bottom: 64px;
+    right: 32px;
+}
+
+.element-symbol {
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.element-name {
+    font-size: 0.625rem;
+    margin-top: 2px;
+    line-height: 1;
+}
+
+.element-season {
+    font-size: 0.5rem;
+    opacity: 0.8;
+    line-height: 1;
+}
+
+/* 오행 컨트롤 */
+.wuxing-controls {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.cycle-btn {
+    padding: 8px 16px;
+    border: 1.5px solid var(--border-color);
+    background: var(--bg-card);
+    color: var(--text-secondary);
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 0.875rem;
+    transition: all var(--transition-normal);
+    min-height: var(--touch-target);
+    display: flex;
+    align-items: center;
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.cycle-btn:active {
+    transform: scale(0.95);
+}
+
+.cycle-btn:hover, .cycle-btn.active {
+    border-color: var(--primary-blue);
+    background: var(--primary-blue);
+    color: white;
+}
+
+/* 순환 설명 */
+.cycle-explanation {
+    margin-top: 20px;
+}
+
+.cycle-info {
+    display: none;
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.cycle-info.active {
+    display: block;
+    animation: slideUp 0.3s ease;
+}
+
+.cycle-info h4 {
+    margin: 0 0 12px 0;
+    font-size: 1.125rem;
+    font-weight: 600;
+}
+
+.cycle-info p {
+    font-weight: 600;
+    color: var(--primary-blue);
+    margin: 0 0 8px 0;
+    font-size: 0.875rem;
+}
+
+.flow-description {
+    color: var(--text-secondary);
+    line-height: 1.5;
+    font-size: 0.875rem;
+}
+
+/* 오행 특성 카드 - 모바일 최적화 */
+.elements-detail {
+    margin: 24px 0;
+}
+
+.element-cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+}
+
+.detail-card {
+    background: var(--bg-card);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: transform var(--transition-normal);
+    cursor: pointer;
+    touch-action: manipulation;
+}
+
+.detail-card:active {
+    transform: scale(0.98);
+}
+
+.card-header {
+    padding: 16px;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.detail-card.wood .card-header { background: var(--wood-color); }
+.detail-card.fire .card-header { background: var(--fire-color); }
+.detail-card.earth .card-header { background: var(--earth-color); }
+.detail-card.metal .card-header { background: var(--metal-color); }
+.detail-card.water .card-header { background: var(--water-color); }
+
+.card-header .element-symbol {
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.card-header h4 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.card-content {
+    padding: 16px;
+}
+
+.trait-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.trait-row:last-child {
+    border-bottom: none;
+}
+
+.trait-label {
+    font-weight: 500;
+    color: var(--text-secondary);
+    font-size: 0.8125rem;
+}
+
+.trait-value {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 0.8125rem;
+    text-align: right;
+}
+
+/* 천간지지 스타일 - 모바일 최적화 */
+.concept-desc {
+    color: var(--text-secondary);
+    font-style: italic;
+    margin-bottom: 20px;
+    font-size: 0.875rem;
+}
+
+.stems-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.stem-card {
+    background: var(--bg-card);
+    border-radius: 12px;
+    padding: 16px 12px;
+    text-align: center;
+    border: 1.5px solid var(--border-light);
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    touch-action: manipulation;
+}
+
+.stem-card:active {
+    transform: scale(0.95);
+}
+
+.stem-card.yang {
+    border-left: 4px solid var(--fire-color);
+}
+
+.stem-card.yin {
+    border-left: 4px solid var(--water-color);
+}
+
+.stem-card.wood { background: linear-gradient(145deg, #f0fdf4, #dcfce7); }
+.stem-card.fire { background: linear-gradient(145deg, #fef2f2, #fee2e2); }
+.stem-card.earth { background: linear-gradient(145deg, #fffbeb, #fef3c7); }
+.stem-card.metal { background: linear-gradient(145deg, #f9fafb, #f3f4f6); }
+.stem-card.water { background: linear-gradient(145deg, #eff6ff, #dbeafe); }
+
+.stem-character {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+    line-height: 1;
+}
+
+.stem-name {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+    line-height: 1.2;
+}
+
+.stem-nature {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    margin-bottom: 4px;
+    line-height: 1.2;
+}
+
+.stem-traits {
+    font-size: 0.6875rem;
+    color: var(--text-muted);
+    font-style: italic;
+    line-height: 1.2;
+}
+
+/* 지지 원형 배치 - 모바일 최적화 */
+.branches-circle {
+    position: relative;
+    width: 280px;
+    height: 280px;
+    margin: 0 auto;
+    touch-action: manipulation;
+}
+
+.branch-card {
+    position: absolute;
+    width: 56px;
+    height: 56px;
+    background: var(--bg-card);
+    border: 1.5px solid var(--border-light);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    transform-origin: center;
+    touch-action: manipulation;
+}
+
+.branch-card:active {
+    transform: scale(0.9);
+}
+
+.branch-card:hover {
+    box-shadow: var(--shadow);
+    border-color: var(--primary-blue);
+}
+
+.branch-character {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1;
+}
+
+.branch-info {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--text-primary);
+    color: white;
+    padding: 8px;
+    border-radius: 6px;
+    white-space: nowrap;
+    font-size: 0.6875rem;
+    z-index: 10;
+    margin-top: 4px;
+    box-shadow: var(--shadow-lg);
+}
+
+.branch-card:hover .branch-info {
+    display: block;
+}
+
+/* 퀴즈 스타일 - 모바일 최적화 */
+.quiz-card {
+    background: var(--bg-card);
+    border-radius: 16px;
+    padding: 24px 20px;
+    box-shadow: var(--shadow);
+    margin-bottom: 20px;
+}
+
+.quiz-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.quiz-header h3 {
+    margin: 0;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.quiz-score {
+    font-weight: 600;
+    color: var(--success-green);
+    font-size: 0.875rem;
+}
+
+.quiz-question h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 20px 0;
+    line-height: 1.4;
+}
+
+.quiz-options {
+    display: grid;
+    gap: 12px;
+    margin: 20px 0;
+}
+
+.quiz-option {
+    padding: 16px;
+    border: 1.5px solid var(--border-color);
+    border-radius: 12px;
+    background: var(--bg-card);
+    cursor: pointer;
+    text-align: left;
+    transition: all var(--transition-normal);
+    font-size: 0.875rem;
+    line-height: 1.4;
+    min-height: var(--touch-target);
+    display: flex;
+    align-items: center;
+    touch-action: manipulation;
+}
+
+.quiz-option:active {
+    transform: scale(0.98);
+}
+
+.quiz-option:hover {
+    border-color: var(--primary-blue);
+    background: var(--bg-secondary);
+}
+
+.quiz-option.correct {
+    border-color: var(--success-green);
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.quiz-option.incorrect {
+    border-color: var(--fire-color);
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.quiz-option:disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.quiz-explanation {
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    padding: 16px;
+    margin-top: 16px;
+}
+
+.quiz-explanation h5 {
+    margin: 0 0 8px 0;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.quiz-explanation p {
+    margin: 0;
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+}
+
+.next-quiz-btn {
+    background: var(--primary-blue);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 24px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 0.875rem;
+    margin-top: 16px;
+    min-height: var(--touch-target);
+    touch-action: manipulation;
+    transition: all var(--transition-normal);
+}
+
+.next-quiz-btn:active {
+    transform: scale(0.95);
+}
+
+/* 퀴즈 결과 */
+.quiz-result {
+    text-align: center;
+    background: var(--bg-card);
+    border-radius: 16px;
+    padding: 32px 20px;
+    box-shadow: var(--shadow);
+}
+
+.quiz-result h3 {
+    margin: 0 0 24px 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.score-circle {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, var(--primary-blue), var(--success-green));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    color: white;
+    box-shadow: var(--shadow);
+}
+
+.score-text {
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.score-percentage {
+    font-size: 0.75rem;
+    opacity: 0.9;
+    line-height: 1;
+}
+
+.result-level {
+    margin-bottom: 24px;
+}
+
+.result-level h4 {
+    margin: 0 0 8px 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.result-level p {
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+}
+
+.result-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.retry-btn, .continue-btn {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 24px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 0.875rem;
+    min-height: var(--touch-target);
+    touch-action: manipulation;
+    transition: all var(--transition-normal);
+}
+
+.retry-btn:active, .continue-btn:active {
+    transform: scale(0.95);
+}
+
+.retry-btn {
+    background: var(--text-secondary);
+    color: white;
+}
+
+.continue-btn {
+    background: var(--success-green);
+    color: white;
+}
+
+/* 완료 버튼 */
+.lesson-complete {
+    text-align: center;
+    margin-top: 32px;
+}
+
+.complete-btn {
+    padding: 16px 32px;
+    background: var(--success-green);
+    color: white;
+    border: none;
+    border-radius: 24px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    min-height: var(--touch-target);
+    touch-action: manipulation;
+    box-shadow: var(--shadow);
+}
+
+.complete-btn:active {
+    transform: scale(0.95);
+}
+
+.complete-btn:hover {
+    background: var(--primary-blue);
+}
+
+.complete-btn:disabled {
+    background: var(--text-secondary);
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* 학습 노트 - 모바일 최적화 */
+.learning-notes {
+    position: fixed;
+    right: 16px;
+    bottom: 80px;
+    z-index: 200;
+}
+
+.notes-toggle {
+    background: var(--primary-blue);
+    color: white;
+    border: none;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.5rem;
+    transition: all var(--transition-normal);
+    box-shadow: var(--shadow-lg);
+    touch-action: manipulation;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.notes-toggle:active {
+    transform: scale(0.9);
+}
+
+.notes-toggle:hover {
+    background: var(--info-purple);
+}
+
+.notes-content {
+    position: absolute;
+    right: 0;
+    bottom: 70px;
+    width: 280px;
+    max-width: calc(100vw - 32px);
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: var(--shadow-xl);
+    transform: translateY(100px) scale(0.9);
+    opacity: 0;
+    transition: all var(--transition-normal);
+    pointer-events: none;
+}
+
+.learning-notes.open .notes-content {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.notes-content h3 {
+    margin: 0 0 16px 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+#learningNotes {
+    width: 100%;
+    height: 120px;
+    border: 1.5px solid var(--border-color);
+    border-radius: 8px;
+    padding: 12px;
+    font-family: inherit;
+    font-size: 0.875rem;
+    resize: vertical;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+}
+
+#learningNotes:focus {
+    outline: none;
+    border-color: var(--primary-blue);
+}
+
+.save-notes-btn {
+    margin-top: 12px;
+    padding: 8px 16px;
+    background: var(--success-green);
+    color: white;
+    border: none;
+    border-radius: 16px;
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 500;
+    width: 100%;
+    min-height: var(--touch-target);
+    touch-action: manipulation;
+    transition: all var(--transition-normal);
+}
+
+.save-notes-btn:active {
+    transform: scale(0.95);
+}
+
+/* 툴팁 */
+.tooltip {
+    position: absolute;
+    background: var(--text-primary);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    z-index: 1000;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all var(--transition-normal);
+    box-shadow: var(--shadow);
+    max-width: 200px;
+    text-align: center;
+    line-height: 1.3;
+}
+
+/* 애니메이션 */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.fade-in {
+    animation: fadeIn 0.3s ease;
+}
+
+.slide-up {
+    animation: slideUp 0.3s ease;
+}
+
+/* 반응형 미디어 쿼리 */
+
+/* 작은 모바일 (320px-480px) */
+@media (max-width: 480px) {
+    :root {
+        --container-padding: 12px;
+    }
+    
+    .learning-content {
+        padding: 0 var(--container-padding) var(--bottom-padding);
+    }
+    
+    .lesson-container {
+        padding: 16px 0;
+    }
+    
+    .lesson-container h2 {
+        font-size: 1.375rem;
+    }
+    
+    .taiji-symbol {
+        width: 140px;
+        height: 140px;
+    }
+    
+    .wuxing-circle {
+        width: 240px;
+        height: 240px;
+    }
+    
+    .element {
+        width: 48px;
+        height: 48px;
+        font-size: 0.75rem;
+    }
+    
+    .element-symbol {
+        font-size: 1rem;
+    }
+    
+    .branches-circle {
+        width: 240px;
+        height: 240px;
+    }
+    
+    .branch-card {
+        width: 44px;
+        height: 44px;
+    }
+    
+    .principle-cards {
+        gap: 8px;
+    }
+    
+    .element-cards {
+        gap: 12px;
+    }
+    
+    .stems-grid {
+        gap: 8px;
+    }
+}
+
+/* 중형 모바일 (481px-768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+    .principle-cards {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+    
+    .application-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+    
+    .stems-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* 태블릿 (769px-1024px) */
+@media (min-width: 769px) {
+    :root {
+        --container-padding: 24px;
+    }
+    
+    .learning-content {
+        max-width: 800px;
+        padding: 0 var(--container-padding) var(--bottom-padding);
+    }
+    
+    .principle-cards {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .application-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .element-cards {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    
+    .stems-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+    }
+    
+    .wuxing-circle {
+        width: 320px;
+        height: 320px;
+    }
+    
+    .element {
+        width: 72px;
+        height: 72px;
+    }
+    
+    .branches-circle {
+        width: 320px;
+        height: 320px;
+    }
+    
+    .branch-card {
+        width: 64px;
+        height: 64px;
+    }
+    
+    .learning-notes {
+        right: 24px;
+        bottom: 100px;
+    }
+    
+    .notes-content {
+        width: 320px;
+    }
+}
+
+/* 다크 모드 지원 */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-primary: #1f2937;
+        --bg-secondary: #111827;
+        --bg-card: #1f2937;
+        --text-primary: #f9fafb;
+        --text-secondary: #d1d5db;
+        --text-muted: #9ca3af;
+        --border-color: #374151;
+        --border-light: #374151;
+        --yang-color: #374151;
+    }
+}
+
+/* 고대비 모드 지원 */
+@media (prefers-contrast: high) {
+    :root {
+        --border-color: #000000;
+        --text-secondary: #333333;
+    }
+}
+
+/* 모션 감소 설정 지원 */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *:before,
+    *:after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .taiji-symbol.rotating {
+        animation: none;
+    }
+}
+
+/* iOS Safari 전용 스타일 */
+@supports (-webkit-touch-callout: none) {
+    .learning-header {
+        -webkit-backdrop-filter: blur(10px);
+    }
+    
+    body {
+        -webkit-overflow-scrolling: touch;
+    }
+}

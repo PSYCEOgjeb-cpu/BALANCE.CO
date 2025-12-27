@@ -1,0 +1,26 @@
+# robots.txt for BALANCE.CO Psychological Test Lab
+# https://balance-co.kr
+
+User-agent: *
+Allow: /
+
+# Disallow admin or private areas (if any)
+# Disallow: /admin/
+# Disallow: /private/
+
+# Allow all search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+# Sitemap location
+Sitemap: https://balance-co.kr/sitemap.xml
+
+# Crawl-delay (optional, for rate limiting)
+# Crawl-delay: 1
+

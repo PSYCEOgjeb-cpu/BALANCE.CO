@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>대체 데이터 소스 테스트</title>
+    <style>
+        body { 
+            font-family: 'Noto Sans KR', Arial, sans-serif; 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 20px; 
+            background-color: #f8f9fa;
+        }
+        .test-container { 
+            background: white; 
+            padding: 20px; 
+            border-radius: 8px; 
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+            margin-bottom: 20px;
+        }
+        .status-banner {
+            background: linear-gradient(135deg, #ff6b6b, #ffa726);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .api-section { 
+            border-left: 4px solid #28a745; 
+            padding-left: 15px; 
+            margin: 20px 0;
+        }
+        .test-button { 
+            background: #28a745; 
+            color: white; 
+            border: none; 
+            padding: 10px 20px; 
+            border-radius: 5px; 
+            cursor: pointer; 
+            margin: 5px;
+        }
+        .test-button:hover { background: #218838; }
+        .test-button:disabled { background: #6c757d; cursor: not-allowed; }
+        .result { 
+            background: #f8f9fa; 
+            border: 1px solid #dee2e6; 
+            border-radius: 4px; 
+            padding: 15px; 
+            margin-top: 10px; 
+            font-family: 'Courier New', monospace; 
+            white-space: pre-wrap;
+        }
+        .success { border-left: 4px solid #28a745; background: #d4edda; }
+        .warning { border-left: 4px solid #ffc107; background: #fff3cd; }
+        .error { border-left: 4px solid #dc3545; background: #f8d7da; }
+        .input-group { margin: 10px 0; }
+        .input-group label { display: inline-block; width: 100px; }
+        .input-group input, .input-group select { padding: 5px; width: 100px; }
+        .library-status {
+            display: flex;
+            gap: 20px;
+            padding: 10px;
+            background: #e9ecef;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+        .status-online { background: #28a745; }
+        .status-offline { background: #dc3545; }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="status-banner">
+        ⚠️ 공공데이터포털 화재로 인한 서비스 중단 상황<br>
+        대체 라이브러리 및 계산 방식으로 천문 데이터 제공 중
+    </div>
+
+    <div class="test-container">
+        <h1>🔄 대체 데이터 소스 테스트</h1>
+        <p>공공데이터포털 API 대신 외부 라이브러리와 천문학 계산을 활용합니다.</p>
+        
+        <div class="library-status">
+            <div class="status-item">
+                <div class="status-dot" id="suncalc-status"></div>
+                <span>SunCalc.js</span>
+            </div>
+            <div class="status-item">
+                <div class="status-dot" id="lunar-status"></div>
+                <span>음력 계산</span>
+            </div>
+            <div class="status-item">
+                <div class="status-dot" id="solar-terms-status"></div>
+                <span>24절기</span>
+            </div>
+            <div class="status-item">
+                <div class="status-dot" id="timezone-status"></div>
+                <span>TimeZoneDB</span>
+            </div>
+        </div>
+
+        <div class="api-section">
+            <h3>🔑 TimeZoneDB API 키 설정</h3>
+            <div class="input-group">
+                <label>API 키:</label>
+                <input type="text" id="timezone-api-key" placeholder="TimeZoneDB API 키 입력" style="width: 300px;">
+                <button class="test-button" onclick="setTimezoneApiKey()">API 키 설정</button>
+            </div>
+            <small style="color: #6c757d;">
+                🔗 TimeZoneDB 회원가입 후 대시보드에서 API 키를 받으세요.
+            </small>
+        </div>
+
+        <div class="api-section">
+            <h3>🗺️ 음양력 변환 테스트</h3>
+            <div class="input-group">
+                <label>연도:</label>
+                <input type="number" id="lunar-year" value="2024" min="1900" max="2100">
+                <label>월:</label>
+                <input type="number" id="lunar-month" value="10" min="1" max="12">
+                <label>일:</label>
+                <input type="number" id="lunar-day" value="17" min="1" max="31">
+            </div>
+            <button class="test-button" onclick="testLunarConversion()">음양력 변환 테스트</button>
+            <div id="lunar-result" class="result" style="display: none;"></div>
+        </div>
+
+        <div class="api-section">
+            <h3>🌸 24절기 계산 테스트</h3>
+            <div class="input-group">
+                <label>연도:</label>
+                <input type="number" id="solar-year" value="2024" min="1900" max="2100">
+            </div>
+            <button class="test-button" onclick="testSolarTerms()">24절기 계산 테스트</button>
+            <div id="solar-result" class="result" style="display: none;"></div>
+        </div>
+
+        <div class="api-section">
+            <h3>🌅 출몰시각 계산 테스트</h3>
+            <div class="input-group">
+                <label>연도:</label>
+                <input type="number" id="sun-year" value="2024" min="1900" max="2100">
+                <label>월:</label>
+                <input type="number" id="sun-month" value="10" min="1" max="12">
+                <label>일:</label>
+                <input type="number" id="sun-day" value="17" min="1" max="31">
+                <label>지역:</label>
+                <select id="sun-location">
+                    <option value="서울">서울</option>
+                    <option value="부산">부산</option>
+                    <option value="대구">대구</option>
+                    <option value="인천">인천</option>
+                    <option value="광주">광주</option>
+                    <option value="대전">대전</option>
+                    <option value="울산">울산</option>
+                    <option value="제주">제주</option>
+                </select>
+            </div>
+            <button class="test-button" onclick="testSunMoonTimes()">출몰시각 계산 테스트</button>
+            <div id="sun-result" class="result" style="display: none;"></div>
+        </div>
+
+        <div class="api-section">
+            <h3>🌙 월령 계산 테스트</h3>
+            <div class="input-group">
+                <label>연도:</label>
+                <input type="number" id="moon-year" value="2024" min="1900" max="2100">
+                <label>월:</label>
+                <input type="number" id="moon-month" value="10" min="1" max="12">
+                <label>일:</label>
+                <input type="number" id="moon-day" value="17" min="1" max="31">
+            </div>
+            <button class="test-button" onclick="testMoonPhase()">월령 계산 테스트</button>
+            <div id="moon-result" class="result" style="display: none;"></div>
+        </div>
+
+        <div class="api-section">
+            <h3>🔄 통합 데이터 테스트</h3>
+            <div class="input-group">
+                <label>연도:</label>
+                <input type="number" id="all-year" value="2024" min="1900" max="2100">
+                <label>월:</label>
+                <input type="number" id="all-month" value="10" min="1" max="12">
+                <label>일:</label>
+                <input type="number" id="all-day" value="17" min="1" max="31">
+                <label>지역:</label>
+                <select id="all-location">
+                    <option value="서울">서울</option>
+                    <option value="부산">부산</option>
+                    <option value="대구">대구</option>
+                </select>
+            </div>
+            <button class="test-button" onclick="testAllData()">통합 데이터 테스트</button>
+            <div id="all-result" class="result" style="display: none;"></div>
+        </div>
+    </div>
+
+    <!-- 외부 라이브러리 로드 -->
+    <script src="https://cdn.jsdelivr.net/npm/suncalc@1.9.0/suncalc.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
+    
+    <!-- 로컬 스크립트 -->
+    <script src="../js/timezone-api-client.js"></script>
+    <script src="../js/alternative-data-provider.js"></script>
+    
+    <script>
+        let dataProvider;
+
+        // 페이지 로드 시 초기화
+        document.addEventListener('DOMContentLoaded', function() {
+            dataProvider = new AlternativeDataProvider();
+            
+            // 라이브러리 상태 확인
+            updateLibraryStatus();
+            
+            console.log('대체 데이터 소스 테스트 페이지가 로드되었습니다.');
+            showResult('all-result', '🚀 대체 데이터 소스가 준비되었습니다.\n외부 API 없이도 천문 데이터를 제공할 수 있습니다.', 'success');
+        });
+
+        // 라이브러리 상태 업데이트
+        function updateLibraryStatus() {
+            const status = dataProvider.getServiceStatus();
+            
+            document.getElementById('suncalc-status').className = 
+                `status-dot ${status.suncalc ? 'status-online' : 'status-offline'}`;
+            document.getElementById('lunar-status').className = 
+                `status-dot ${status.capabilities.lunarConversion ? 'status-online' : 'status-offline'}`;
+            document.getElementById('solar-terms-status').className = 
+                `status-dot ${status.capabilities.solarTerms ? 'status-online' : 'status-offline'}`;
+            document.getElementById('timezone-status').className = 
+                `status-dot ${status.timezonedb ? 'status-online' : 'status-offline'}`;
+        }
+
+        // TimeZoneDB API 키 설정
+        function setTimezoneApiKey() {
+            const apiKey = document.getElementById('timezone-api-key').value.trim();
+            if (!apiKey) {
+                alert('TimeZoneDB API 키를 입력해주세요.');
+                return;
+            }
+            
+            // localStorage에 API 키 저장
+            localStorage.setItem('timezonedb_api_key', apiKey);
+            
+            // 데이터 프로바이더 재초기화
+            dataProvider = new AlternativeDataProvider();
+            updateLibraryStatus();
+            
+            showResult('all-result', `✅ TimeZoneDB API 키가 설정되었습니다: ${apiKey.substring(0, 8)}...\n이제 더 정확한 시간대 보정이 가능합니다.`, 'success');
+        }
+
+        // 결과 표시 함수
+        function showResult(elementId, content, type = 'info') {
+            const resultDiv = document.getElementById(elementId);
+            resultDiv.style.display = 'block';
+            resultDiv.textContent = content;
+            
+            resultDiv.className = `result ${type === 'error' ? 'error' : type === 'success' ? 'success' : type === 'warning' ? 'warning' : ''}`;
+        }
+
+        // 음양력 변환 테스트
+        async function testLunarConversion() {
+            const year = parseInt(document.getElementById('lunar-year').value);
+            const month = parseInt(document.getElementById('lunar-month').value);
+            const day = parseInt(document.getElementById('lunar-day').value);
+            
+            showResult('lunar-result', '⏳ 음양력 변환 계산 중...', 'info');
+            
+            try {
+                const result = dataProvider.convertSolarToLunar(year, month, day);
+                
+                const output = `🗓️ 음양력 변환 결과:
+태양력: ${year}년 ${month}월 ${day}일
+음력: ${result.lunarYear}년 ${result.lunarMonth}월 ${result.lunarDay}일${result.isLeapMonth ? ' (윤달)' : ''}
+
+📊 정보:
+데이터 출처: ${result.source}
+정확도: ${result.accuracy}
+
+✅ 테스트 성공! (API 없이 계산)`;
+                
+                showResult('lunar-result', output, 'success');
+            } catch (error) {
+                showResult('lunar-result', `❌ 음양력 변환 실패:\n${error.message}`, 'error');
+            }
+        }
+
+        // 24절기 테스트
+        async function testSolarTerms() {
+            const year = parseInt(document.getElementById('solar-year').value);
+            
+            showResult('solar-result', '⏳ 24절기 계산 중...', 'info');
+            
+            try {
+                const result = dataProvider.calculate24SolarTerms(year);
+                
+                let output = `🌸 ${year}년 24절기 정보:\n\n`;
+                
+                // 처음 12개 절기만 표시
+                result.slice(0, 12).forEach(term => {
+                    output += `${term.name}: ${term.date} (${term.angle}°)\n`;
+                });
+                
+                output += `\n... 그 외 ${result.length - 12}개 절기\n`;
+                output += `\n📊 정보:\n데이터 출처: ${result[0].source}\n`;
+                output += `\n✅ 테스트 성공! (천문학 계산)`;
+                
+                showResult('solar-result', output, 'success');
+            } catch (error) {
+                showResult('solar-result', `❌ 24절기 계산 실패:\n${error.message}`, 'error');
+            }
+        }
+
+        // 출몰시각 테스트
+        async function testSunMoonTimes() {
+            const year = parseInt(document.getElementById('sun-year').value);
+            const month = parseInt(document.getElementById('sun-month').value);
+            const day = parseInt(document.getElementById('sun-day').value);
+            const location = document.getElementById('sun-location').value;
+            
+            showResult('sun-result', '⏳ 출몰시각 계산 중...', 'info');
+            
+            try {
+                const result = dataProvider.calculateSunMoonTimes(year, month, day, location);
+                
+                const output = `🌅 ${location} 출몰시각 정보:
+날짜: ${year}년 ${month}월 ${day}일
+
+☀️ 태양:
+일출: ${result.sunrise || '정보없음'}
+일몰: ${result.sunset || '정보없음'}
+
+🌙 달:
+월출: ${result.moonrise || '정보없음'}  
+월몰: ${result.moonset || '정보없음'}
+
+📊 정보:
+데이터 출처: ${result.source}
+정확도: ${result.accuracy}
+
+✅ 테스트 성공!`;
+                
+                const resultType = result.source === 'suncalc_library' ? 'success' : 'warning';
+                showResult('sun-result', output, resultType);
+            } catch (error) {
+                showResult('sun-result', `❌ 출몰시각 계산 실패:\n${error.message}`, 'error');
+            }
+        }
+
+        // 월령 테스트
+        async function testMoonPhase() {
+            const year = parseInt(document.getElementById('moon-year').value);
+            const month = parseInt(document.getElementById('moon-month').value);
+            const day = parseInt(document.getElementById('moon-day').value);
+            
+            showResult('moon-result', '⏳ 월령 계산 중...', 'info');
+            
+            try {
+                const result = dataProvider.calculateMoonPhase(year, month, day);
+                const moonData = result[0];
+                
+                const output = `🌙 월령 정보:
+날짜: ${year}년 ${month}월 ${day}일
+월령: ${moonData.phase}일
+달의 위상: ${moonData.phaseName}
+조명 비율: ${moonData.fraction}
+
+📊 정보:
+데이터 출처: ${moonData.source}
+정확도: ${moonData.accuracy}
+
+✅ 테스트 성공!`;
+                
+                const resultType = moonData.source === 'suncalc_library' ? 'success' : 'warning';
+                showResult('moon-result', output, resultType);
+            } catch (error) {
+                showResult('moon-result', `❌ 월령 계산 실패:\n${error.message}`, 'error');
+            }
+        }
+
+        // 통합 데이터 테스트
+        async function testAllData() {
+            const year = parseInt(document.getElementById('all-year').value);
+            const month = parseInt(document.getElementById('all-month').value);
+            const day = parseInt(document.getElementById('all-day').value);
+            const location = document.getElementById('all-location').value;
+            
+            showResult('all-result', '⏳ 모든 천문 데이터 계산 중...', 'info');
+            
+            try {
+                const result = await dataProvider.getAllAstronomicalData(year, month, day, location);
+                
+                if (result.success) {
+                    const { lunar, sunMoon, moonPhase, solarTerms } = result.data;
+                    
+                    const output = `🌟 ${year}년 ${month}월 ${day}일 종합 천문 정보 (${location})
+
+📅 음양력:
+태양력: ${year}.${month}.${day}
+음력: ${lunar.lunarYear}.${lunar.lunarMonth}.${lunar.lunarDay}${lunar.isLeapMonth ? ' (윤)' : ''}
+
+🌅 출몰시각:
+일출/일몰: ${sunMoon.sunrise} / ${sunMoon.sunset}
+월출/월몰: ${sunMoon.moonrise || 'N/A'} / ${sunMoon.moonset || 'N/A'}
+
+🌙 월령:
+위상: ${moonPhase.phaseName} (${moonPhase.phase}일)
+조명: ${moonPhase.fraction}
+
+🌸 올해 절기: ${solarTerms.length}개 계산됨
+
+📊 메타데이터:
+타임스탬프: ${result.metadata.timestamp}
+전체 정확도: ${result.metadata.accuracy}
+
+✅ 모든 데이터 성공적으로 계산됨!
+(공공데이터포털 API 없이 독립 운영)`;
+                    
+                    showResult('all-result', output, 'success');
+                } else {
+                    throw new Error(result.error);
+                }
+            } catch (error) {
+                showResult('all-result', `❌ 통합 데이터 계산 실패:\n${error.message}`, 'error');
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>한국천문연구원 API 테스트</title>
+    <style>
+        body { 
+            font-family: 'Noto Sans KR', Arial, sans-serif; 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 20px; 
+            background-color: #f8f9fa;
+        }
+        .test-container { 
+            background: white; 
+            padding: 20px; 
+            border-radius: 8px; 
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+            margin-bottom: 20px;
+        }
+        .api-section { 
+            border-left: 4px solid #007bff; 
+            padding-left: 15px; 
+            margin: 20px 0;
+        }
+        .test-button { 
+            background: #007bff; 
+            color: white; 
+            border: none; 
+            padding: 10px 20px; 
+            border-radius: 5px; 
+            cursor: pointer; 
+            margin: 5px;
+        }
+        .test-button:hover { background: #0056b3; }
+        .test-button:disabled { background: #6c757d; cursor: not-allowed; }
+        .result { 
+            background: #f8f9fa; 
+            border: 1px solid #dee2e6; 
+            border-radius: 4px; 
+            padding: 15px; 
+            margin-top: 10px; 
+            font-family: 'Courier New', monospace; 
+            white-space: pre-wrap;
+        }
+        .error { border-left: 4px solid #dc3545; background: #f8d7da; }
+        .success { border-left: 4px solid #28a745; background: #d4edda; }
+        .status-indicator { 
+            display: inline-block; 
+            width: 12px; 
+            height: 12px; 
+            border-radius: 50%; 
+            margin-right: 8px;
+        }
+        .status-online { background: #28a745; }
+        .status-offline { background: #dc3545; }
+        .status-unknown { background: #6c757d; }
+        .input-group { margin: 10px 0; }
+        .input-group label { display: inline-block; width: 100px; }
+        .input-group input { padding: 5px; width: 100px; }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="test-container">
+        <h1>🌟 한국천문연구원 API 테스트</h1>
+        <p>API 키를 설정하고 각 서비스를 테스트해보세요.</p>
+        
+        <div class="api-section">
+            <h3>🔑 API 키 설정</h3>
+            <div class="input-group">
+                <label>서비스키:</label>
+                <input type="text" id="service-key" placeholder="공공데이터포털 서비스키" style="width: 300px;">
+                <button class="test-button" onclick="updateApiKey()">설정</button>
+            </div>
+            <small style="color: #6c757d;">
+                ⚠️ 공공데이터포털(data.go.kr)에서 "한국천문연구원" 관련 서비스를 신청하여 발급받으세요.
+            </small>
+        </div>
+
+        <div class="api-section">
+            <h3>🗓️ 음양력 변환 테스트</h3>
+            <div class="input-group">
+                <label>연도:</label>
+                <input type="number" id="solar-year" value="2024" min="1900" max="2100">
+                <label>월:</label>
+                <input type="number" id="solar-month" value="10" min="1" max="12">
+                <label>일:</label>
+                <input type="number" id="solar-day" value="17" min="1" max="31">
+            </div>
+            <button class="test-button" onclick="testLunarConversion()">음양력 변환 테스트</button>
+            <div id="lunar-result" class="result" style="display: none;"></div>
+        </div>
+
+        <div class="api-section">
+            <h3>🌸 24절기 정보 테스트</h3>
+            <div class="input-group">
+                <label>연도:</label>
+                <input type="number" id="solarterm-year" value="2024" min="1900" max="2100">
+            </div>
+            <button class="test-button" onclick="testSolarTerms()">24절기 조회 테스트</button>
+            <div id="solarterm-result" class="result" style="display: none;"></div>
+        </div>
+
+        <div class="api-section">
+            <h3>🌙 월령 정보 테스트</h3>
+            <div class="input-group">
+                <label>연도:</label>
+                <input type="number" id="moon-year" value="2024" min="1900" max="2100">
+                <label>월:</label>
+                <input type="number" id="moon-month" value="10" min="1" max="12">
+                <label>일:</label>
+                <input type="number" id="moon-day" value="17" min="1" max="31">
+            </div>
+            <button class="test-button" onclick="testMoonPhase()">월령 조회 테스트</button>
+            <div id="moon-result" class="result" style="display: none;"></div>
+        </div>
+
+        <div class="api-section">
+            <h3>🌅 출몰시각 정보 테스트</h3>
+            <div class="input-group">
+                <label>연도:</label>
+                <input type="number" id="rise-year" value="2024" min="1900" max="2100">
+                <label>월:</label>
+                <input type="number" id="rise-month" value="10" min="1" max="12">
+                <label>일:</label>
+                <input type="number" id="rise-day" value="17" min="1" max="31">
+                <label>지역:</label>
+                <select id="location">
+                    <option value="seoul">서울</option>
+                    <option value="busan">부산</option>
+                    <option value="daegu">대구</option>
+                    <option value="incheon">인천</option>
+                </select>
+            </div>
+            <button class="test-button" onclick="testRiseSet()">출몰시각 테스트</button>
+            <div id="rise-result" class="result" style="display: none;"></div>
+        </div>
+
+        <div class="api-section">
+            <h3>🔄 전체 API 상태 확인</h3>
+            <button class="test-button" onclick="checkAllApis()">모든 API 상태 확인</button>
+            <div id="status-result" class="result" style="display: none;"></div>
+        </div>
+    </div>
+
+    <!-- 스크립트 파일들 로드 -->
+    <script src="../config/api-config.js"></script>
+    <script src="../js/api-manager.js"></script>
+    
+    <script>
+        let apiManager;
+
+        // 페이지 로드 시 초기화
+        document.addEventListener('DOMContentLoaded', function() {
+            // 기본 API 키가 설정되어 있으면 표시
+            if (API_CONFIG.kasi.serviceKey !== 'YOUR_KASI_SERVICE_KEY_HERE') {
+                document.getElementById('service-key').value = API_CONFIG.kasi.serviceKey;
+            }
+            
+            // API 매니저 초기화
+            apiManager = new ApiManager();
+            
+            console.log('API 테스트 페이지가 로드되었습니다.');
+            showResult('status-result', '🚀 API 테스트 페이지가 준비되었습니다.\n위의 서비스키를 먼저 설정해주세요.', 'info');
+        });
+
+        // API 키 업데이트
+        function updateApiKey() {
+            const serviceKey = document.getElementById('service-key').value.trim();
+            if (!serviceKey) {
+                alert('서비스키를 입력해주세요.');
+                return;
+            }
+            
+            // API_CONFIG 업데이트
+            API_CONFIG.kasi.serviceKey = serviceKey;
+            
+            // ApiManager 재초기화
+            apiManager = new ApiManager();
+            
+            showResult('status-result', `✅ API 키가 설정되었습니다: ${serviceKey.substring(0, 10)}...`, 'success');
+        }
+
+        // 결과 표시 함수
+        function showResult(elementId, content, type = 'info') {
+            const resultDiv = document.getElementById(elementId);
+            resultDiv.style.display = 'block';
+            resultDiv.textContent = content;
+            
+            // 스타일 적용
+            resultDiv.className = `result ${type === 'error' ? 'error' : type === 'success' ? 'success' : ''}`;
+        }
+
+        // 음양력 변환 테스트
+        async function testLunarConversion() {
+            const year = parseInt(document.getElementById('solar-year').value);
+            const month = parseInt(document.getElementById('solar-month').value);
+            const day = parseInt(document.getElementById('solar-day').value);
+            
+            showResult('lunar-result', '⏳ 음양력 변환 중...', 'info');
+            
+            try {
+                const result = await apiManager.convertSolarToLunar(year, month, day);
+                if (result) {
+                    const output = `🗓️ 음양력 변환 결과:
+태양력: ${year}년 ${month}월 ${day}일
+음력: ${result.lunarYear}년 ${result.lunarMonth}월 ${result.lunarDay}일${result.isLeapMonth ? ' (윤달)' : ''}
+데이터 출처: ${result.source}
+
+✅ 테스트 성공!`;
+                    showResult('lunar-result', output, 'success');
+                } else {
+                    throw new Error('변환 결과가 없습니다.');
+                }
+            } catch (error) {
+                showResult('lunar-result', `❌ 음양력 변환 실패:\n${error.message}`, 'error');
+            }
+        }
+
+        // 24절기 테스트
+        async function testSolarTerms() {
+            const year = parseInt(document.getElementById('solarterm-year').value);
+            
+            showResult('solarterm-result', '⏳ 24절기 조회 중...', 'info');
+            
+            try {
+                const result = await apiManager.getSolarTerms(year);
+                if (result && result.length > 0) {
+                    let output = `🌸 ${year}년 24절기 정보 (일부):\n`;
+                    result.slice(0, 8).forEach(term => {
+                        output += `${term.name}: ${term.date}\n`;
+                    });
+                    output += `\n전체 ${result.length}개 절기 조회됨\n데이터 출처: ${result[0].source}\n\n✅ 테스트 성공!`;
+                    showResult('solarterm-result', output, 'success');
+                } else {
+                    throw new Error('24절기 데이터가 없습니다.');
+                }
+            } catch (error) {
+                showResult('solarterm-result', `❌ 24절기 조회 실패:\n${error.message}`, 'error');
+            }
+        }
+
+        // 월령 정보 테스트
+        async function testMoonPhase() {
+            const year = parseInt(document.getElementById('moon-year').value);
+            const month = parseInt(document.getElementById('moon-month').value);
+            const day = parseInt(document.getElementById('moon-day').value);
+            
+            showResult('moon-result', '⏳ 월령 조회 중...', 'info');
+            
+            try {
+                const result = await apiManager.getMoonPhase(year, month, day);
+                if (result && result.length > 0) {
+                    const moonData = result[0];
+                    const output = `🌙 월령 정보:
+날짜: ${year}년 ${month}월 ${day}일
+월령: ${moonData.phase}일
+달의 위상: ${moonData.phaseName}
+데이터 출처: ${moonData.source}
+
+✅ 테스트 성공!`;
+                    showResult('moon-result', output, 'success');
+                } else {
+                    throw new Error('월령 데이터가 없습니다.');
+                }
+            } catch (error) {
+                showResult('moon-result', `❌ 월령 조회 실패:\n${error.message}`, 'error');
+            }
+        }
+
+        // 출몰시각 테스트
+        async function testRiseSet() {
+            const year = parseInt(document.getElementById('rise-year').value);
+            const month = parseInt(document.getElementById('rise-month').value);
+            const day = parseInt(document.getElementById('rise-day').value);
+            const location = document.getElementById('location').value;
+            
+            showResult('rise-result', '⏳ 출몰시각 조회 중...', 'info');
+            
+            try {
+                const result = await apiManager.getSunMoonRiseSet(year, month, day, location);
+                if (result) {
+                    const output = `🌅 출몰시각 정보:
+날짜: ${result.date}
+지역: ${result.location}
+일출: ${result.sunrise}
+일몰: ${result.sunset}
+월출: ${result.moonrise || '정보없음'}
+월몰: ${result.moonset || '정보없음'}
+데이터 출처: ${result.source}
+
+✅ 테스트 성공!`;
+                    showResult('rise-result', output, 'success');
+                } else {
+                    throw new Error('출몰시각 데이터가 없습니다.');
+                }
+            } catch (error) {
+                showResult('rise-result', `❌ 출몰시각 조회 실패:\n${error.message}`, 'error');
+            }
+        }
+
+        // 전체 API 상태 확인
+        async function checkAllApis() {
+            showResult('status-result', '⏳ API 상태 확인 중...', 'info');
+            
+            try {
+                const status = await apiManager.checkApiStatus();
+                let output = `🔍 API 상태 확인 결과:\n\n`;
+                
+                output += `한국천문연구원 API: ${status.kasi ? '🟢 정상' : '🔴 오류'}\n`;
+                output += `TimeZone API: ${status.timezone ? '🟢 정상' : '🟡 미설정'}\n`;
+                output += `Google API: ${status.google ? '🟢 정상' : '🟡 미설정'}\n\n`;
+                
+                if (status.kasi) {
+                    output += '✅ 주요 API가 정상 작동합니다!';
+                    showResult('status-result', output, 'success');
+                } else {
+                    output += '⚠️ API 키를 확인해주세요.';
+                    showResult('status-result', output, 'error');
+                }
+            } catch (error) {
+                showResult('status-result', `❌ API 상태 확인 실패:\n${error.message}`, 'error');
+            }
+        }
+    </script>
+</body>
+</html>
