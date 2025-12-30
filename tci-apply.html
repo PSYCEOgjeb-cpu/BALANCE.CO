@@ -979,12 +979,10 @@
       <div class="apply-container">
         <div class="apply-form-wrapper" id="formWrapper">
           <!-- Netlify Form -->
-          <form id="tciApplyForm" name="tci-apply" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-            <!-- Netlify hidden fields -->
+          <form id="tciApplyForm" name="tci-apply" method="POST" netlify>
+            <!-- Netlify hidden field for AJAX submission -->
             <input type="hidden" name="form-name" value="tci-apply">
-            <p style="display: none;">
-              <label>Don't fill this out if you're human: <input name="bot-field" /></label>
-            </p>
+          
 
             <!-- Section 1: Intro -->
             <section class="apply-section apply-section--intro">
@@ -1256,9 +1254,9 @@
           <ul>
             <li><a href="index.html#hero">소개</a></li>
             <li><a href="index.html#tests">테스트</a></li>
-            <li><a href="tci.html">TCI 심리검사</a></li>
-            <li><a href="ai-counseling.html">AI 오은영 박사님의 심리상담소</a></li>
             <li><a href="index.html#features">특징</a></li>
+            <li><a href="ai-counseling.html">AI 오은영 박사님의 심리상담소</a></li>
+            <li><a href="tci.html">TCI 심리검사</a></li>
             <li><a href="index.html#faq">FAQ 문의</a></li>
           </ul>
         </div>
@@ -1376,12 +1374,16 @@
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
           body: new URLSearchParams(formData).toString()
         })
-        .then(() => {
-          // Show success message
-          form.style.display = 'none';
-          successMessage.classList.add('show');
-          outroSection.style.display = 'none';
-          window.scrollTo({ top: 0, behavior: 'smooth' });
+        .then((response) => {
+          if (response.ok) {
+            // Show success message
+            form.style.display = 'none';
+            successMessage.classList.add('show');
+            outroSection.style.display = 'none';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          } else {
+            throw new Error('Form submission failed');
+          }
         })
         .catch((error) => {
           console.error('Error:', error);

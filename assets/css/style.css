@@ -399,8 +399,14 @@ a {
   color: var(--color-medium) !important;
 }
 
+/* AI 상담소 메뉴 - is-active 상태에서도 기본 검정, 호버 시에만 갈색 */
 .main-nav__list > li > a.main-nav__counseling.is-active,
 .main-nav__list > li > a.main-nav__counseling.main-nav__active {
+  color: #333333 !important;
+}
+
+.main-nav__list > li > a.main-nav__counseling.is-active:hover,
+.main-nav__list > li > a.main-nav__counseling.main-nav__active:hover {
   color: var(--color-medium) !important;
 }
 
